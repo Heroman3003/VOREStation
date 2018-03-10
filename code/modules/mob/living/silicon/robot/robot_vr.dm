@@ -5,8 +5,9 @@
 	var/pounce_cooldown = 0
 	var/pounce_cooldown_time = 40
 	var/leap_at
-	var/dogborg = FALSE //Dogborg special features (overlays etc.)
+  var/dogborg = FALSE //Dogborg special features (overlays etc.)
 	var/wideborg = FALSE //When the borg simply doesn't use standard 32p size.
+	var/notransform
 	var/original_icon = 'icons/mob/robots.dmi'
 	var/vr_icons = list(
 					   "handy-hydro",
