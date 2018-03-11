@@ -26,8 +26,11 @@
 
 /obj/item/borg/upgrade/reset/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
+	R.transform_with_anim() //VOREStation edit: sprite animation
 	R.pixel_x = initial(pixel_x) //VOREStation Edit
 	R.pixel_y = initial(pixel_y) //VOREStation Edit
+	R.dogborg = FALSE //VOREStation Edit
+	R.wideborg = FALSE //VOREStation Edit
 	R.uneq_all()
 	R.modtype = initial(R.modtype)
 	R.hands.icon_state = initial(R.hands.icon_state)
@@ -136,7 +139,7 @@
 	return 1
 
 /obj/item/borg/upgrade/jetpack
-	name = "mining robot jetpack"
+	name = "robot jetpack"
 	desc = "A carbon dioxide jetpack suitable for low-gravity operations."
 	icon_state = "cyborg_upgrade3"
 	item_state = "cyborg_upgrade"
@@ -151,7 +154,7 @@
 	if(!T)
 		T = locate() in R.module.modules
 	if(!T)
-		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide
+		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide(R.module)
 		for(var/obj/item/weapon/tank/jetpack/carbondioxide in R.module.modules)
 			R.internals = src
 		return 1
@@ -176,7 +179,7 @@
 	if(!T)
 		T = locate() in R.module.modules
 	if(!T)
-		R.module.modules += new/obj/item/device/healthanalyzer/advanced
+		R.module.modules += new/obj/item/device/healthanalyzer/advanced(R.module)
 		return 1
 	if(T)
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
@@ -213,8 +216,10 @@
 	R.add_language(LANGUAGE_UNATHI, 1)
 	R.add_language(LANGUAGE_SIIK, 1)
 	R.add_language(LANGUAGE_SKRELLIAN, 1)
+	R.add_language(LANGUAGE_SKRELLIANFAR, 0)
 	R.add_language(LANGUAGE_GUTTER, 1)
 	R.add_language(LANGUAGE_SCHECHI, 1)
 	R.add_language(LANGUAGE_ROOTLOCAL, 1)
+	R.add_language(LANGUAGE_TERMINUS, 1)
 
 	return 1
