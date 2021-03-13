@@ -92,7 +92,17 @@
 	var/icon/default_worn_icon	//Default on-mob icon
 	var/worn_layer				//Default on-mob layer
 
-	var/drop_sound = 'sound/items/drop/device.ogg' // drop sound - this is the default
+	// Pickup/Drop/Equip/Throw Sounds
+	///Used when thrown into a mob
+	var/mob_throw_hit_sound
+	// Sound used when equipping the items into a valid slot.
+	var/equip_sound
+	// pickup sound - this is the default
+	var/pickup_sound = "generic_pickup"
+	// drop sound - this is the default
+	var/drop_sound = "generic_drop"
+
+	var/tip_timer // reference to timer id for a tooltip we might open soon
 
 /obj/item/New()
 	..()
@@ -197,7 +207,7 @@
 	src.loc = T
 
 // See inventory_sizes.dm for the defines.
-/obj/item/examine(mob/user, var/distance = -1)
+/obj/item/examine(mob/user)
 	var/size
 	switch(src.w_class)
 		if(ITEMSIZE_TINY)
@@ -210,7 +220,7 @@
 			size = "bulky"
 		if(ITEMSIZE_HUGE)
 			size = "huge"
-	return ..(user, distance, "", "It is a [size] item.")
+	return ..(user, "", "It is a [size] item.")
 
 /obj/item/attack_hand(mob/living/user as mob)
 	if (!user) return
@@ -276,10 +286,29 @@
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)
 	return
 
+/obj/item/proc/get_volume_by_throwforce_and_or_w_class() // This is used for figuring out how loud our sounds are for throwing.
+	if(throwforce && w_class)
+		return CLAMP((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
+	else if(w_class)
+		return CLAMP(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
+	else
+		return 0
+
 /obj/item/throw_impact(atom/hit_atom)
 	..()
-	if(drop_sound)
-		playsound(src, drop_sound, 50, 0, preference = /datum/client_preference/drop_sounds)
+	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
+		var/volume = get_volume_by_throwforce_and_or_w_class()
+		if (throwforce > 0)
+			if (mob_throw_hit_sound)
+				playsound(hit_atom, mob_throw_hit_sound, volume, TRUE, -1)
+			else if(hitsound)
+				playsound(hit_atom, hitsound, volume, TRUE, -1)
+			else
+				playsound(hit_atom, 'sound/weapons/genhit.ogg', volume, TRUE, -1)
+		else
+			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
+	else
+		playsound(src, drop_sound, 30, preference = /datum/client_preference/drop_sounds)
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
@@ -316,6 +345,13 @@
 	user.position_hud_item(src,slot)
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
+	if((slot_flags & slot))
+		if(equip_sound)
+			playsound(src, equip_sound, 30)
+		else
+			playsound(src, drop_sound, 30)
+	else if(slot == slot_l_hand || slot == slot_r_hand)
+		playsound(src, pickup_sound, 20, preference = /datum/client_preference/pickup_sounds)
 	return
 
 //Defines which slots correspond to which slot flags
@@ -339,7 +375,7 @@ var/list/global/slot_flags_enumeration = list(
 //If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
-/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0)
+/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = FALSE)
 	if(!slot) return 0
 	if(!M) return 0
 
@@ -428,11 +464,16 @@ var/list/global/slot_flags_enumeration = list(
 	return 1
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)
-	if(!slot) return 0
 	if(!M) return 0
 
 	if(!canremove)
 		return 0
+
+	if(!slot)
+		if(issilicon(M))
+			return 1 // for stuff in grippers
+		return 0
+
 	if(!M.slot_is_accessible(slot, src, disable_warning? null : M))
 		return 0
 	return 1
@@ -506,7 +547,7 @@ var/list/global/slot_flags_enumeration = list(
 	var/hit_zone = get_zone_with_miss_chance(U.zone_sel.selecting, M, U.get_accuracy_penalty(U))
 	if(!hit_zone)
 		U.do_attack_animation(M)
-		playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 		//visible_message("<span class='danger'>[U] attempts to stab [M] in the eyes, but misses!</span>")
 		for(var/mob/V in viewers(M))
 			V.show_message("<span class='danger'>[U] attempts to stab [M] in the eyes, but misses!</span>")
@@ -569,9 +610,6 @@ var/list/global/slot_flags_enumeration = list(
 	. = ..()
 	if(blood_overlay)
 		overlays.Remove(blood_overlay)
-	if(istype(src, /obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = src
-		G.transfer_blood = 0
 
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
@@ -602,19 +640,24 @@ var/list/global/slot_flags_enumeration = list(
 		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	return 1 //we applied blood to the item
 
-
+GLOBAL_LIST_EMPTY(blood_overlays_by_type)
 /obj/item/proc/generate_blood_overlay()
+	// Already got one
 	if(blood_overlay)
 		return
 
-	var/icon/I = new /icon(icon, icon_state)
-	I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD) //fills the icon_state with white (except where it's transparent)
-	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
+	// Already cached
+	if(GLOB.blood_overlays_by_type[type])
+		blood_overlay = GLOB.blood_overlays_by_type[type]
+		return
 
-	//not sure if this is worth it. It attaches the blood_overlay to every item of the same type if they don't have one already made.
-	for(var/obj/item/A in world)
-		if(A.type == type && !A.blood_overlay)
-			A.blood_overlay = image(I)
+	// Firsties!
+	var/image/blood = image(icon = 'icons/effects/blood.dmi', icon_state = "itemblood") // Needs to be a new one each time since we're slicing it up with filters.
+	blood.filters += filter(type = "alpha", icon = icon(icon, icon_state)) // Same, this filter is unique for each blood overlay per type
+	GLOB.blood_overlays_by_type[type] = blood
+
+	// And finally
+	blood_overlay = blood
 
 /obj/item/proc/showoff(mob/user)
 	for (var/mob/M in view(user))
@@ -665,6 +708,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			H.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 		H.set_viewsize(viewsize)
 		zoom = 1
+		GLOB.moved_event.register(H, src, .proc/zoom)
 
 		var/tilesize = 32
 		var/viewoffset = tilesize * tileoffset
@@ -693,6 +737,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if(!H.hud_used.hud_shown)
 			H.toggle_zoom_hud()
 		zoom = 0
+		GLOB.moved_event.unregister(H, src, .proc/zoom)
 
 		H.client.pixel_x = 0
 		H.client.pixel_y = 0
@@ -737,9 +782,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // My best guess as to why this is here would be that it does so little. Still, keep it under all the procs, for sanity's sake.
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 
 //Worn icon generation for on-mob sprites
-/obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer,var/icon/clip_mask = null) //VOREStation edit - add 'clip mask' argument.
+/obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer,var/icon/clip_mask = null)
 	//Get the required information about the base icon
 	var/icon/icon2use = get_worn_icon_file(body_type = body_type, slot_name = slot_name, default_icon = default_icon, inhands = inhands)
 	var/state2use = get_worn_icon_state(slot_name = slot_name)
@@ -761,13 +808,16 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(!inhands)
 		apply_custom(standing_icon)		//Pre-image overridable proc to customize the thing
 		apply_addblends(icon2use,standing_icon)		//Some items have ICON_ADD blend shaders
-		if(istype(clip_mask)) //VOREStation Edit - For taur bodies/tails clipping off parts of uniforms and suits.
-			standing_icon = get_icon_difference(standing_icon, clip_mask, 1)
 
 	var/image/standing = image(standing_icon)
 	standing.alpha = alpha
 	standing.color = color
 	standing.layer = layer2use
+	if(istype(clip_mask)) //VOREStation Edit - For taur bodies/tails clipping off parts of uniforms and suits.
+		standing.filters += filter(type = "alpha", icon = clip_mask)
+
+	if(istype(clip_mask)) //For taur bodies/tails clipping off parts of uniforms and suits.
+		standing.filters += filter(type = "alpha", icon = clip_mask)
 
 	//Apply any special features
 	if(!inhands)
@@ -878,3 +928,26 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/is_welder()
 	return FALSE
+
+/obj/item/MouseEntered(location,control,params)
+	. = ..()
+	if(usr.is_preference_enabled(/datum/client_preference/inv_tooltips) && ((src in usr) || isstorage(loc))) // If in inventory or in storage we're looking at
+		var/user = usr
+		tip_timer = addtimer(CALLBACK(src, .proc/openTip, location, control, params, user), 5, TIMER_STOPPABLE)
+
+/obj/item/MouseExited()
+	. = ..()
+	deltimer(tip_timer)
+	closeToolTip(usr)
+
+/obj/item/proc/openTip(location, control, params, user)
+	openToolTip(user, src, params, title = name, content = desc)
+
+// These procs are for RPEDs and part ratings. The concept for this was borrowed from /vg/station.
+// Gets the rating of the item, used in stuff like machine construction.
+/obj/item/proc/get_rating()
+	return FALSE
+
+// Like the above, but used for RPED sorting of parts.
+/obj/item/proc/rped_rating()
+	return get_rating()

@@ -253,6 +253,51 @@
 	SScharacter_setup.queue_preferences_save(prefs)
 
 	feedback_add_details("admin_verb","TAirPumpNoise")
+	
+/client/verb/toggle_old_door_sounds()
+	set name = "Toggle Old Door Sounds"
+	set category = "Preferences"
+	set desc = "Toggles New/Old Door Sounds"
+
+	var/pref_path = /datum/client_preference/old_door_sounds
+
+	toggle_preference(pref_path)
+
+	to_chat(src, "You will [ (is_preference_enabled(pref_path)) ? "now" : "no longer"] hear the legacy door sounds.")
+
+	SScharacter_setup.queue_preferences_save(prefs)
+
+	feedback_add_details("admin_verb","TOldDoorSounds")
+	
+/client/verb/toggle_department_door_sounds()
+	set name = "Toggle Department Door Sounds"
+	set category = "Preferences"
+	set desc = "Toggles Department-Specific Door Sounds"
+
+	var/pref_path = /datum/client_preference/department_door_sounds
+
+	toggle_preference(pref_path)
+
+	to_chat(src, "You will [ (is_preference_enabled(pref_path)) ? "now" : "no longer"] hear per-department door sounds.")
+
+	SScharacter_setup.queue_preferences_save(prefs)
+
+	feedback_add_details("admin_verb","TDepartmentDoorSounds")
+
+/client/verb/toggle_pickup_sounds()
+	set name = "Toggle Picked Up Item Sounds"
+	set category = "Preferences"
+	set desc = "Toggles sounds when items are picked up or thrown."
+
+	var/pref_path = /datum/client_preference/pickup_sounds
+
+	toggle_preference(pref_path)
+
+	to_chat(src, "You will [ (is_preference_enabled(pref_path)) ? "now" : "no longer"] hear sounds when items are picked up or thrown.")
+
+	SScharacter_setup.queue_preferences_save(prefs)
+
+	feedback_add_details("admin_verb", "TPickupSounds")
 
 /client/verb/toggle_drop_sounds()
 	set name = "Toggle Dropped Item Sounds"
@@ -295,6 +340,19 @@
 
 	feedback_add_details("admin_verb","TMobTooltips") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/verb/toggle_inv_tooltips()
+	set name = "Toggle Item Tooltips"
+	set category = "Preferences"
+	set desc = "Toggles displaying name/desc over items when moused over (only applies in inventory)."
+
+	var/pref_path = /datum/client_preference/inv_tooltips
+	toggle_preference(pref_path)
+	SScharacter_setup.queue_preferences_save(prefs)
+
+	to_chat(src,"You will now [(is_preference_enabled(/datum/client_preference/inv_tooltips)) ? "see" : "not see"] inventory tooltips.")
+
+	feedback_add_details("admin_verb","TInvTooltips") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /client/verb/toggle_hear_instruments()
 	set name = "Toggle Hear/Ignore Instruments"
 	set category = "Preferences"
@@ -321,6 +379,19 @@
 		You will have to reload VChat and/or reconnect to the server for these changes to take place. \
 		VChat message persistence is not guaranteed if you change this again before the start of the next round.")
 
+/client/verb/toggle_status_indicators()
+	set name = "Toggle Status Indicators"
+	set category = "Preferences"
+	set desc = "Enable/Disable seeing status indicators over peoples' heads."
+
+	var/pref_path = /datum/client_preference/status_indicators
+	toggle_preference(pref_path)
+	SScharacter_setup.queue_preferences_save(prefs)
+
+	to_chat(src, "You will now [(is_preference_enabled(/datum/client_preference/status_indicators)) ? "see" : "not see"] status indicators.")
+
+	feedback_add_details("admin_verb","TStatusIndicators")
+
 
 // Not attached to a pref datum because those are strict binary toggles
 /client/verb/toggle_examine_mode()
@@ -328,17 +399,34 @@
 	set category = "Preferences"
 	set desc = "Control the additional behaviour of examining things"
 
-	examine_text_mode++
-	examine_text_mode %= EXAMINE_MODE_MAX // This cycles through them because if you're already specifically being routed to the examine panel, you probably don't need to have the extra text printed to chat
-	switch(examine_text_mode)				// ... And I only wanted to add one verb
+	prefs.examine_text_mode++
+	prefs.examine_text_mode %= EXAMINE_MODE_MAX // This cycles through them because if you're already specifically being routed to the examine panel, you probably don't need to have the extra text printed to chat
+	switch(prefs.examine_text_mode)				// ... And I only wanted to add one verb
 		if(EXAMINE_MODE_DEFAULT)
-			to_chat(src, "Examining things will only output the base examine text, and you will not be redirected to the examine panel automatically.")
+			to_chat(src, "<span class='filter_system'>Examining things will only output the base examine text, and you will not be redirected to the examine panel automatically.</span>")
 
 		if(EXAMINE_MODE_INCLUDE_USAGE)
-			to_chat(src, "Examining things will also print any extra usage information normally included in the examine panel to the chat.")
+			to_chat(src, "<span class='filter_system'>Examining things will also print any extra usage information normally included in the examine panel to the chat.</span>")
 
 		if(EXAMINE_MODE_SWITCH_TO_PANEL)
-			to_chat(src, "Examining things will direct you to the examine panel, where you can view extended information about the thing.")
+			to_chat(src, "<span class='filter_system'>Examining things will direct you to the examine panel, where you can view extended information about the thing.</span>")
+
+/client/verb/toggle_multilingual_mode()
+	set name = "Toggle Multilingual Mode"
+	set category = "Preferences"
+	set desc = "Control the behaviour of multilingual speech parsing"
+
+	prefs.multilingual_mode++
+	prefs.multilingual_mode %= MULTILINGUAL_MODE_MAX // Cycles through the various options
+	switch(prefs.multilingual_mode)
+		if(MULTILINGUAL_DEFAULT)
+			to_chat(src, "<span class='filter_system'>Multilingual parsing will only check for the delimiter-key combination (,0galcom-2tradeband).</span>")
+		if(MULTILINGUAL_SPACE)
+			to_chat(src, "<span class='filter_system'>Multilingual parsing will enforce a space after the delimiter-key combination (,0 galcom -2still galcom). The extra space will be consumed by the pattern-matching.</span>")
+		if(MULTILINGUAL_DOUBLE_DELIMITER)
+			to_chat(src, "<span class='filter_system'>Multilingual parsing will enforce the a language delimiter after the delimiter-key combination (,0,galcom -2 still galcom). The extra delimiter will be consumed by the pattern-matching.</span>")
+		if(MULTILINGUAL_OFF)
+			to_chat(src, "<span class='filter_system'>Multilingual parsing is now disabled. Entire messages will be in the language specified at the start of the message.</span>")
 
 
 //Toggles for Staff

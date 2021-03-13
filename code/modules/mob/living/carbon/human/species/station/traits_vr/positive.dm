@@ -1,3 +1,6 @@
+#define ORGANICS	1
+#define SYNTHETICS	2
+
 /datum/trait/speed_fast
 	name = "Haste"
 	desc = "Allows you to move faster on average than baseline."
@@ -42,13 +45,13 @@
 	name = "Darksight"
 	desc = "Allows you to see a short distance in the dark."
 	cost = 1
-	var_changes = list("darksight" = 3, "flash_mod" = 2.0)
+	var_changes = list("darksight" = 5, "flash_mod" = 2.0)
 
 /datum/trait/darksight_plus
 	name = "Darksight (Major)"
 	desc = "Allows you to see in the dark for the whole screen."
 	cost = 2
-	var_changes = list("darksight" = 7, "flash_mod" = 3.0)
+	var_changes = list("darksight" = 8, "flash_mod" = 3.0)
 
 /datum/trait/melee_attack
 	name = "Sharp Melee"
@@ -61,6 +64,12 @@
 	desc = "Provides sharp melee attacks that do slightly more damage, along with fangs that makes the person bit unable to feel their body or pain."
 	cost = 2
 	var_changes = list("unarmed_types" = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp, /datum/unarmed_attack/bite/sharp/numbing))
+
+/datum/trait/fangs
+	name = "Numbing Fangs"
+	desc = "Provides fangs that makes the person bit unable to feel their body or pain."
+	cost = 1
+	var_changes = list("unarmed_types" = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp/numbing))
 
 /datum/trait/minor_brute_resist
 	name = "Minor Brute Resist"
@@ -117,10 +126,30 @@
 
 /datum/trait/antiseptic_saliva/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..()
-	H.verbs |= /mob/living/carbon/human/proc/lick_wounds 
+	H.verbs |= /mob/living/carbon/human/proc/lick_wounds
 
 /datum/trait/traceur
 	name = "Traceur"
 	desc = "You're capable of parkour and can *flip over low objects (most of the time)."
 	cost = 2
 	var_changes = list("agility" = 90)
+
+/datum/trait/snowwalker
+	name = "Snow Walker"
+	desc = "You are able to move unhindered on snow."
+	cost = 1
+	var_changes = list("snow_movement" = -2)
+
+/datum/trait/weaver
+	name = "Weaver"
+	desc = "You can produce silk and create various articles of clothing and objects."
+	cost = 2
+	var_changes = list("is_weaver" = 1)
+
+/datum/trait/weaver/apply(var/datum/species/S,var/mob/living/carbon/human/H)
+	..()
+	H.verbs |= /mob/living/carbon/human/proc/check_silk_amount
+	H.verbs |= /mob/living/carbon/human/proc/toggle_silk_production
+	H.verbs |= /mob/living/carbon/human/proc/weave_structure
+	H.verbs |= /mob/living/carbon/human/proc/weave_item
+	H.verbs |= /mob/living/carbon/human/proc/set_silk_color

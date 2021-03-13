@@ -18,9 +18,10 @@
 	w_class = ITEMSIZE_NORMAL
 	max_amount = 60
 	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
 
-/obj/item/stack/tile/New()
-	..()
+/obj/item/stack/tile/Initialize()
+	. = ..()
 	randpixel_xy()
 
 /*
@@ -39,6 +40,18 @@
 	origin_tech = list(TECH_BIO = 1)
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/herb.ogg'
+	pickup_sound = 'sound/items/pickup/herb.ogg'
+
+/obj/item/stack/tile/grass/sif
+	name = "sivian grass tile"
+	singular_name = "sivian grass floor tile"
+	desc = "A patch of grass like those that decorate the plains of Sif."
+
+/obj/item/stack/tile/grass/sif/forest
+	name = "sivian overgrowth tile"
+	singular_name = "sivian overgrowth floor tile"
+	desc = "A patch of dark overgrowth like those that decorate the plains of Sif."
+
 /*
  * Wood
  */
@@ -54,6 +67,7 @@
 	flags = 0
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/stack/tile/wood/sif
 	name = "alien wood tile"
@@ -83,7 +97,8 @@
 	throw_range = 20
 	flags = 0
 	no_variants = FALSE
-	drop_sound = 'sound/items/drop/clothing.ogg'
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/stack/tile/carpet/teal
 	name = "teal carpet"
@@ -197,6 +212,30 @@
 	icon_state = "tile-linoleum"
 	force = 1.0
 	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = 0
+	no_variants = FALSE
+
+/obj/item/stack/tile/wmarble
+	name = "light marble tile"
+	singular_name = "light marble tile"
+	desc = "Some white marble tiles used for flooring."
+	icon_state = "tile-wmarble"
+	force = 6.0
+	throwforce = 15.0
+	throw_speed = 5
+	throw_range = 20
+	flags = 0
+	no_variants = FALSE
+
+/obj/item/stack/tile/bmarble
+	name = "dark marble tile"
+	singular_name = "dark marble tile"
+	desc = "Some black marble tiles used for flooring."
+	icon_state = "tile-bmarble"
+	force = 6.0
+	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
 	flags = 0

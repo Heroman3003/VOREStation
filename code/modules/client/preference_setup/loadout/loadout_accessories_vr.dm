@@ -1,5 +1,15 @@
 // Collars
 
+/datum/gear/choker //A colorable choker
+	display_name = "choker (colorable, tagless)"
+	path = /obj/item/clothing/accessory/choker
+	slot = slot_tie
+	sort_category = "Accessories"
+
+/datum/gear/choker/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/collar
 	display_name = "collar, silver"
 	path = /obj/item/clothing/accessory/collar/silver
@@ -8,7 +18,7 @@
 
 /datum/gear/collar/New()
 	..()
-	gear_tweaks = list(gear_tweak_collar_tag)
+	gear_tweaks += gear_tweak_collar_tag
 
 /datum/gear/collar/golden
 	display_name = "collar, golden"
@@ -40,8 +50,8 @@
 	path = /obj/item/clothing/accessory/collar/holo/indigestible
 
 /datum/gear/accessory/holster
-	display_name = "holster selection (Security, CD, HoP, Exploration)"
-	allowed_roles = list("Colony Director", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective","Explorer","Pathfinder")
+	display_name = "holster selection (Security, SM, HoP, Exploration)"
+	allowed_roles = list("Site Manager", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective","Explorer","Pathfinder")
 
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, brown (Eng, Sec, Med, Exploration, Miner)"
@@ -66,6 +76,12 @@
 /datum/gear/accessory/white_drop_pouches
 	display_name = "drop pouches, white (Medical)"
 	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor","Chemist","Field Medic")
+
+/datum/gear/accessory/bluespace
+	display_name = "bluespace badge (Eng, Sec, Med, Exploration, Miner)"
+	path = /obj/item/clothing/accessory/storage/bluespace
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor","Chemist","Field Medic","Explorer","Pathfinder","Shaft Miner")
+	cost = 2
 
 /datum/gear/accessory/webbing
 	cost = 1
@@ -96,4 +112,4 @@
 
 /datum/gear/accessory/flops/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice

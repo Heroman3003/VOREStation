@@ -14,7 +14,6 @@
 	desc = "Murder device."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "baton"
-	item_state = "classic_baton"
 	slot_flags = SLOT_BELT
 	force = 10
 	drop_sound = 'sound/items/drop/metalweapon.ogg'
@@ -27,6 +26,8 @@
 	item_state = "classic_baton"
 	slot_flags = SLOT_BELT
 	force = 10
+	drop_sound = 'sound/items/drop/crowbar.ogg'
+	pickup_sound = 'sound/items/pickup/crowbar.ogg'
 
 /obj/item/weapon/melee/classic_baton/attack(mob/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
@@ -50,6 +51,8 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEMSIZE_SMALL
 	force = 3
+	drop_sound = 'sound/items/drop/crowbar.ogg'
+	pickup_sound = 'sound/items/pickup/crowbar.ogg'
 	var/on = 0
 
 /obj/item/weapon/melee/telebaton/attack_self(mob/user as mob)
@@ -78,7 +81,7 @@
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
 
-	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+	playsound(src, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
 
 	if(blood_overlay && blood_DNA && (blood_DNA.len >= 1)) //updates blood overlay, if any
@@ -105,7 +108,7 @@
 				user.take_organ_damage(2*force)
 			return
 		if(..())
-			//playsound(src.loc, "swing_hit", 50, 1, -1)
+			//playsound(src, "swing_hit", 50, 1, -1)
 			return
 	else
 		return ..()

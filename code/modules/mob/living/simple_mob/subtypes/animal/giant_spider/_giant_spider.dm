@@ -100,9 +100,19 @@
 
 	say_list_type = /datum/say_list/spider
 
+	tame_items = list(
+	/obj/item/weapon/reagent_containers/food/snacks/xenomeat = 10,
+	/obj/item/weapon/reagent_containers/food/snacks/meat/crab = 40,
+	/obj/item/weapon/reagent_containers/food/snacks/meat = 20
+	)
+
 	var/poison_type = "spidertoxin"	// The reagent that gets injected when it attacks.
 	var/poison_chance = 10			// Chance for injection to occur.
 	var/poison_per_bite = 5			// Amount added per injection.
+
+	butchery_loot = list(\
+		/obj/item/stack/material/chitin = 1\
+		)
 
 /mob/living/simple_mob/animal/giant_spider/apply_melee_effects(var/atom/A)
 	if(isliving(A))

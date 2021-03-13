@@ -15,18 +15,22 @@ VIRGO3B_TURF_CREATE(/turf/simulated/floor)
 	return 0
 
 VIRGO3B_TURF_CREATE(/turf/simulated/floor/reinforced)
+
 VIRGO3B_TURF_CREATE(/turf/simulated/floor/tiled/steel_dirty)
 
 VIRGO3B_TURF_CREATE(/turf/simulated/floor/outdoors/dirt)
+/turf/simulated/floor/outdoors/dirt/virgo3b
+	icon = 'icons/turf/flooring/asteroid.dmi'
+	icon_state = "asteroid"
+
 VIRGO3B_TURF_CREATE(/turf/simulated/floor/outdoors/rocks)
+
 VIRGO3B_TURF_CREATE(/turf/simulated/floor/outdoors/grass/sif)
 /turf/simulated/floor/outdoors/grass/sif
 	turf_layers = list(
 		/turf/simulated/floor/outdoors/rocks/virgo3b,
 		/turf/simulated/floor/outdoors/dirt/virgo3b
 		)
-
-
 
 // Overriding these for the sake of submaps that use them on other planets.
 // This means that mining on tether base and space is oxygen-generating, but solars and mining should use the virgo3b subtype
@@ -65,6 +69,10 @@ VIRGO3B_TURF_CREATE(/turf/simulated/mineral/floor)
 			"uranium" = 10,
 			"platinum" = 10,
 			"hematite" = 20,
+			"copper" = 8,
+			"tin" = 4,
+			"bauxite" = 4,
+			"rutile" = 4,
 			"carbon" = 20,
 			"diamond" = 1,
 			"gold" = 8,
@@ -78,6 +86,10 @@ VIRGO3B_TURF_CREATE(/turf/simulated/mineral/floor)
 			"uranium" = 5,
 			"platinum" = 5,
 			"hematite" = 35,
+			"copper" = 15,
+			"tin" = 10,
+			"bauxite" = 10,
+			"rutile" = 10,
 			"carbon" = 35,
 			"gold" = 3,
 			"silver" = 3,

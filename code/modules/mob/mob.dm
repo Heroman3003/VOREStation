@@ -22,16 +22,10 @@
 	pullin = null
 	purged = null
 	internals = null
-	oxygen = null
 	i_select = null
 	m_select = null
-	toxin = null
-	fire = null
-	bodytemp = null
 	healths = null
 	throw_icon = null
-	nutrition_icon = null
-	pressure = null
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null
@@ -45,6 +39,7 @@
 		dead_mob_list += src
 	else
 		living_mob_list += src
+	lastarea = get_area(src)
 	hook_vr("mob_new",list(src)) //VOREStation Code
 	update_transform() // Some mobs may start bigger or smaller than normal.
 	return ..()
@@ -82,31 +77,14 @@
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/mob/visible_message(var/message, var/self_message, var/blind_message)
-
-	//VOREStation Edit
-	var/list/see
-	if(isbelly(loc))
-		var/obj/belly/B = loc
-		see = B.get_mobs_and_objs_in_belly()
-	else
-		see = get_mobs_and_objs_in_view_fast(get_turf(src),world.view,remote_ghosts = FALSE)
-	//VOREStation Edit End
-
-	var/list/seeing_mobs = see["mobs"]
-	var/list/seeing_objs = see["objs"]
-
-	for(var/obj in seeing_objs)
-		var/obj/O = obj
-		O.show_message(message, 1, blind_message, 2)
-	for(var/mob in seeing_mobs)
-		var/mob/M = mob
-		if(self_message && M == src)
-			M.show_message( self_message, 1, blind_message, 2)
-		else if(M.see_invisible >= invisibility && MOB_CAN_SEE_PLANE(M, plane))
-			M.show_message(message, 1, blind_message, 2)
-		else if(blind_message)
-			M.show_message(blind_message, 2)
+/mob/visible_message(var/message, var/self_message, var/blind_message, var/list/exclude_mobs = null)
+	if(self_message)
+		if(LAZYLEN(exclude_mobs))
+			exclude_mobs |= src
+		else
+			exclude_mobs = list(src)
+		src.show_message(self_message, 1, blind_message, 2)
+	. = ..(message, blind_message, exclude_mobs)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.
@@ -144,9 +122,6 @@
 	for(var/mob/M in mob_list)
 		if (M.real_name == text("[]", msg))
 			return M
-	return 0
-
-/mob/proc/movement_delay(oldloc, direct)
 	return 0
 
 /mob/proc/Life()
@@ -217,27 +192,7 @@
 			else
 				client.perspective = EYE_PERSPECTIVE
 				client.eye = loc
-	return
-
-
-/mob/proc/show_inv(mob/user as mob)
-	return
-
-//mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
-/mob/verb/examinate(atom/A as mob|obj|turf in view())
-	set name = "Examine"
-	set category = "IC"
-
-	if((is_blind(src) || usr.stat) && !isobserver(src))
-		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
-		return 1
-	
-	//Could be gone by the time they finally pick something
-	if(!A)
-		return 1
-
-	face_atom(A)
-	A.examine(src)
+		return TRUE
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
@@ -248,16 +203,23 @@
 	if(istype(A, /obj/effect/decal/point))
 		return 0
 
-	var/tile = get_turf(A)
+	var/turf/tile = get_turf(A)
 	if (!tile)
 		return 0
 
-	var/obj/P = new /obj/effect/decal/point(tile)
-	P.invisibility = invisibility
-	P.plane = plane
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
+	var/turf/our_tile = get_turf(src)
+	var/obj/visual = new /obj/effect/decal/point(our_tile)
+	visual.invisibility = invisibility
+	visual.plane = ABOVE_PLANE
+	visual.layer = FLY_LAYER
+
+	animate(visual,
+		pixel_x = (tile.x - our_tile.x) * world.icon_size + A.pixel_x,
+		pixel_y = (tile.y - our_tile.y) * world.icon_size + A.pixel_y,
+		time = 1.7,
+		easing = EASE_OUT)
+
+	QDEL_IN(visual, 2 SECONDS) //Better qdel
 
 	face_atom(A)
 	return 1
@@ -346,46 +308,56 @@
 	return
 */
 
+/mob/proc/set_respawn_timer(var/time)
+	// Try to figure out what time to use
+
+	// Special cases, can never respawn
+	if(ticker?.mode?.deny_respawn)
+		time = -1
+	else if(!config.abandon_allowed)
+		time = -1
+	else if(!config.respawn)
+		time = -1
+
+	// Special case for observing before game start
+	else if(ticker?.current_state <= GAME_STATE_SETTING_UP)
+		time = 1 MINUTE
+
+	// Wasn't given a time, use the config time
+	else if(!time)
+		time = config.respawn_time
+
+	var/keytouse = ckey
+	// Try harder to find a key to use
+	if(!keytouse && key)
+		keytouse = ckey(key)
+	else if(!keytouse && mind?.key)
+		keytouse = ckey(mind.key)
+
+	GLOB.respawn_timers[keytouse] = world.time + time
+
+/mob/observer/dead/set_respawn_timer()
+	if(config.antag_hud_restricted && has_enabled_antagHUD)
+		..(-1)
+	else
+		return // Don't set it, no need
+
 /mob/verb/abandon_mob()
-	set name = "Respawn"
+	set name = "Return to Menu"
 	set category = "OOC"
 
-	if (!( config.abandon_allowed ))
-		to_chat(usr, "<span class='notice'>Respawn is disabled.</span>")
-		return
-	if ((stat != 2 || !( ticker )))
+	if(stat != DEAD || !ticker)
 		to_chat(usr, "<span class='notice'><B>You must be dead to use this!</B></span>")
 		return
-	if (ticker.mode && ticker.mode.deny_respawn) //BS12 EDIT
-		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
-		return
-	else
-		var/deathtime = world.time - src.timeofdeath
-		if(istype(src,/mob/observer/dead))
-			var/mob/observer/dead/G = src
-			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
-				to_chat(usr, "<font color='blue'><B>By using the antagHUD you forfeit the ability to join the round.</B></font>")
-				return
-		var/deathtimeminutes = round(deathtime / 600)
-		var/pluralcheck = "minute"
-		if(deathtimeminutes == 0)
-			pluralcheck = ""
-		else if(deathtimeminutes == 1)
-			pluralcheck = " [deathtimeminutes] minute and"
-		else if(deathtimeminutes > 1)
-			pluralcheck = " [deathtimeminutes] minutes and"
-		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
-		to_chat(usr, "You have been dead for[pluralcheck] [deathtimeseconds] seconds.")
 
-		if ((deathtime < (1 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))	//VOREStation Edit: lower respawn timer
-			to_chat(usr, "You must wait 1 minute to respawn!")
+	// Final chance to abort "respawning"
+	if(mind && timeofdeath) // They had spawned before
+		var/choice = alert(usr, "Returning to the menu will prevent your character from being revived in-round. Are you sure?", "Confirmation", "No, wait", "Yes, leave")
+		if(choice == "No, wait")
 			return
-		else
-			to_chat(usr, "You can respawn now, enjoy your new life!")
 
-	log_game("[usr.name]/[usr.key] used abandon mob.")
-
-	to_chat(usr, "<font color='blue'><B>Make sure to play a different character, and please roleplay correctly!</B></font>")
+	// Beyond this point, you're going to respawn
+	to_chat(usr, config.respawn_message)
 
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
@@ -432,56 +404,26 @@
 	if(is_admin && stat == DEAD)
 		is_admin = 0
 
-	var/list/names = list()
-	var/list/namecounts = list()
-	var/list/creatures = list()
+	var/list/targets = list()
 
-	for(var/obj/O in world)				//EWWWWWWWWWWWWWWWWWWWWWWWW ~needs to be optimised
-		if(!O.loc)
-			continue
-		if(istype(O, /obj/item/weapon/disk/nuclear))
-			var/name = "Nuclear Disk"
-			if (names.Find(name))
-				namecounts[name]++
-				name = "[name] ([namecounts[name]])"
-			else
-				names.Add(name)
-				namecounts[name] = 1
-			creatures[name] = O
 
-		if(istype(O, /obj/singularity))
-			var/name = "Singularity"
-			if (names.Find(name))
-				namecounts[name]++
-				name = "[name] ([namecounts[name]])"
-			else
-				names.Add(name)
-				namecounts[name] = 1
-			creatures[name] = O
-
-	for(var/mob/M in sortAtom(mob_list))
-		var/name = M.name
-		if (names.Find(name))
-			namecounts[name]++
-			name = "[name] ([namecounts[name]])"
-		else
-			names.Add(name)
-			namecounts[name] = 1
-
-		creatures[name] = M
-
+	targets += observe_list_format(nuke_disks)
+	targets += observe_list_format(all_singularities)
+	targets += getmobs()
+	targets += observe_list_format(sortAtom(mechas_list))
+	targets += observe_list_format(SSshuttles.ships)
 
 	client.perspective = EYE_PERSPECTIVE
 
 	var/eye_name = null
 
 	var/ok = "[is_admin ? "Admin Observe" : "Observe"]"
-	eye_name = input("Please, select a player!", ok, null, null) as null|anything in creatures
+	eye_name = input("Please, select a player!", ok, null, null) as null|anything in targets
 
 	if (!eye_name)
 		return
 
-	var/mob/mob_eye = creatures[eye_name]
+	var/mob/mob_eye = targets[eye_name]
 
 	if(client && mob_eye)
 		client.eye = mob_eye
@@ -512,26 +454,7 @@
 
 
 /mob/proc/pull_damage()
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		if(H.health - H.halloss <= config.health_threshold_softcrit)
-			for(var/name in H.organs_by_name)
-				var/obj/item/organ/external/e = H.organs_by_name[name]
-				if(e && H.lying)
-					if((e.status & ORGAN_BROKEN && (!e.splinted || (e.splinted && e.splinted in e.contents && prob(30))) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
-						return 1
-						break
 	return 0
-
-/mob/MouseDrop(mob/M as mob)
-	..()
-	if(M != usr) return
-	if(usr == src) return
-	if(!Adjacent(usr)) return
-	if(usr.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT | INCAPACITATION_RESTRAINED)) return //Incapacitated.
-	if(istype(M,/mob/living/silicon/ai)) return
-	show_inv(usr)
-
 
 /mob/verb/stop_pulling()
 
@@ -539,6 +462,11 @@
 	set category = "IC"
 
 	if(pulling)
+		if(ishuman(pulling))
+			var/mob/living/carbon/human/H = pulling
+			visible_message(SPAN_WARNING("\The [src] lets go of \the [H]."), SPAN_NOTICE("You let go of \the [H]."), exclude_mobs = list(H))
+			if(!H.stat)
+				to_chat(H, SPAN_WARNING("\The [src] lets go of you."))
 		pulling.pulledby = null
 		pulling = null
 		if(pullin)
@@ -610,6 +538,16 @@
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
+		if(H.lying) // If they're on the ground we're probably dragging their arms to move them
+			visible_message(SPAN_WARNING("\The [src] leans down and grips \the [H]'s arms."), SPAN_NOTICE("You lean down and grip \the [H]'s arms."), exclude_mobs = list(H))
+			if(!H.stat)
+				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your arms."))
+		else //Otherwise we're probably just holding their arm to lead them somewhere
+			visible_message(SPAN_WARNING("\The [src] grips \the [H]'s arm."), SPAN_NOTICE("You grip \the [H]'s arm."), exclude_mobs = list(H))
+			if(!H.stat)
+				to_chat(H, SPAN_WARNING("\The [src] grips your arm."))
+		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 25) //Quieter than hugging/grabbing but we still want some audio feedback
+
 		if(H.pull_damage())
 			to_chat(src, "<font color='red'><B>Pulling \the [H] in their current condition would probably be a bad idea.</B></font>")
 
@@ -725,7 +663,7 @@
 
 // facing verbs
 /mob/proc/canface()
-	if(!canmove)						return 0
+//	if(!canmove)						return 0 //VOREStation Edit. Redundant check that only affects conscious proning, actual inability to turn and shift around handled by actual inabilities.
 	if(stat)							return 0
 	if(anchored)						return 0
 	if(transforming)						return 0
@@ -741,12 +679,12 @@
 
 
 /mob/proc/facedir(var/ndir)
-	if(!canface() || (client && (client.moving || (world.time < move_delay))))
+	if(!canface() || (client && (client.moving || !checkMoveCooldown())))
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	move_delay += movement_delay()
+	setMoveCooldown(movement_delay())
 	return 1
 
 
@@ -909,7 +847,7 @@ mob/proc/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || !usr.canClick())
+	if(!isliving(usr) || !usr.checkClickCooldown())
 		return
 	usr.setClickCooldown(20)
 
@@ -956,6 +894,7 @@ mob/proc/yank_out_object()
 	valid_objects = get_visible_implants(0)
 	if(valid_objects.len == 1) //Yanking out last object - removing verb.
 		src.verbs -= /mob/proc/yank_out_object
+		clear_alert("embeddedobject")
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
@@ -1061,6 +1000,40 @@ mob/proc/yank_out_object()
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(WEST))
+
+// Begin VOREstation edit
+/mob/verb/shiftnorth()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_y <= (default_pixel_y + 16))
+		pixel_y++
+		is_shifted = TRUE
+
+/mob/verb/shiftsouth()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_y >= (default_pixel_y - 16))
+		pixel_y--
+		is_shifted = TRUE
+
+/mob/verb/shiftwest()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_x >= (default_pixel_x - 16))
+		pixel_x--
+		is_shifted = TRUE
+
+mob/verb/shifteast()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_x <= (default_pixel_x + 16))
+		pixel_x++
+		is_shifted = TRUE
+// End VOREstation edit
 
 /mob/proc/adjustEarDamage()
 	return
@@ -1199,6 +1172,16 @@ mob/proc/yank_out_object()
 		else
 			registered_z = null
 
+GLOBAL_LIST_EMPTY(living_players_by_zlevel)
+/mob/living/update_client_z(new_z)
+	var/precall_reg_z = registered_z
+	. = ..() // will update registered_z if necessary
+	if(precall_reg_z != registered_z) // parent did work, let's do work too
+		if(precall_reg_z)
+			GLOB.living_players_by_zlevel[precall_reg_z] -= src
+		if(registered_z)
+			GLOB.living_players_by_zlevel[registered_z] += src
+
 /mob/onTransitZ(old_z, new_z)
 	..()
 	update_client_z(new_z)
@@ -1224,3 +1207,14 @@ mob/proc/yank_out_object()
 	selfimage.loc = src
 
 	return selfimage
+
+/mob/proc/GetAltName()
+	return ""
+
+/mob/proc/get_ghost(even_if_they_cant_reenter = 0)
+	if(mind)
+		return mind.get_ghost(even_if_they_cant_reenter)
+
+/mob/proc/grab_ghost(force)
+	if(mind)
+		return mind.grab_ghost(force = force)

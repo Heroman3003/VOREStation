@@ -9,7 +9,7 @@
 
 	desc = "A small rodent, often seen hiding in maintenance areas and making a nuisance of itself. And stealing cheese, or annoying the chef. SQUEAK! <3"
 
-	movement_cooldown = 1.5 //roughly half the speed of a person
+	movement_cooldown = 5
 	universal_understand = 1
 
 /mob/living/simple_mob/animal/passive/mouse/attack_hand(mob/living/L)
@@ -22,7 +22,7 @@
 //No longer in use, as mice create a holder/micro object instead
 /obj/item/weapon/holder/mouse/attack_self(var/mob/U)
 	for(var/mob/living/simple_mob/M in src.contents)
-		if((I_HELP) && U.canClick()) //a little snowflakey, but makes it use the same cooldown as interacting with non-inventory objects
+		if((I_HELP) && U.checkClickCooldown()) //a little snowflakey, but makes it use the same cooldown as interacting with non-inventory objects
 			U.setClickCooldown(U.get_attack_speed()) //if there's a cleaner way in baycode, I'll change this
 			U.visible_message("<span class='notice'>[U] [M.response_help] \the [M].</span>")
 
@@ -50,3 +50,13 @@
 			return 0
 	else
 		..()
+/mob/living/simple_mob/animal/passive/mouse/white/apple
+	name = "Apple"
+	desc = "Dainty, well groomed and cared for, her eyes glitter with untold knowledge..."
+	gender = FEMALE
+
+/mob/living/simple_mob/animal/passive/mouse/white/apple/New()
+	..()
+	// Change my name back, don't want to be named Apple (666)
+	name = initial(name)
+	desc = initial(desc)

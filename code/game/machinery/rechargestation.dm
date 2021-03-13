@@ -22,17 +22,10 @@
 	var/weld_power_use = 2300	// power used per point of brute damage repaired. 2.3 kW ~ about the same power usage of a handheld arc welder
 	var/wire_power_use = 500	// power used per point of burn damage repaired.
 
-/obj/machinery/recharge_station/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/cell/high(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 5)
-	RefreshParts()
-
+/obj/machinery/recharge_station/Initialize()
+	. = ..()
+	default_apply_parts()
+	cell = default_use_hicell()
 	update_icon()
 
 /obj/machinery/recharge_station/proc/has_cell_power()
@@ -62,6 +55,9 @@
 
 		recharge_amount = cell.give(recharge_amount)
 		use_power(recharge_amount / CELLRATE)
+	else
+		// Since external power is offline, draw operating current from the internal cell
+		cell.use(get_power_usage() * CELLRATE)
 
 	if(icon_update_tick >= 10)
 		icon_update_tick = 0
@@ -70,19 +66,6 @@
 
 	if(occupant || recharge_amount)
 		update_icon()
-
-//since the recharge station can still be on even with NOPOWER. Instead it draws from the internal cell.
-/obj/machinery/recharge_station/auto_use_power()
-	if(!(stat & NOPOWER))
-		return ..()
-
-	if(!has_cell_power())
-		return 0
-	if(use_power == USE_POWER_IDLE)
-		cell.use(idle_power_usage * CELLRATE)
-	else if(use_power >= USE_POWER_ACTIVE)
-		cell.use(active_power_usage * CELLRATE)
-	return 1
 
 //Processes the occupant, drawing from the internal power cell if needed.
 /obj/machinery/recharge_station/proc/process_occupant()
@@ -104,29 +87,48 @@
 	else if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
 
-		// In case they somehow end up with positive values for otherwise unobtainable damage...
-		if(H.getToxLoss() > 0)
-			H.adjustToxLoss(-(rand(1,3)))
-		if(H.getOxyLoss() > 0)
-			H.adjustOxyLoss(-(rand(1,3)))
-		if(H.getCloneLoss() > 0)
-			H.adjustCloneLoss(-(rand(1,3)))
-		if(H.getBrainLoss() > 0)
-			H.adjustBrainLoss(-(rand(1,3)))
+		if(H.isSynthetic())
+			// In case they somehow end up with positive values for otherwise unobtainable damage...
+			if(H.getToxLoss() > 0)
+				H.adjustToxLoss(-(rand(1,3)))
+			if(H.getOxyLoss() > 0)
+				H.adjustOxyLoss(-(rand(1,3)))
+			if(H.getCloneLoss() > 0)
+				H.adjustCloneLoss(-(rand(1,3)))
+			if(H.getBrainLoss() > 0)
+				H.adjustBrainLoss(-(rand(1,3)))
 
-		// Also recharge their internal battery.
-		if(H.isSynthetic() && H.nutrition < 450)
-			H.nutrition = min(H.nutrition+10, 450)
-			cell.use(7000/450*10)
+			// Also recharge their internal battery.
+			if(H.isSynthetic() && H.nutrition < 500) //VOREStation Edit
+				H.nutrition = min(H.nutrition+10, 500) //VOREStation Edit
+				cell.use(7000/450*10)
 
-		// And clear up radiation
-		if(H.radiation > 0)
-			H.radiation = max(H.radiation - rand(5, 15), 0)
+			// And clear up radiation
+			if(H.radiation > 0)
+				H.radiation = max(H.radiation - rand(5, 15), 0)
 
+		if(H.wearing_rig) // stepping into a borg charger to charge your rig and fix your shit
+			var/obj/item/weapon/rig/wornrig = H.get_rig()
+			if(wornrig) // just to make sure
+				for(var/obj/item/rig_module/storedmod in wornrig.installed_modules)
+					if(weld_rate && storedmod.damage && cell.checked_use(weld_power_use * weld_rate * CELLRATE))
+						to_chat(H, "<span class='notice'>[storedmod] is repaired!</span>")
+						storedmod.damage = 0
+				if(wornrig.chest)
+					var/obj/item/clothing/suit/space/rig/rigchest = wornrig.chest
+					if(weld_rate && rigchest.damage && cell.checked_use(weld_power_use * weld_rate * CELLRATE))
+						rigchest.breaches = list()
+						rigchest.calc_breach_damage()
+						to_chat(H, "<span class='notice'>[rigchest] is repaired!</span>")
+				if(wornrig.cell)
+					var/obj/item/weapon/cell/rigcell = wornrig.cell
+					var/diff = min(rigcell.maxcharge - rigcell.charge, charging_power * CELLRATE) // Capped by charging_power / tick
+					var/charge_used = cell.use(diff)
+					rigcell.give(charge_used)
 
 /obj/machinery/recharge_station/examine(mob/user)
-	..(user)
-	to_chat(user, "The charge meter reads: [round(chargepercentage())]%")
+	. = ..()
+	. += "The charge meter reads: [round(chargepercentage())]%"
 
 /obj/machinery/recharge_station/proc/chargepercentage()
 	if(!cell)
@@ -254,7 +256,7 @@
 
 	else if(istype(L,  /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = L
-		if(H.isSynthetic())
+		if(H.isSynthetic() || H.wearing_rig)
 			add_fingerprint(H)
 			H.reset_view(src)
 			H.forceMove(src)

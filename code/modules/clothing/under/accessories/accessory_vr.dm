@@ -2,11 +2,97 @@
 // Collars and such like that
 //
 
+/obj/item/clothing/accessory/choker //A colorable, tagless choker
+	name = "plain choker"
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	desc = "A simple, plain choker. Or maybe it's a collar? Use in-hand to customize it."
+	icon = 'icons/obj/clothing/ties_vr.dmi'
+	icon_override = 'icons/mob/ties_vr.dmi'
+	icon_state = "choker_cst"
+	item_state = "choker_cst"
+	overlay_state = "choker_cst"
+	var/customized = 0
+	var/icon_previous_override
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/seromi/ties_vr.dmi'
+		)
+
+//Forces different sprite sheet on equip
+/obj/item/clothing/accessory/choker/New()
+	..()
+	icon_previous_override = icon_override
+
+/obj/item/clothing/accessory/choker/equipped() //Solution for race-specific sprites for an accessory which is also a suit. Suit icons break if you don't use icon override which then also overrides race-specific sprites.
+	..()
+	setUniqueSpeciesSprite()
+
+/obj/item/clothing/accessory/choker/proc/setUniqueSpeciesSprite()
+	var/mob/living/carbon/human/H = loc
+	if(!istype(H) && istype(has_suit) && ishuman(has_suit.loc))
+		H = has_suit.loc
+	if(sprite_sheets && istype(H) && H.species.get_bodytype(H) && (H.species.get_bodytype(H) in sprite_sheets))
+		icon_override = sprite_sheets[H.species.get_bodytype(H)]
+		update_clothing_icon()
+
+/obj/item/clothing/accessory/choker/on_attached(var/obj/item/clothing/S, var/mob/user)
+	if(!istype(S))
+		return
+	has_suit = S
+	setUniqueSpeciesSprite()
+	..(S, user)
+
+/obj/item/clothing/accessory/choker/dropped()
+	icon_override = icon_previous_override
+
+/obj/item/clothing/accessory/choker/attack_self(mob/user as mob)
+	if(!customized)
+		var/design = input(user,"Descriptor?","Pick descriptor","") in list("plain","simple","ornate","elegant","opulent")
+		var/material = input(user,"Material?","Pick material","") in list("leather","velvet","lace","fabric","latex","plastic","metal","chain","silver","gold","platinum","steel","bead","ruby","sapphire","emerald","diamond")
+		var/type = input(user,"Type?","Pick type","") in list("choker","collar","necklace")
+		name = "[design] [material] [type]"
+		desc = "A [type], made of [material]. It's rather [design]."
+		customized = 1
+		to_chat(usr,"<span class='notice'>[src] has now been customized.</span>")
+	else
+		to_chat(usr,"<span class='notice'>[src] has already been customized!</span>")
+
 /obj/item/clothing/accessory/collar
 	slot_flags = SLOT_TIE | SLOT_OCLOTHING
 	icon = 'icons/obj/clothing/ties_vr.dmi'
 	icon_override = 'icons/mob/ties_vr.dmi'
+	icon_state = "collar_blk"
 	var/writtenon = 0
+	var/icon_previous_override
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/seromi/ties_vr.dmi'
+		)
+
+//Forces different sprite sheet on equip
+/obj/item/clothing/accessory/collar/New()
+	..()
+	icon_previous_override = icon_override
+
+/obj/item/clothing/accessory/collar/equipped() //Solution for race-specific sprites for an accessory which is also a suit. Suit icons break if you don't use icon override which then also overrides race-specific sprites.
+	..()
+	setUniqueSpeciesSprite()
+
+/obj/item/clothing/accessory/collar/proc/setUniqueSpeciesSprite()
+	var/mob/living/carbon/human/H = loc
+	if(!istype(H) && istype(has_suit) && ishuman(has_suit.loc))
+		H = has_suit.loc
+	if(sprite_sheets && istype(H) && H.species.get_bodytype(H) && (H.species.get_bodytype(H) in sprite_sheets))
+		icon_override = sprite_sheets[H.species.get_bodytype(H)]
+		update_clothing_icon()
+
+/obj/item/clothing/accessory/collar/on_attached(var/obj/item/clothing/S, var/mob/user)
+	if(!istype(S))
+		return
+	has_suit = S
+	setUniqueSpeciesSprite()
+	..(S, user)
+
+/obj/item/clothing/accessory/collar/dropped()
+	icon_override = icon_previous_override
 
 /obj/item/clothing/accessory/collar/silver
 	name = "Silver tag collar"
@@ -39,6 +125,7 @@
 
 	if(!jingled)
 		usr.audible_message("[usr] jingles the [src]'s bell.")
+		playsound(src, 'sound/items/pickup/ring.ogg', 50, 1)
 		jingled = 1
 		addtimer(CALLBACK(src, .proc/jingledreset), 50)
 	return
@@ -58,7 +145,7 @@
 	var/datum/radio_frequency/radio_connection
 
 /obj/item/clothing/accessory/collar/shock/Initialize()
-	..()
+	. = ..()
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT) // Makes it so you don't need to change the frequency off of default for it to work.
 
 /obj/item/clothing/accessory/collar/shock/Destroy() //Clean up your toys when you're done.

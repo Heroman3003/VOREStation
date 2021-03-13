@@ -7,13 +7,18 @@ var/list/floor_decals = list()
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals_vr.dmi' // VOREStation Edit
 	plane = DECAL_PLANE
+	layer = MAPPER_DECAL_LAYER
 	var/supplied_dir
 
 /obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour)
 	supplied_dir = newdir
-	if(newcolour) color = newcolour
+	if(newcolour)
+		color = newcolour
 	..(newloc)
 
+// TODO: identify what is causing these atoms to be qdeleted in New()/Initialize() 
+// somewhere in this chain. Alternatively repath to /obj/floor_decal or some other 
+// abstract handler that explicitly doesn't invoke any obj behavior.
 /obj/effect/floor_decal/Initialize()
 	add_to_turf_decals()
 	initialized = TRUE
@@ -29,7 +34,7 @@ var/list/floor_decals = list()
 		var/image/I = floor_decals[cache_key]
 		if(!I)
 			I = image(icon = icon, icon_state = icon_state, dir = dir)
-			I.layer = T.layer
+			I.layer = MAPPER_DECAL_LAYER
 			I.color = color
 			I.alpha = alpha
 			floor_decals[cache_key] = I
@@ -41,11 +46,11 @@ var/list/floor_decals = list()
 	name = "reset marker"
 
 /obj/effect/floor_decal/reset/Initialize()
+	..()
 	var/turf/T = get_turf(src)
 	if(T.decals && T.decals.len)
 		T.decals.Cut()
 		T.update_icon()
-	initialized = TRUE
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/corner
@@ -713,6 +718,54 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/sign/p
 	icon_state = "white_p"
+
+/obj/effect/floor_decal/sign/small_a
+	icon_state = "small_a"
+
+/obj/effect/floor_decal/sign/small_b
+	icon_state = "small_b"
+
+/obj/effect/floor_decal/sign/small_c
+	icon_state = "small_c"
+
+/obj/effect/floor_decal/sign/small_d
+	icon_state = "small_d"
+
+/obj/effect/floor_decal/sign/small_e
+	icon_state = "small_e"
+
+/obj/effect/floor_decal/sign/small_f
+	icon_state = "small_f"
+
+/obj/effect/floor_decal/sign/small_g
+	icon_state = "small_g"
+
+/obj/effect/floor_decal/sign/small_h
+	icon_state = "small_h"
+
+/obj/effect/floor_decal/sign/small_1
+	icon_state = "small_1"
+
+/obj/effect/floor_decal/sign/small_2
+	icon_state = "small_2"
+
+/obj/effect/floor_decal/sign/small_3
+	icon_state = "small_3"
+
+/obj/effect/floor_decal/sign/small_4
+	icon_state = "small_4"
+
+/obj/effect/floor_decal/sign/small_5
+	icon_state = "small_5"
+
+/obj/effect/floor_decal/sign/small_6
+	icon_state = "small_6"
+
+/obj/effect/floor_decal/sign/small_7
+	icon_state = "small_7"
+
+/obj/effect/floor_decal/sign/small_8
+	icon_state = "small_8"
 
 /obj/effect/floor_decal/sign/dock
 	icon_state = "white_d"

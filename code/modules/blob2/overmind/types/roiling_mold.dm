@@ -21,6 +21,7 @@
 	attack_message_synth = ", and your shell buckles"
 	attack_verb = "lashes"
 	spore_projectile = /obj/item/projectile/arc/spore
+	factory_type = /obj/structure/blob/factory/turret
 
 /datum/blob_type/roiling_mold/proc/find_target(var/obj/structure/blob/B, var/tries = 0, var/list/previous_targets = null)
 	if(tries > 3)
@@ -33,7 +34,7 @@
 
 		previous_targets |= L
 
-		L = find_target(B, tries + 1, previous_targets)
+		return find_target(B, tries + 1, previous_targets)
 
 	return L
 
@@ -43,7 +44,7 @@
 	if(!istype(L))
 		return
 
-	if(istype(B, /obj/structure/blob/factory) && L.stat != DEAD && prob(ai_aggressiveness) && L.faction != "blob")
+	if(istype(B, /obj/structure/blob/factory) && L.stat != DEAD && prob(ai_aggressiveness) && L.faction != faction)
 		var/obj/item/projectile/arc/spore/P = new(get_turf(B))
 		P.launch_projectile(L, BP_TORSO, B)
 

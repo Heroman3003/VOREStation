@@ -13,7 +13,7 @@
 	/obj/effect/meteor/big=3,
 	/obj/effect/meteor/flaming=1,
 	/obj/effect/meteor/irradiated=3
-	) 
+	)
 
 //for threatening meteor event
 /var/list/meteors_threatening = list(
@@ -55,7 +55,7 @@
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
 	spawn(0)
-		walk_towards(M, M.dest, 1)
+		walk_towards(M, M.dest, 3) //VOREStation Edit - Slower Meteors
 	return
 
 /proc/spaceDebrisStartLoc(startSide, Z)
@@ -138,14 +138,13 @@
 
 	. = ..() //process movement...
 
-	if(.)//.. if did move, ram the turf we get in
-		var/turf/T = get_turf(loc)
-		ram_turf(T)
+/obj/effect/meteor/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
+	var/turf/T = get_turf(loc)
+	ram_turf(T)
 
-		if(prob(10) && !istype(T, /turf/space))//randomly takes a 'hit' from ramming
-			get_hit()
-
-	return .
+	if(prob(10) && !istype(T, /turf/space)) //randomly takes a 'hit' from ramming
+		get_hit()
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
@@ -206,6 +205,21 @@
 		qdel(src)
 		return
 	..()
+
+/obj/effect/meteor/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.excavation_amount)
+		get_hit()
+		if(!QDELETED(src))
+			wall_power -= Proj.excavation_amount + Proj.damage + (Proj.hitscan * 25)	// Instant-impact projectiles are inherently better at dealing with meteors.
+			wall_power = max(1, wall_power)
+
+			if(wall_power < Proj.excavation_amount)
+				if(prob(min(90, 100 - Proj.damage)))
+					die(TRUE)
+				else
+					die(FALSE)
+				return
+	return
 
 /obj/effect/meteor/proc/make_debris()
 	for(var/throws = dropamt, throws > 0, throws--)

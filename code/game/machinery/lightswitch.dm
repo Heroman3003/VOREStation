@@ -6,6 +6,7 @@
 	desc = "It turns lights on and off. What are you, simple?"
 	icon = 'icons/obj/power_vr.dmi' // VOREStation Edit
 	icon_state = "light1"
+	layer = ABOVE_WINDOW_LAYER
 	anchored = 1.0
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
@@ -50,8 +51,9 @@
 		set_light(2, 0.1, on ? "#82FF4C" : "#F86060")
 
 /obj/machinery/light_switch/examine(mob/user)
-	if(..(user, 1))
-		to_chat(user, "A light switch. It is [on? "on" : "off"].")
+	. = ..()
+	if(Adjacent(user))
+		. += "A light switch. It is [on? "on" : "off"]."
 
 /obj/machinery/light_switch/attack_hand(mob/user)
 
@@ -66,6 +68,7 @@
 		L.updateicon()
 
 	area.power_change()
+	GLOB.lights_switched_on_roundstat++
 
 /obj/machinery/light_switch/power_change()
 

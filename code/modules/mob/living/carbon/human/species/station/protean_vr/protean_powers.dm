@@ -46,6 +46,7 @@
 			var/obj/item/organ/external/new_eo = new limbpath(src)
 			organs_by_name[choice] = new_eo
 			new_eo.robotize(synthetic ? synthetic.company : null) //Use the base we started with
+			new_eo.sync_colour_to_human(src)
 			regenerate_icons()
 		active_regen = FALSE
 		nano_outofblob(blob)
@@ -175,7 +176,7 @@
 		to_chat(src,  "<span class='critical'>Your refactoring is interrupted.</span>")
 		to_chat(blob, "<span class='critical'>Your refactoring is interrupted!</span>")
 	active_regen = FALSE
-	nano_outofblob()
+	nano_outofblob(blob)
 
 
 ////
@@ -281,9 +282,9 @@
 		to_chat(user,"<span class='warning'>You don't have a working refactory module!</span>")
 		return
 
-	var/nagmessage = "Adjust your mass to be a size between 25 to 200%. Up-sizing consumes metal, downsizing returns metal."
+	var/nagmessage = "Adjust your mass to be a size between 25 to 200% (or between 1 to 600% in dorms area). Up-sizing consumes metal, downsizing returns metal."
 	var/new_size = input(user, nagmessage, "Pick a Size", user.size_multiplier*100) as num|null
-	if(!new_size || !ISINRANGE(new_size,25,200))
+	if(!new_size || !size_range_check(new_size))
 		return
 
 	var/size_factor = new_size/100

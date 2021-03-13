@@ -50,6 +50,7 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 	drop_sound = 'sound/items/drop/gun.ogg'
+	pickup_sound = 'sound/items/pickup/gun.ogg'
 
 	var/automatic = 0
 	var/burst = 1
@@ -528,7 +529,7 @@
 		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
 	else
 		src.visible_message("*click click*")
-	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+	playsound(src, 'sound/weapons/empty.ogg', 100, 1)
 
 // Called when the user is about to fire.
 // Moved from handle_post_fire() because if using a laser, the message for when someone got shot would show up before the firing message.
@@ -678,9 +679,9 @@
 		return
 
 	if(silenced)
-		playsound(user, shot_sound, 10, 1)
+		playsound(src, shot_sound, 10, 1)
 	else
-		playsound(user, shot_sound, 50, 1)
+		playsound(src, shot_sound, 50, 1)
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
@@ -745,7 +746,7 @@
 	. = ..()
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
-		to_chat(user, "The fire selector is set to [current_mode.name].")
+		. += "The fire selector is set to [current_mode.name]."
 
 /obj/item/weapon/gun/proc/switch_firemodes(mob/user)
 	if(firemodes.len <= 1)

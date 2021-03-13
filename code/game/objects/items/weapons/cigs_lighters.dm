@@ -34,7 +34,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	origin_tech = list(TECH_MATERIAL = 1)
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
-	drop_sound = null
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/weapon/flame/match/process()
 	if(isliving(loc))
@@ -149,22 +150,21 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	..()
 
 /obj/item/clothing/mask/smokable/examine(mob/user)
-	..()
-	if(is_pipe)
-		return
-	var/smoke_percent = round((smoketime / max_smoketime) * 100)
-	switch(smoke_percent)
-		if(90 to INFINITY)
-			to_chat(user, "[src] is still fresh.")
-		if(60 to 90)
-			to_chat(user, "[src] has a good amount of burn time remaining.")
-		if(30 to 60)
-			to_chat(user, "[src] is about half finished.")
-		if(10 to 30)
-			to_chat(user, "[src] is starting to burn low.")
-		else
-			to_chat(user, "[src] is nearly burnt out!")
+	. = ..()
 
+	if(!is_pipe)
+		var/smoke_percent = round((smoketime / max_smoketime) * 100)
+		switch(smoke_percent)
+			if(90 to INFINITY)
+				. += "[src] is still fresh."
+			if(60 to 90)
+				. += "[src] has a good amount of burn time remaining."
+			if(30 to 60)
+				. += "[src] is about half finished."
+			if(10 to 30)
+				. += "[src] is starting to burn low."
+			else
+				. += "[src] is nearly burnt out!"
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -194,7 +194,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/smokable/proc/die(var/nomessage = 0)
 	var/turf/T = get_turf(src)
 	set_light(0)
-	playsound(src.loc, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
+	playsound(src, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
 	STOP_PROCESSING(SSobj, src)
 	if (type_butt)
 		var/obj/item/butt = new type_butt(T)
@@ -216,7 +216,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/mob/living/M = loc
 			if (!nomessage)
 				to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
-				playsound(src.loc, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
+				playsound(src, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
 			lit = 0
 			icon_state = initial(icon_state)
 			item_state = initial(item_state)
@@ -284,7 +284,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	attack_verb = list("burnt", "singed")
-	type_butt = /obj/item/weapon/cigbutt
+	type_butt = /obj/item/trash/cigbutt
 	chem_volume = 15
 	max_smoketime = 300
 	smoketime = 300
@@ -328,7 +328,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit == 1)
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='notice'>[user] drops and treads on the lit [src], putting it out instantly.</span>")
-			playsound(src.loc, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
+			playsound(src, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
 			die(1)
 		else
 			user.visible_message("<span class='notice'>[user] puts out \the [src].</span>")
@@ -341,8 +341,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/smokable/cigarette/cigar
 	name = "premium cigar"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
+	description_fluff = "While the label does say that this is a 'premium cigar', it really cannot match other types of cigars on the market.  Is it a quality cigarette?  Perhaps.  Was it hand-made with care?  No."
 	icon_state = "cigar2"
-	type_butt = /obj/item/weapon/cigbutt/cigarbutt
+	type_butt = /obj/item/trash/cigbutt/cigarbutt
 	throw_speed = 0.5
 	item_state = "cigar"
 	max_smoketime = 1500
@@ -358,19 +359,21 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
 	desc = "There's little more you could want from a cigar."
+	description_fluff = "Cohiba has been a popular cigar company for centuries.  They are still based out of Cuba and refuse to expand and therefore have a very limited quantity, making their cigars coveted all through known space. Robusto is one of their most popular shapes of cigars."
 	icon_state = "cigar2"
 	nicotine_amt = 7
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	name = "premium Havanian cigar"
 	desc = "A cigar fit for only the best of the best."
+	description_fluff = "'Havanian' is an umbrella term for any cigar made in the typical handmade style of Cuba. This particular cigar is from Gilthari's cigar manufacturers and produced galaxy-wide. While this way of making quality cigars has become slightly bastardized over the years, overall quality has remained relatively the same, even if there is a large quantity of 'Havanian' cigars."
 	icon_state = "cigar2"
 	max_smoketime = 7200
 	smoketime = 7200
 	chem_volume = 30
 	nicotine_amt = 10
 
-/obj/item/weapon/cigbutt
+/obj/item/trash/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
 	icon = 'icons/obj/clothing/masks.dmi'
@@ -380,12 +383,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	slot_flags = SLOT_EARS
 	throwforce = 1
 
-/obj/item/weapon/cigbutt/Initialize()
+/obj/item/trash/cigbutt/Initialize()
 	. = ..()
 	randpixel_xy()
 	transform = turn(transform,rand(0,360))
 
-/obj/item/weapon/cigbutt/cigarbutt
+/obj/item/trash/cigbutt/cigarbutt
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
@@ -403,6 +406,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/smokable/pipe
 	name = "smoking pipe"
 	desc = "A pipe, for smoking. Made of fine, stained cherry wood."
+	description_fluff = "ClassiCo Accessories and Haberdashers, originating out of Mars, claim to produce products 'for the modern gentlefolk'. Most of their items are high-end and expensive, but they pledge to back their prices up with quality, and usually do."
 	icon_state = "pipe"
 	item_state = "pipe"
 	smoketime = 0
@@ -422,7 +426,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit == 1)
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='notice'>[user] empties the lit [src] on the floor!.</span>")
-			playsound(src.loc, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
+			playsound(src, 'sound/items/cigs_lighters/cig_snuff.ogg', 50, 1)
 			die(1)
 		else
 			user.visible_message("<span class='notice'>[user] puts out \the [src].</span>")
@@ -489,6 +493,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/rollingpaper
 	name = "rolling paper"
 	desc = "A small, thin piece of easily flammable paper, commonly used for rolling and smoking various dried plants."
+	description_fluff = "The legalization of certain substances propelled the sale of rolling papers through the roof. Now almost every Trans-stellar produces a variety, often of questionable quality."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig paper"
 
@@ -514,6 +519,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame/lighter
 	name = "cheap lighter"
 	desc = "A cheap-as-free lighter."
+	description_fluff = "The 'hand-made in Altair' sticker underneath is a charming way of saying 'Made with prison labour'. It's no wonder the company can sell these things so cheap."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
 	item_state = "lighter-g"
@@ -528,6 +534,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
 	desc = "The zippo."
+	description_fluff = "Still going after all these years."
 	icon = 'icons/obj/zippo.dmi'
 	icon_state = "zippo"
 	item_state = "zippo"
@@ -547,7 +554,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		lit = 1
 		icon_state = "[base_state]on"
 		item_state = "[base_state]on"
-		playsound(src.loc, activation_sound, 75, 1)
+		playsound(src, activation_sound, 75, 1)
 		if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 			user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 		else
@@ -567,7 +574,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		lit = 0
 		icon_state = "[base_state]"
 		item_state = "[base_state]"
-		playsound(src.loc, deactivation_sound, 75, 1)
+		playsound(src, deactivation_sound, 75, 1)
 		if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 			user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
 		else

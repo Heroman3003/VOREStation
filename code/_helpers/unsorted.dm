@@ -289,6 +289,11 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/format_frequency(var/f)
 	return "[round(f / 10)].[f % 10]"
 
+//Opposite of format, returns as a number
+/proc/unformat_frequency(frequency)
+	frequency = text2num(frequency)
+	return frequency * 10
+
 
 
 //This will update a mob's name, real_name, mind.name, data_core records, pda and id
@@ -453,29 +458,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Returns a list of all mobs with their name
 /proc/getmobs()
-
-	var/list/mobs = sortmobs()
-	var/list/names = list()
-	var/list/creatures = list()
-	var/list/namecounts = list()
-	for(var/mob/M in mobs)
-		var/name = M.name
-		if (name in names)
-			namecounts[name]++
-			name = "[name] ([namecounts[name]])"
-		else
-			names.Add(name)
-			namecounts[name] = 1
-		if (M.real_name && M.real_name != M.name)
-			name += " \[[M.real_name]\]"
-		if (M.stat == 2)
-			if(istype(M, /mob/observer/dead/))
-				name += " \[ghost\]"
-			else
-				name += " \[dead\]"
-		creatures[name] = M
-
-	return creatures
+	return observe_list_format(sortmobs())
 
 //Orders mobs by type then by name
 /proc/sortmobs()
@@ -508,6 +491,34 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //	for(var/mob/living/silicon/hive_mainframe/M in sortmob)
 //		mob_list.Add(M)
 	return moblist
+
+/proc/observe_list_format(input_list)
+	if(!islist(input_list))
+		return
+	var/list/names = list()
+	var/list/output_list = list()
+	var/list/namecounts = list()
+	var/name
+	for(var/atom/A in input_list)
+		name = A.name
+		if(name in names)
+			namecounts[name]++
+			name = "[name] ([namecounts[name]])"
+		else
+			names.Add(name)
+			namecounts[name] = 1
+		if(ismob(A))
+			var/mob/M = A
+			if(M.real_name && M.real_name != M.name)
+				name += " \[[M.real_name]\]"
+			if(M.stat == DEAD)
+				if(istype(M, /mob/observer/dead/))
+					name += " \[ghost\]"
+				else
+					name += " \[dead\]"
+		output_list[name] = A
+
+	return output_list
 
 // Format a power value in W, kW, MW, or GW.
 /proc/DisplayPower(powerused)
@@ -1167,12 +1178,19 @@ proc/is_hot(obj/item/W as obj)
 
 // check if mob is lying down on something we can operate him on.
 // The RNG with table/rollerbeds comes into play in do_surgery() so that fail_step() can be used instead.
-/proc/can_operate(mob/living/carbon/M)
-	return M.lying
+/proc/can_operate(mob/living/carbon/M, mob/living/user)
+	. = M.lying
+
+	if(user && M == user && user.allow_self_surgery && user.a_intent == I_HELP)	// You can, technically, always operate on yourself after standing still. Inadvised, but you can.
+
+		if(!M.isSynthetic())
+			. = TRUE
+
+	return .
 
 // Returns an instance of a valid surgery surface.
-/mob/living/proc/get_surgery_surface()
-	if(!lying)
+/mob/living/proc/get_surgery_surface(mob/living/user)
+	if(!lying && user != src)
 		return null // Not lying down means no surface.
 	var/obj/surface = null
 	for(var/obj/O in loc) // Looks for the best surface.
@@ -1266,21 +1284,22 @@ var/list/WALLITEMS = list(
 			colour += temp_col
 	return colour
 
+/proc/color_square(red, green, blue, hex)
+	var/color = hex ? hex : "#[num2hex(red, 2)][num2hex(green, 2)][num2hex(blue, 2)]"
+	return "<span style='font-face: fixedsys; font-size: 14px; background-color: [color]; color: [color]'>___</span>"
+
 var/mob/dview/dview_mob = new
 
 //Version of view() which ignores darkness, because BYOND doesn't have it.
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
-
-	//VOREStation Add - Emergency Backup
-	if(!dview_mob)
-		dview_mob = new()
-		WARNING("dview mob was lost, and had to be recreated!")
-	//VOREStation Add End
+	if(!dview_mob) //VOREStation Add: Debugging
+		dview_mob = new
+		log_error("Had to recreate the dview mob!")
 
 	dview_mob.loc = center
-
+	
 	dview_mob.see_invisible = invis_flags
 
 	. = view(range, dview_mob)
@@ -1308,6 +1327,11 @@ var/mob/dview/dview_mob = new
 		dead_mob_list -= src
 	else
 		living_mob_list -= src
+
+/mob/dview/Life()
+	mob_list -= src
+	dead_mob_list -= src
+	living_mob_list -= src
 
 /mob/dview/Destroy(var/force)
 	crash_with("Attempt to delete the dview_mob: [log_info_line(src)]")
@@ -1566,6 +1590,14 @@ var/mob/dview/dview_mob = new
 /datum/proc/stack_trace(msg)
 	CRASH(msg)
 
+GLOBAL_REAL_VAR(list/stack_trace_storage)
+/proc/gib_stack_trace()
+	stack_trace_storage = list()
+	stack_trace()
+	stack_trace_storage.Cut(1, min(3,stack_trace_storage.len))
+	. = stack_trace_storage
+	stack_trace_storage = null
+
 // \ref behaviour got changed in 512 so this is necesary to replicate old behaviour.
 // If it ever becomes necesary to get a more performant REF(), this lies here in wait
 // #define REF(thing) (thing && istype(thing, /datum) && (thing:datum_flags & DF_USE_TAG) && thing:tag ? "[thing:tag]" : "\ref[thing]")
@@ -1587,3 +1619,47 @@ var/mob/dview/dview_mob = new
 // Third one is the text that will be clickable.
 /proc/href(href_src, list/href_params, href_text)
 	return "<a href='?src=\ref[href_src];[list2params(href_params)]'>[href_text]</a>"
+
+// This is a helper for anything that wants to render the map in TGUI
+/proc/get_tgui_plane_masters()
+	. = list()
+	// 'Utility' planes
+	. += new /obj/screen/plane_master/fullbright						//Lighting system (lighting_overlay objects)
+	. += new /obj/screen/plane_master/lighting							//Lighting system (but different!)
+	. += new /obj/screen/plane_master/ghosts							//Ghosts!
+	. += new /obj/screen/plane_master{plane = PLANE_AI_EYE}			//AI Eye!
+
+	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS}			//Status is the synth/human icon left side of medhuds
+	. += new /obj/screen/plane_master{plane = PLANE_CH_HEALTH}			//Health bar
+	. += new /obj/screen/plane_master{plane = PLANE_CH_LIFE}			//Alive-or-not icon
+	. += new /obj/screen/plane_master{plane = PLANE_CH_ID}				//Job ID icon
+	. += new /obj/screen/plane_master{plane = PLANE_CH_WANTED}			//Wanted status
+	. += new /obj/screen/plane_master{plane = PLANE_CH_IMPLOYAL}		//Loyalty implants
+	. += new /obj/screen/plane_master{plane = PLANE_CH_IMPTRACK}		//Tracking implants
+	. += new /obj/screen/plane_master{plane = PLANE_CH_IMPCHEM}		//Chemical implants
+	. += new /obj/screen/plane_master{plane = PLANE_CH_SPECIAL}		//"Special" role stuff
+	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS_OOC}		//OOC status HUD
+
+	. += new /obj/screen/plane_master{plane = PLANE_ADMIN1}			//For admin use
+	. += new /obj/screen/plane_master{plane = PLANE_ADMIN2}			//For admin use
+	. += new /obj/screen/plane_master{plane = PLANE_ADMIN3}			//For admin use
+
+	. += new /obj/screen/plane_master{plane = PLANE_MESONS} 			//Meson-specific things like open ceilings.
+	. += new /obj/screen/plane_master{plane = PLANE_BUILDMODE}			//Things that only show up while in build mode
+
+	// Real tangible stuff planes
+	. += new /obj/screen/plane_master/main{plane = TURF_PLANE}
+	. += new /obj/screen/plane_master/main{plane = OBJ_PLANE}
+	. += new /obj/screen/plane_master/main{plane = MOB_PLANE}
+	. += new /obj/screen/plane_master/cloaked								//Cloaked atoms!
+
+	//VOREStation Add - Random other plane masters
+	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS_R}			//Right-side status icon
+	. += new /obj/screen/plane_master{plane = PLANE_CH_HEALTH_VR}			//Health bar but transparent at 100
+	. += new /obj/screen/plane_master{plane = PLANE_CH_BACKUP}				//Backup implant status
+	. += new /obj/screen/plane_master{plane = PLANE_CH_VANTAG}				//Vore Antags
+	. += new /obj/screen/plane_master{plane = PLANE_AUGMENTED}				//Augmented reality
+	//VOREStation Add End
+/proc/CallAsync(datum/source, proctype, list/arguments)
+	set waitfor = FALSE
+	return call(source, proctype)(arglist(arguments))

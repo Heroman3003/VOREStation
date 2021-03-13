@@ -92,12 +92,25 @@
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_C
 
+/obj/item/clothing/accessory/armor/armorplate/explorer
+	name = "explorer armor plate"
+	desc = "A flexible plate made of synthetic fibers, designed to protect from the Sivian fauna. Attaches to a plate carrier."
+	icon_state = "armor_light"
+	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
+
 /obj/item/clothing/accessory/armor/armorplate/stab
 	name = "mesh armor plate"
 	desc = "A mesh armor plate made of steel-reinforced synthetic fibers, great for dealing with small blades. Attaches to a plate carrier."
 	icon_state = "armor_stab"
-	armor = list(melee = 25, bullet = 5, laser = 20, energy = 10, bomb = 15, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 5, laser = 20, energy = 10, bomb = 15, bio = 0, rad = 0)
 	armorsoak = list(melee = 7, bullet = 5, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/accessory/armor/armorplate/blast
+	name = "gel armor plate"
+	desc = "A gel armor plate made of high-grade polymers, great for dealing with localized blasts. Attaches to a plate carrier."
+	icon_state = "armor_blast"
+	armor = list(melee = 25, bullet = 25, laser = 10, energy = 0, bomb = 30, bio = 0, rad = 0)
+	armorsoak = list(melee = 5, bullet = 7, laser = 0, energy = 0, bomb = 40, bio = 0, rad = 0)
 
 /obj/item/clothing/accessory/armor/armorplate/medium
 	name = "medium armor plate"
@@ -138,7 +151,7 @@
 /obj/item/clothing/accessory/armor/armorplate/laserproof
 	name = "ablative armor plate"
 	desc = "A durasteel-scaled synthetic armor plate, providing good protection against lasers. Attaches to a plate carrier."
-	icon_state = "armor_medium"
+	icon_state = "armor_ablative"
 	slowdown = 0.6
 	armor = list(melee = 10, bullet = 10, laser = 70, energy = 50, bomb = 0, bio = 0, rad = 0)
 	armorsoak = list(melee = 0, bullet = 0, laser = 10, energy = 15, bomb = 0, bio = 0, rad = 0)
@@ -195,6 +208,12 @@
 /obj/item/clothing/accessory/armor/armguards/tan
 	desc = "A pair of tan arm pads reinforced with armor plating. Attaches to a plate carrier."
 	icon_state = "armguards_tan"
+
+/obj/item/clothing/accessory/armor/armguards/explorer
+	name = "explorer arm guards"
+	desc = "A pair of green arm pads reinforced with armor plating. Attaches to a plate carrier."
+	icon_state = "armguards_green"
+	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
 
 /obj/item/clothing/accessory/armor/armguards/merc
 	name = "heavy arm guards"
@@ -254,6 +273,12 @@
 /obj/item/clothing/accessory/armor/legguards/tan
 	desc = "A pair of armored leg pads in tan. Attaches to a plate carrier."
 	icon_state = "legguards_tan"
+
+/obj/item/clothing/accessory/armor/legguards/explorer
+	name = "explorer leg guards"
+	desc = "A pair of armored leg pads in green. Attaches to a plate carrier."
+	icon_state = "legguards_green"
+	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
 
 /obj/item/clothing/accessory/armor/legguards/merc
 	name = "heavy leg guards"

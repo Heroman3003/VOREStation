@@ -247,7 +247,7 @@
 /turf/simulated/floor/reinforced/n20/Initialize()
 	. = ..()
 	if(!air) make_air()
-	air.adjust_gas("sleeping_agent", ATMOSTANK_NITROUSOXIDE)
+	air.adjust_gas("nitrous_oxide", ATMOSTANK_NITROUSOXIDE)
 
 /turf/simulated/floor/cult
 	name = "engraved floor"
@@ -324,6 +324,18 @@
 	icon_state = "lino"
 	initial_flooring = /decl/flooring/linoleum
 
+/turf/simulated/floor/wmarble
+	name = "marble"
+	icon = 'icons/turf/flooring/misc.dmi'
+	icon_state = "lightmarble"
+	initial_flooring = /decl/flooring/wmarble
+
+/turf/simulated/floor/bmarble
+	name = "marble"
+	icon = 'icons/turf/flooring/misc.dmi'
+	icon_state = "darkmarble"
+	initial_flooring = /decl/flooring/bmarble
+
 //ATMOS PREMADES
 /turf/simulated/floor/reinforced/airless
 	name = "vacuum floor"
@@ -386,6 +398,7 @@
 	name = "snow"
 	icon = 'icons/turf/snow_new.dmi'
 	icon_state = "snow"
+	initial_flooring = /decl/flooring/snow
 	var/list/crossed_dirs = list()
 
 /turf/simulated/floor/snow/snow2
@@ -411,24 +424,20 @@
 
 #define FOOTSTEP_SPRITE_AMT 2
 
-/turf/snow/Entered(atom/A)
-    if(isliving(A))
-        var/mdir = "[A.dir]"
-        if(crossed_dirs[mdir])
-            crossed_dirs[mdir] = min(crossed_dirs[mdir] + 1, FOOTSTEP_SPRITE_AMT)
-        else
-            crossed_dirs[mdir] = 1
+// TODO: Move foortprints to a datum-component signal so they can actually be applied to other turf types, like sand, or mud
+/turf/simulated/floor/snow/Entered(atom/A)
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.hovering) // Flying things shouldn't make footprints.
+			return ..()
+		var/mdir = "[A.dir]"
+		crossed_dirs[mdir] = 1
+		update_icon()
+	. = ..()
 
-        update_icon()
-
-    . = ..()
-
-/turf/snow/update_icon()
-    cut_overlays()
-    for(var/d in crossed_dirs)
-        var/amt = crossed_dirs[d]
-
-        for(var/i in 1 to amt)
-            add_overlay(image(icon, "footprint[i]", text2num(d)))
+/turf/simulated/floor/snow/update_icon()
+	..()
+	for(var/d in crossed_dirs)
+		add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = "snow_footprints", dir = text2num(d)))
 
 //**** Here ends snow ****

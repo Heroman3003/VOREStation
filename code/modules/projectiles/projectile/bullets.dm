@@ -10,6 +10,7 @@
 	sharp = 1
 	hitsound_wall = "ricochet"
 	impact_effect_type = /obj/effect/temp_visual/impact_effect
+	excavation_amount  = 20
 	var/mob_passthrough_check = 0
 
 	muzzle_type = /obj/effect/projectile/muzzle/bullet
@@ -117,7 +118,7 @@
 	name = "slug"
 	fire_sound = 'sound/weapons/Gunshot_shotgun.ogg'
 	damage = 50
-	armor_penetration = 15
+	armor_penetration = 20
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -215,6 +216,20 @@
 	penetrating = 5
 	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
+
+	icon_state = "bullet_alt"
+	tracer_type = /obj/effect/projectile/tracer/cannon
+
+/obj/item/projectile/bullet/rifle/a145/highvel
+	damage = 50
+	stun = 1
+	weaken = 0
+	penetrating = 15
+	armor_penetration = 90
+
+/obj/item/projectile/bullet/rifle/a44rifle
+	fire_sound = 'sound/weapons/gunshot4.ogg'
+	damage = 50
 
 /* Miscellaneous */
 

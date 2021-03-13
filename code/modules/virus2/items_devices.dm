@@ -37,7 +37,7 @@
 /obj/item/weapon/virusdish
 	name = "virus dish"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-b"
+	icon_state = "virussample"
 	var/datum/disease2/disease/virus2 = null
 	var/growth = 0
 	var/basic_info = null
@@ -66,9 +66,9 @@
 		qdel(src)
 
 /obj/item/weapon/virusdish/examine(mob/user)
-	..()
+	. = ..()
 	if(basic_info)
-		to_chat(user, "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>")
+		. += "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>"
 
 /obj/item/weapon/virusdish/Topic(href, href_list)
 	. = ..()
@@ -81,7 +81,7 @@
 /obj/item/weapon/ruinedvirusdish
 	name = "ruined virus sample"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-b"
+	icon_state = "virussample-ruined"
 	desc = "The bacteria in the dish are completely dead."
 
 /obj/item/weapon/ruinedvirusdish/attackby(var/obj/item/weapon/W as obj,var/mob/living/carbon/user as mob)

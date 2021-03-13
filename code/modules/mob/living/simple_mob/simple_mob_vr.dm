@@ -4,7 +4,9 @@
 #define SA_ICON_REST	0x04
 
 /mob/living/simple_mob
-	base_attack_cooldown = 15
+	melee_attack_delay = 1
+	base_attack_cooldown = 10
+	melee_miss_chance = 25
 
 	var/temperature_range = 40			// How close will they get to environmental temperature before their body stops changing its heat
 
@@ -21,7 +23,7 @@
 	var/vore_pounce_falloff = 1			// Success rate falloff per %health of target mob.
 	var/vore_pounce_maxhealth = 80		// Mob will not attempt to pounce targets above this %health
 	var/vore_standing_too = 0			// Can also eat non-stunned mobs
-	var/vore_ignores_undigestable = 1	// Refuse to eat mobs who are undigestable by the prefs toggle.
+	var/vore_ignores_undigestable = FALSE	// If set to true, will refuse to eat mobs who are undigestable by the prefs toggle.
 	var/swallowsound = null				// What noise plays when you succeed in eating the mob.
 
 	var/vore_default_mode = DM_DIGEST	// Default bellymode (DM_DIGEST, DM_HOLD, DM_ABSORB)
@@ -52,7 +54,7 @@
 /mob/living/simple_mob/Destroy()
 	release_vore_contents()
 	prey_excludes.Cut()
-	. = ..()
+	return ..()
 
 //For all those ID-having mobs
 /mob/living/simple_mob/GetIdCard()
@@ -66,6 +68,7 @@
 		var/obj/belly/B = belly
 		for(var/mob/living/M in B)
 			new_fullness += M.size_multiplier
+	new_fullness = new_fullness / size_multiplier //Divided by pred's size so a macro mob won't get macro belly from a regular prey.
 	new_fullness = round(new_fullness, 1) // Because intervals of 0.25 are going to make sprite artists cry.
 	vore_fullness = min(vore_capacity, new_fullness)
 
@@ -153,7 +156,7 @@
 		M.visible_message("<span class='danger'>\the [src] pounces on \the [M]!</span>!")
 	else // pounce misses!
 		M.visible_message("<span class='danger'>\the [src] attempts to pounce \the [M] but misses!</span>!")
-		playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 	if(will_eat(M) && (!M.canmove || vore_standing_too)) //if they're edible then eat them too
 		return EatTarget(M)
@@ -243,17 +246,23 @@
 		"The stomach glorps and gurgles as it tries to work you into slop.")
 
 /mob/living/simple_mob/Bumped(var/atom/movable/AM, yes)
-	if(ismob(AM))
-		var/mob/tmob = AM
-		if(will_eat(tmob) && !istype(tmob, type) && prob(vore_bump_chance) && !ckey) //check if they decide to eat. Includes sanity check to prevent cannibalism.
-			if(tmob.canmove && prob(vore_pounce_chance)) //if they'd pounce for other noms, pounce for these too, otherwise still try and eat them if they hold still
-				tmob.Weaken(5)
-			tmob.visible_message("<span class='danger'>\the [src] [vore_bump_emote] \the [tmob]!</span>!")
-			set_AI_busy(TRUE)
+	if(tryBumpNom(AM))
+		return
+	..()
+
+/mob/living/simple_mob/proc/tryBumpNom(var/mob/tmob)
+	//returns TRUE if we actually start an attempt to bumpnom, FALSE if checks fail or the random bump nom chance fails
+	if(istype(tmob) && will_eat(tmob) && !istype(tmob, type) && prob(vore_bump_chance) && !ckey) //check if they decide to eat. Includes sanity check to prevent cannibalism.
+		if(tmob.canmove && prob(vore_pounce_chance)) //if they'd pounce for other noms, pounce for these too, otherwise still try and eat them if they hold still
+			tmob.Weaken(5)
+		tmob.visible_message("<span class='danger'>\the [src] [vore_bump_emote] \the [tmob]!</span>!")
+		set_AI_busy(TRUE)
+		spawn()
 			animal_nom(tmob)
 			update_icon()
 			set_AI_busy(FALSE)
-	..()
+		return TRUE
+	return FALSE
 
 // Checks to see if mob doesn't like this kind of turf
 /mob/living/simple_mob/IMove(newloc)
@@ -270,7 +279,7 @@
 
 // Riding
 /datum/riding/simple_mob
-	keytype = /obj/item/weapon/material/twohanded/fluff/riding_crop // Crack!
+	keytype = /obj/item/weapon/material/twohanded/riding_crop // Crack!
 	nonhuman_key_exemption = FALSE	// If true, nonhumans who can't hold keys don't need them, like borgs and simplemobs.
 	key_name = "a riding crop"		// What the 'keys' for the thing being rided on would be called.
 	only_one_driver = TRUE			// If true, only the person in 'front' (first on list of riding mobs) can drive.
@@ -410,7 +419,7 @@
 
 	src.visible_message("<span class='danger'>\The [src] leaps at [T]!</span>")
 	src.throw_at(get_step(get_turf(T),get_turf(src)), 4, 1, src)
-	playsound(src.loc, 'sound/effects/bodyfall1.ogg', 50, 1)
+	playsound(src, 'sound/effects/bodyfall1.ogg', 50, 1)
 	pixel_y = default_pixel_y
 
 	sleep(5)

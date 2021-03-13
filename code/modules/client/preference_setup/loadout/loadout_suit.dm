@@ -6,6 +6,14 @@
 	sort_category = "Suits and Overwear"
 	cost = 2
 
+/datum/gear/suit/apron_white
+	display_name = "apron, colorable"
+	path = /obj/item/clothing/suit/storage/apron/white
+
+/datum/gear/suit/apron_white/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/suit/greatcoat
 	display_name = "greatcoat"
 	path = /obj/item/clothing/suit/greatcoat
@@ -67,16 +75,16 @@
 	path = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen/sleeveless
 
 /datum/gear/suit/mil
-	display_name = "military jacket"
+	display_name = "military jacket selection"
 	path = /obj/item/clothing/suit/storage/miljacket
 
-/datum/gear/suit/mil/alt
-	display_name = "military jacket, alt"
-	path = /obj/item/clothing/suit/storage/miljacket/alt
-
-/datum/gear/suit/mil/green
-	display_name = "military jacket, green"
-	path = /obj/item/clothing/suit/storage/miljacket/green
+/datum/gear/suit/mil/New()
+	..()
+	var/list/mil_jackets = list()
+	for(var/military_style in typesof(/obj/item/clothing/suit/storage/miljacket))
+		var/obj/item/clothing/suit/storage/miljacket/miljacket = military_style
+		mil_jackets[initial(miljacket.name)] = miljacket
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(mil_jackets))
 
 /datum/gear/suit/greyjacket
 	display_name = "grey jacket"
@@ -96,7 +104,7 @@ datum/gear/suit/duster
 
 /datum/gear/suit/duster/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/hazard_vest
 	display_name = "hazard vest selection"
@@ -164,6 +172,10 @@ datum/gear/suit/duster
 	display_name = "labcoat, EMT (Medical)"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/emt
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
+
+/datum/gear/suit/miscellaneous/labcoat
+	display_name = "plague doctor's coat"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/plaguedoctor
 
 /datum/gear/suit/roles/surgical_apron
 	display_name = "surgical apron"
@@ -235,9 +247,9 @@ datum/gear/suit/duster
 	allowed_roles = list("Quartermaster")
 
 /datum/gear/suit/roles/poncho/cloak/captain
-	display_name = "cloak, colony director"
+	display_name = "cloak, site manager"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/captain
-	allowed_roles = list("Colony Director")
+	allowed_roles = list("Site Manager")
 
 /datum/gear/suit/roles/poncho/cloak/hop
 	display_name = "cloak, head of personnel"
@@ -282,7 +294,7 @@ datum/gear/suit/duster
 
 /datum/gear/suit/roles/poncho/cloak/custom/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
@@ -330,9 +342,9 @@ datum/gear/suit/duster
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
 /datum/gear/suit/wintercoat/captain
-	display_name = "winter coat, colony director"
+	display_name = "winter coat, site manager"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/captain
-	allowed_roles = list("Colony Director")
+	allowed_roles = list("Site Manager")
 
 /datum/gear/suit/wintercoat/security
 	display_name = "winter coat, security"
@@ -429,7 +441,7 @@ datum/gear/suit/duster
 
 /datum/gear/suit/miscellaneous/kimono/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/miscellaneous/sec_dep_jacket
 	display_name = "department jacket, security"
@@ -457,7 +469,7 @@ datum/gear/suit/duster
 
 /datum/gear/suit/miscellaneous/peacoat/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/miscellaneous/kamishimo
 	display_name = "kamishimo"
@@ -470,7 +482,7 @@ datum/gear/suit/duster
 /datum/gear/suit/snowsuit/command
 	display_name = "snowsuit, command"
 	path = /obj/item/clothing/suit/storage/snowsuit/command
-	allowed_roles = list("Colony Director","Research Director","Head of Personnel","Head of Security","Chief Engineer","Command Secretary")
+	allowed_roles = list("Site Manager","Research Director","Head of Personnel","Head of Security","Chief Engineer","Command Secretary")
 
 /datum/gear/suit/snowsuit/security
 	display_name = "snowsuit, security"
@@ -503,4 +515,4 @@ datum/gear/suit/duster
 
 /datum/gear/suit/miscellaneous/cardigan/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice

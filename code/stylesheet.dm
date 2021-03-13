@@ -67,7 +67,11 @@ em						{font-style: normal;font-weight: bold;}
 h1.alert, h2.alert		{color: #000000;}
 .ghostalert				{color: #5c00e6;	font-style: italic; font-weight: bold;}
 
-.emote					{font-style: italic;}
+
+/* VOREStation Edit Start */
+.emote					{}
+.emote_subtle			{font-style: italic;}
+/* VOREStation Edit End */
 
 /* Game Messages */
 
@@ -95,7 +99,7 @@ h1.alert, h2.alert		{color: #000000;}
 .akhani					{color: #AC398C;}
 .skrell					{color: #00B0B3;}
 .skrellfar				{color: #70FCFF;}
-.soghun					{color: #228B22;}
+.soghun					{color: #50BA6C;}
 .solcom					{color: #22228B;}
 .changeling				{color: #800080;}
 .sergal					{color: #0077FF;}
@@ -106,10 +110,13 @@ h1.alert, h2.alert		{color: #000000;}
 .bug                                    {color: #9e9e39;}
 .vox					{color: #AA00AA;}
 .zaddat					{color: #941C1C;}
+.promethean				{color: #5A5A5A;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 .terminus				{font-family: "Times New Roman", Times, serif, sans-serif}
 .interface				{color: #330033;}
+.spacer					{color: #9c660b;} /* VOREStation Add */
+.blob					{color: #ff950d; font-weight: bold; font-style: italic;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
 
@@ -119,5 +126,14 @@ BIG IMG.icon 			{width: 32px; height: 32px;}
 .debug_info						{}
 .debug_debug					{color:#0000FF;}
 .debug_trace					{color:#888888;}
+
+.black					{color: #000000;}
+.darkgray				{color: #808080;}
+.gray					{color: #A9A9A9;}
+.red					{color: #FF0000;}
+.orange					{color: #FF8C00;}
+.blue					{color: #0000FF;}
+.green					{color: #00DD00;}
+
 
 </style>"}

@@ -7,9 +7,10 @@
 	var/obj/item/stack/type_to_spawn = null
 
 /obj/fiftyspawner/Initialize()
-	..() //We're not returning . because we're going to ask to be deleted.
-	
-	var/obj/item/stack/M = new type_to_spawn(get_turf(src))
+	..()
+	var/turf/T = get_turf(src)
+	var/obj/structure/closet/C = locate() in T
+	var/obj/item/stack/M = new type_to_spawn(C || T)
 	M.amount = M.max_amount //some stuff spawns with 60, we're still calling it fifty
 	M.update_icon() // Some stacks have different sprites depending on how full they are.
 	return INITIALIZE_HINT_QDEL //Bye!

@@ -68,7 +68,11 @@ var/list/gamemode_cache = list()
 	var/static/allow_ai_shells = FALSE			// allow AIs to enter and leave special borg shells at will, and for those shells to be buildable.
 	var/static/give_free_ai_shell = FALSE		// allows a specific spawner object to instantiate a premade AI Shell
 	var/static/hostedby = null
+
 	var/static/respawn = 1
+	var/static/respawn_time = 3000			// time before a dead player is allowed to respawn (in ds, though the config file asks for minutes, and it's converted below)
+	var/static/respawn_message = "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
+
 	var/static/guest_jobban = 1
 	var/static/usewhitelist = 0
 	var/static/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
@@ -201,16 +205,18 @@ var/list/gamemode_cache = list()
 
 	var/static/enter_allowed = 1
 
-	var/static/use_irc_bot = 0
-	var/static/use_node_bot = 0
-	var/static/irc_bot_port = 0
-	var/static/irc_bot_host = ""
-	var/static/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
-	var/static/main_irc = ""
-	var/static/admin_irc = ""
-	var/static/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-	var/static/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
-	var/static/use_overmap = 0
+	var/use_irc_bot = 0
+	var/use_node_bot = 0
+	var/irc_bot_port = 0
+	var/irc_bot_host = ""
+	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
+	var/main_irc = ""
+	var/admin_irc = ""
+	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
+	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
+	var/use_overmap = 0
+	
+	var/static/list/engine_map = list("Supermatter Engine", "Edison's Bane")	// Comma separated list of engines to choose from.  Blank means fully random.
 
 	// Event settings
 	var/static/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -232,7 +238,14 @@ var/list/gamemode_cache = list()
 	var/static/dooc_allowed = 1
 	var/static/dsay_allowed = 1
 
-	var/static/starlight = 0	// Whether space turfs have ambient light or not
+	var/persistence_disabled = FALSE
+	var/persistence_ignore_mapload = FALSE
+
+	var/allow_byond_links = 0
+	var/allow_discord_links = 0
+	var/allow_url_links = 0					// honestly if I were you i'd leave this one off, only use in dire situations
+
+	var/starlight = 0	// Whether space turfs have ambient light or not
 
 	var/static/list/ert_species = list(SPECIES_HUMAN)
 
@@ -269,6 +282,12 @@ var/list/gamemode_cache = list()
 
 	// disables the annoying "You have already logged in this round, disconnect or be banned" popup for multikeying, because it annoys the shit out of me when testing.
 	var/static/disable_cid_warn_popup = FALSE
+
+	// whether or not to use the nightshift subsystem to perform lighting changes
+	var/static/enable_night_shifts = FALSE
+	
+	var/static/vgs_access_identifier = null	// VOREStation Edit - VGS
+	var/static/vgs_server_port = null	// VOREStation Edit - VGS
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -421,6 +440,15 @@ var/list/gamemode_cache = list()
 				if ("allow_admin_spawning")
 					config.allow_admin_spawning = 1
 
+				if ("allow_byond_links")
+					allow_byond_links = 1
+
+				if ("allow_discord_links")
+					allow_discord_links = 1
+
+				if ("allow_url_links")
+					allow_url_links = 1
+
 				if ("no_dead_vote")
 					config.vote_no_dead = 1
 
@@ -462,6 +490,13 @@ var/list/gamemode_cache = list()
 
 				if ("norespawn")
 					config.respawn = 0
+
+				if ("respawn_time")
+					var/raw_minutes = text2num(value)
+					config.respawn_time = raw_minutes MINUTES
+
+				if ("respawn_message")
+					config.respawn_message = "<span class='notice'><B>[value]</B></span>"
 
 				if ("servername")
 					config.server_name = value
@@ -546,6 +581,12 @@ var/list/gamemode_cache = list()
 
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
+
+				if("persistence_disabled")
+					config.persistence_disabled = TRUE // Previously this forcibly set persistence enabled in the saves.
+
+				if("persistence_ignore_mapload")
+					config.persistence_ignore_mapload = TRUE
 
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
@@ -748,6 +789,9 @@ var/list/gamemode_cache = list()
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("engine_map")
+					config.engine_map = splittext(value, ",")
 /*
 				if("station_levels")
 					using_map.station_levels = text2numlist(value, ";")
@@ -887,6 +931,16 @@ var/list/gamemode_cache = list()
 
 				if("disable_cid_warn_popup")
 					config.disable_cid_warn_popup = TRUE
+
+				if("enable_night_shifts")
+					config.enable_night_shifts = TRUE
+				
+				// VOREStation Edit Start - Can't be in _vr file because it is loaded too late.
+				if("vgs_access_identifier")
+					config.vgs_access_identifier = value
+				if("vgs_server_port")
+					config.vgs_server_port = text2num(value)
+				// VOREStation Edit End
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

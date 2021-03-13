@@ -88,6 +88,11 @@
 	display_name = "cap, grey"
 	path = /obj/item/clothing/head/soft/grey
 
+/datum/gear/head/cap/med
+	display_name = "cap, medical (Medical)"
+	path = /obj/item/clothing/head/soft/med
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Psychiatrist","Paramedic","Search and Rescue")
+
 /datum/gear/head/cap/orange
 	display_name = "cap, orange"
 	path = /obj/item/clothing/head/soft/orange
@@ -119,23 +124,15 @@
 
 /datum/gear/head/cap/white/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/cap/mbill
 	display_name = "cap, bill"
 	path = /obj/item/clothing/head/soft/mbill
 
-/*/datum/gear/head/cap/sol
+/datum/gear/head/cap/sol
 	display_name = "cap, sol"
-	path = /obj/item/clothing/head/soft/sol
-
-/datum/gear/head/cap/expdition
-	display_name = "cap, expedition"
-	path = /obj/item/clothing/head/soft/sol/expedition
-
-/datum/gear/head/cap/fleet
-	display_name = "cap, fleet"
-	path = /obj/item/clothing/head/soft/sol/fleet*/ // Vorestation removal
+	path = /obj/item/clothing/head/soft/solgov
 
 /datum/gear/head/cowboy
 	display_name = "cowboy, rodeo"
@@ -163,7 +160,7 @@
 
 /datum/gear/head/hairflower/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/pin
 	display_name = "pin selection"
@@ -237,7 +234,7 @@
 
 /datum/gear/head/hijab/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/kippa
 	display_name = "kippa"
@@ -245,7 +242,7 @@
 
 /datum/gear/head/kippa/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/turban
 	display_name = "turban"
@@ -253,7 +250,7 @@
 
 /datum/gear/head/turban/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/taqiyah
 	display_name = "taqiyah"
@@ -261,7 +258,7 @@
 
 /datum/gear/head/taqiyah/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/kitty
 	display_name = "kitty ears"
@@ -277,7 +274,7 @@
 
 /datum/gear/head/beanie/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/loose_beanie
 	display_name = "loose beanie"
@@ -285,7 +282,7 @@
 
 /datum/gear/head/loose_beanie/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/beretg
 	display_name = "beret"
@@ -293,7 +290,7 @@
 
 /datum/gear/head/beretg/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/sombrero
 	display_name = "sombrero"
@@ -305,7 +302,7 @@
 
 /datum/gear/head/flatcapg/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/bow/small
 	display_name = "hair bow, small (colorable)"
@@ -313,7 +310,7 @@
 
 /datum/gear/head/bow/small/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/welding/
 	display_name = "welding, normal (engineering/robotics)"
@@ -337,17 +334,17 @@
 	display_name = "welding, engie (engineering/robotics)"
 	path = /obj/item/clothing/head/welding/engie
 
-/*/datum/gear/head/beret/sol
-	display_name = "beret sol, selection"
-	path = /obj/item/clothing/head/beret/sol
+/datum/gear/head/beret/solgov
+	display_name = "beret government, selection"
+	path = /obj/item/clothing/head/beret/solgov
 
-/datum/gear/head/beret/sol/New()
+/datum/gear/head/beret/solgov/New()
 	..()
 	var/list/sols = list()
-	for(var/sol_style in typesof(/obj/item/clothing/head/beret/sol))
-		var/obj/item/clothing/head/beret/sol/sol = sol_style
+	for(var/sol_style in typesof(/obj/item/clothing/head/beret/solgov))
+		var/obj/item/clothing/head/beret/solgov/sol = sol_style
 		sols[initial(sol.name)] = sol
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sols))*/ // Vorestation removal.
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sols))
 
 /datum/gear/head/surgery
 	display_name = "surgical cap selection"
@@ -375,3 +372,27 @@
 /datum/gear/head/jingasa
 	display_name = "jingasa"
 	path = /obj/item/clothing/head/jingasa
+
+/datum/gear/head/sunflower_crown
+	display_name = "sunflower crown"
+	path = /obj/item/clothing/head/sunflower_crown
+
+/datum/gear/head/lavender_crown
+	display_name = "lavender crown"
+	path = /obj/item/clothing/head/lavender_crown
+
+/datum/gear/head/poppy_crown
+	display_name = "poppy crown"
+	path = /obj/item/clothing/head/poppy_crown
+
+/datum/gear/head/rose_crown
+	display_name = "rose crown"
+	path = /obj/item/clothing/head/rose_crown
+
+/datum/gear/head/blackngoldheaddress
+	display_name = "black and gold headdress"
+	path = /obj/item/clothing/head/blackngoldheaddress
+
+/datum/gear/head/plaguedoctor2
+	display_name = "golden plague doctor's hat"
+	path = /obj/item/clothing/head/plaguedoctorhat/gold

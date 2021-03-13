@@ -60,17 +60,20 @@
 	verbs += /mob/living/proc/ventcrawl
 	return ..()
 
+/mob/living/simple_mob/vore/hostile/morph/Destroy()
+	form = null
+	return ..()
+
 /mob/living/simple_mob/vore/hostile/morph/proc/allowed(atom/movable/A)
 	return !is_type_in_typecache(A, blacklist_typecache) && (isobj(A) || ismob(A))
 
 /mob/living/simple_mob/vore/hostile/morph/examine(mob/user)
 	if(morphed)
-		form.examine(user)
-		if(get_dist(user,src)<=3)
-			to_chat(user, "<span class='warning'>It doesn't look quite right...</span>")
+		. = form.examine(user)
+		if(get_dist(user, src) <= 3)
+			. += "<span class='warning'>[form] doesn't look quite right...</span>"
 	else
-		..()
-	return
+		. = ..()
 
 /mob/living/simple_mob/vore/hostile/morph/ShiftClickOn(atom/movable/A)
 	if(Adjacent(A))
@@ -86,6 +89,10 @@
 		..()
 
 /mob/living/simple_mob/vore/hostile/morph/proc/assume(atom/movable/target)
+	var/mob/living/carbon/human/humantarget = target
+	if(istype(humantarget) && humantarget.resleeve_lock && ckey != humantarget.resleeve_lock)
+		to_chat(src, "<span class='warning'>[target] cannot be impersonated!</span>")
+		return
 	if(morphed)
 		to_chat(src, "<span class='warning'>You must restore to your original form first!</span>")
 		return
@@ -93,19 +100,16 @@
 	form = target
 
 	visible_message("<span class='warning'>[src] suddenly twists and changes shape, becoming a copy of [target]!</span>")
-	var/mutable_appearance/ma = new(target)
-	ma.alpha = max(ma.alpha, 150) //fucking chameleons
-	ma.transform = initial(target.transform) //will this ever be non-null?
-
-	//copy_overlays(target, TRUE) //Overlays should be a part of ma, no?
+	name = target.name
+	desc = target.desc
+	icon = target.icon
+	icon_state = target.icon_state
+	alpha = max(target.alpha, 150)
+	copy_overlays(target, TRUE)
 	our_size_multiplier = size_multiplier
 	
-	ma.pixel_x = initial(target.pixel_x)
-	ma.pixel_y = initial(target.pixel_y)
-
-	//MA changes end
-	appearance = ma
-	//Non-MA changes
+	pixel_x = initial(target.pixel_x)
+	pixel_y = initial(target.pixel_y)
 
 	density = target.density
 
@@ -157,7 +161,6 @@
 	density = initial(density)
 
 	cut_overlays(TRUE) //ALL of zem
-	overlays.Cut() //Annoying. ANNOYING.
 	
 	maptext = null
 

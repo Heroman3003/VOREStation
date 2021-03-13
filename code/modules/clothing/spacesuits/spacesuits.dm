@@ -37,6 +37,9 @@
 	if(camera_networks)
 		verbs |= /obj/item/clothing/head/helmet/space/proc/toggle_camera
 
+	if(type == /obj/item/clothing/head/helmet/space) //VOREStation edit - use the specially refitted sprites by KBraid. Done this way to avoid breaking subtypes.
+		sprite_sheets[SPECIES_TESHARI] = 'icons/mob/species/seromi/helmet_vr.dmi'
+
 /obj/item/clothing/head/helmet/space/proc/toggle_camera()
 	set name = "Toggle Helmet Camera"
 	set desc = "Turn your helmet's camera on or off."
@@ -58,10 +61,10 @@
 		camera.c_tag = usr.name
 		to_chat(usr, "<font color='blue'>User scanned as [camera.c_tag]. Camera activated.</font>")
 
-/obj/item/clothing/head/helmet/space/examine()
-	..()
-	if(camera_networks && get_dist(usr,src) <= 1)
-		to_chat(usr, "This helmet has a built-in camera. It's [camera ? "" : "in"]active.")
+/obj/item/clothing/head/helmet/space/examine(mob/user)
+	. = ..()
+	if(camera_networks && Adjacent(user))
+		. += "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
@@ -88,6 +91,13 @@
 	preserve_item = 1
 	valid_accessory_slots = (ACCESSORY_SLOT_OVER | ACCESSORY_SLOT_ARMBAND | ACCESSORY_SLOT_DECOR)
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
+
+//VOREStation edit start - use the specially refitted sprites by KBraid. Done this way to avoid breaking subtypes.
+/obj/item/clothing/suit/space/Initialize()
+	. = ..()
+	if(type == /obj/item/clothing/suit/space)
+		sprite_sheets[SPECIES_TESHARI] = 'icons/mob/species/seromi/suit_vr.dmi'
+//VOREStation edit end.
 
 /obj/item/clothing/suit/space/equipped(mob/M)
 	check_limb_support(M)

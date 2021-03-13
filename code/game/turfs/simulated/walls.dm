@@ -14,9 +14,9 @@
 	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
-	var/material/girder_material
-	var/material/material
-	var/material/reinf_material
+	var/datum/material/girder_material
+	var/datum/material/material
+	var/datum/material/reinf_material
 	var/last_state
 	var/construction_stage
 
@@ -45,6 +45,9 @@
 	STOP_PROCESSING(SSturfs, src)
 	dismantle_wall(null,null,1)
 	..()
+
+/turf/simulated/wall/examine_icon()
+	return icon(icon=initial(icon), icon_state=initial(icon_state))
 
 /turf/simulated/wall/process()
 	// Calling parent will kill processing
@@ -120,21 +123,21 @@
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)
-	. = ..(user)
+	. = ..()
 
 	if(!damage)
-		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
+		. += "<span class='notice'>It looks fully intact.</span>"
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
-			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
+			. += "<span class='warning'>It looks slightly damaged.</span>"
 		else if(dam <= 0.6)
-			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
+			. += "<span class='warning'>It looks moderately damaged.</span>"
 		else
-			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
+			. += "<span class='danger'>It looks heavily damaged.</span>"
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
+		. += "<span class='warning'>There is fungus growing on [src].</span>"
 
 //Damage
 
@@ -301,6 +304,9 @@
 				W.burn((temperature/4))
 			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 				D.ignite(temperature/4)
+
+/turf/simulated/wall/can_engrave()
+	return (material && material.hardness >= 10 && material.hardness <= 100)
 
 /turf/simulated/wall/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
 	if(material.integrity > 1000) // Don't decon things like elevatorium.

@@ -55,14 +55,14 @@
 	var/list/stat_rig_module/stat_modules = new()
 
 /obj/item/rig_module/examine()
-	..()
+	. = ..()
 	switch(damage)
 		if(0)
-			to_chat(usr, "It is undamaged.")
+			. += "It is undamaged."
 		if(1)
-			to_chat(usr, "It is badly damaged.")
+			. += "It is badly damaged."
 		if(2)
-			to_chat(usr, "It is almost completely destroyed.")
+			. += "It is almost completely destroyed."
 
 /obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -267,12 +267,18 @@
 
 /stat_rig_module/Click()
 	if(CanUse())
-		var/list/href_list = list(
-							"interact_module" = module.holder.installed_modules.Find(module),
-							"module_mode" = module_mode
-							)
-		AddHref(href_list)
-		module.holder.Topic(usr, href_list)
+		switch(module_mode)
+			if("select")
+				module.holder.selected_module = module
+			if("engage")
+				module.engage()
+			if("toggle")
+				if(module.active)
+					module.deactivate()
+				else
+					module.activate()
+			if("select_charge_type")
+				module.charge_selected = module.charges[module.charges.Find(module.charge_selected)]
 
 /stat_rig_module/DblClick()
 	return Click()

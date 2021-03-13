@@ -14,6 +14,7 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurences with the appropriate organ code
+#define DOING_TASK	0x8000  // Performing a do_after or do_mob that's exclusive
 
 // Grab levels.
 #define GRAB_PASSIVE    1
@@ -25,7 +26,7 @@
 #define BORGMESON 0x1
 #define BORGTHERM 0x2
 #define BORGXRAY  0x4
-#define BORGMATERIAL  8
+#define BORGMATERIAL  0x8
 
 #define STANCE_ATTACK    11 // Backwards compatability
 #define STANCE_ATTACKING 12 // Ditto
@@ -213,6 +214,13 @@
 #define O_AUG_SPINE "spinal augment"
 #define O_AUG_PELVIC "pelvic augment"
 
+// FBP components.
+
+#define O_PUMP     "hydraulic hub"
+#define O_CYCLER   "reagent cycler"
+#define O_HEATSINK "thermal regulator"
+#define O_DIAGNOSTIC "diagnostic controller"
+
 // Non-Standard organs
 #define O_MOUTH    "mouth"
 #define O_CELL     "cell"
@@ -398,7 +406,9 @@
 
 #define VIS_CLOAKED			23
 
-#define VIS_COUNT			23 //Must be highest number from above.
+#define VIS_STATUS			24
+
+#define VIS_COUNT			24 //Must be highest number from above.
 
 //Some mob icon layering defines
 #define BODY_LAYER		-100
@@ -427,3 +437,7 @@
 #define EXAMINE_SKIPHANDS			0x0040
 #define EXAMINE_SKIPLEGS			0x0080
 #define EXAMINE_SKIPFEET			0x0100
+
+#define MAX_NUTRITION	5000 //VOREStation Edit
+
+#define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.

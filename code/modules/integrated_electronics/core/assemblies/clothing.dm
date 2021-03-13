@@ -12,11 +12,8 @@
 	max_complexity = IC_COMPLEXITY_BASE
 	var/obj/item/clothing/clothing = null
 
-/obj/item/device/electronic_assembly/clothing/nano_host()
-	return clothing
-
-/obj/item/device/electronic_assembly/clothing/resolve_nano_host()
-	return clothing
+/obj/item/device/electronic_assembly/clothing/tgui_host()
+	return clothing.tgui_host()
 
 /obj/item/device/electronic_assembly/clothing/update_icon()
 	..()
@@ -47,9 +44,9 @@
 	..()
 
 /obj/item/clothing/examine(mob/user)
+	. = ..()
 	if(IC)
-		IC.examine(user)
-	..()
+		. += IC.examine(user)
 
 /obj/item/clothing/CtrlShiftClick(mob/user)
 	var/turf/T = get_turf(src)
@@ -64,18 +61,6 @@
 			IC.attack_self(user)
 		else
 			action_circuit.do_work()
-	else
-		..()
-
-/obj/item/clothing/Moved(oldloc)
-	if(IC)
-		IC.on_loc_moved(oldloc)
-	else
-		..()
-
-/obj/item/clothing/on_loc_moved(oldloc)
-	if(IC)
-		IC.on_loc_moved(oldloc)
 	else
 		..()
 

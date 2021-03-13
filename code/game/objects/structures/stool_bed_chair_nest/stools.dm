@@ -12,8 +12,8 @@ var/global/list/stool_cache = list() //haha stool
 	throwforce = 10
 	w_class = ITEMSIZE_HUGE
 	var/base_icon = "stool_base"
-	var/material/material
-	var/material/padding_material
+	var/datum/material/material
+	var/datum/material/padding_material
 
 /obj/item/weapon/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
@@ -145,7 +145,7 @@ var/global/list/stool_cache = list() //haha stool
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
 		to_chat(user, "You remove the padding from \the [src].")
-		playsound(src.loc, W.usesound, 50, 1)
+		playsound(src, W.usesound, 50, 1)
 		remove_padding()
 	else
 		..()

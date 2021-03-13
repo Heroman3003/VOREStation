@@ -198,7 +198,7 @@
 	home worlds and speak a variety of languages, especially Siik and Akhani."
 	catalogue_data = list(/datum/category_item/catalogue/fauna/tajaran)
 
-	body_temperature = 320.15	//Even more cold resistant, even more flammable
+	body_temperature = 280.15	//Even more cold resistant, even more flammable
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -225,6 +225,7 @@
 	base_color = "#333333"
 
 	reagent_tag = IS_TAJARA
+	allergens = COFFEE
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
@@ -235,7 +236,7 @@
 		"Your overheated skin itches."
 		)
 
-	cold_discomfort_level = 275
+	cold_discomfort_level = 215
 
 	has_organ = list(    //No appendix.
 		O_HEART =    /obj/item/organ/internal/heart,
@@ -292,7 +293,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
-	blood_color = "#1D2CBF"
+	blood_color = "#0081CD"
 	base_color = "#006666"
 
 	cold_level_1 = 280 //Default 260 - Lower is better
@@ -312,6 +313,7 @@
 	breath_heat_level_3 = 1350	//Default 1250
 
 	reagent_tag = IS_SKRELL
+	allergens = MEAT|FISH|DAIRY|EGGS
 
 	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
@@ -521,7 +523,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP | NO_MINOR_CUT
+	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP | NO_MINOR_CUT | NO_DEFIB
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 
 	blood_color = "#004400"
@@ -532,10 +534,9 @@
 	genders = list(PLURAL)
 
 /datum/species/diona/can_understand(var/mob/other)
-	var/mob/living/carbon/alien/diona/D = other
-	if(istype(D))
-		return 1
-	return 0
+	if(istype(other, /mob/living/carbon/alien/diona))
+		return TRUE
+	return FALSE
 
 /datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
 	if(H.backbag == 1)
@@ -587,11 +588,9 @@
 		if(isturf(H.loc)) //else, there's considered to be no light
 			var/turf/T = H.loc
 			light_amount = T.get_lumcount() * 10
-		H.nutrition += light_amount
+		H.adjust_nutrition(light_amount)
 		H.shock_stage -= light_amount
 
-		if(H.nutrition > 450)
-			H.nutrition = 450
 		if(light_amount >= 3) //if there's enough light, heal
 			H.adjustBruteLoss(-(round(light_amount/2)))
 			H.adjustFireLoss(-(round(light_amount/2)))

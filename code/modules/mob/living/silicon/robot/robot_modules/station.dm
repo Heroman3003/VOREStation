@@ -9,7 +9,6 @@ var/global/list/robot_modules = list(
 	"Security" 		= /obj/item/weapon/robot_module/robot/security/general,
 	"Combat" 		= /obj/item/weapon/robot_module/robot/security/combat,
 	"Engineering"	= /obj/item/weapon/robot_module/robot/engineering/general,
-//	"Construction"	= /obj/item/weapon/robot_module/robot/engineering/construction,
 	"Janitor" 		= /obj/item/weapon/robot_module/robot/janitor
 	)
 
@@ -193,7 +192,8 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-standard",
 					"Insekt" = "insekt-Default",
 					"Usagi-II" = "tall2standard",
-					"Pyralis" = "Glitterfly-Standard"
+					"Pyralis" = "Glitterfly-Standard",
+					"Decapod" = "decapod-Standard"
 					)
 
 
@@ -229,7 +229,8 @@ var/global/list/robot_modules = list(
 					"Handy" = "handy-med",
 					"Insekt" = "insekt-Med",
 					"Usagi-II" = "tall2medical",
-					"Pyralis" = "Glitterfly-Surgeon"
+					"Pyralis" = "Glitterfly-Surgeon",
+					"Decapod" = "decapod-Surgeon"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/surgeon/New()
@@ -302,7 +303,8 @@ var/global/list/robot_modules = list(
 					"Drone - Chemistry" = "drone-chemistry",
 					"Insekt" = "insekt-Med",
 					"Usagi-II" = "tall2medical",
-					"Pyralis" = "Glitterfly-Crisis"
+					"Pyralis" = "Glitterfly-Crisis",
+					"Decapod" = "decapod-Crisis"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
@@ -378,55 +380,9 @@ var/global/list/robot_modules = list(
 					"Treadwell" = "treadwell",
 					"Handy" = "handy-engineer",
 					"Usagi-II" = "tall2engineer",
-					"Pyralis" = "Glitterfly-Engineering"
+					"Pyralis" = "Glitterfly-Engineering",
+					"Decapod" = "decapod-Engineering"
 					)
-
-/obj/item/weapon/robot_module/robot/engineering/construction
-	name = "construction robot module"
-	no_slip = 1
-
-/* Merged back into engineering (Hell, it's about time.)
-
-/obj/item/weapon/robot_module/robot/engineering/construction/New()
-	..()
-	src.modules += new /obj/item/borg/sight/meson(src)
-	src.modules += new /obj/item/weapon/rcd/borg(src)
-	src.modules += new /obj/item/weapon/tool/screwdriver/cyborg(src)
-	src.modules += new /obj/item/weapon/tool/wrench/cyborg(src)
-	src.modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
-	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
-	src.modules += new /obj/item/device/pipe_painter(src)
-	src.modules += new /obj/item/device/floor_painter(src)
-	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
-	src.modules += new /obj/item/device/geiger(src)
-
-	var/datum/matter_synth/metal = new /datum/matter_synth/metal()
-	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel()
-	var/datum/matter_synth/glass = new /datum/matter_synth/glass()
-	synths += metal
-	synths += plasteel
-	synths += glass
-
-	var/obj/item/stack/material/cyborg/steel/M = new (src)
-	M.synths = list(metal)
-	src.modules += M
-
-	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
-	R.synths = list(metal)
-	src.modules += R
-
-	var/obj/item/stack/tile/floor/cyborg/F = new /obj/item/stack/tile/floor/cyborg(src)
-	F.synths = list(metal)
-	src.modules += F
-
-	var/obj/item/stack/material/cyborg/plasteel/S = new (src)
-	S.synths = list(plasteel)
-	src.modules += S
-
-	var/obj/item/stack/material/cyborg/glass/reinforced/RG = new (src)
-	RG.synths = list(metal, glass)
-	src.modules += RG
-*/
 
 /obj/item/weapon/robot_module/robot/engineering/general/New()
 	..()
@@ -539,7 +495,8 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-sec",
 					"Insekt" = "insekt-Sec",
 					"Usagi-II" = "tall2security",
-					"Pyralis" = "Glitterfly-Security"
+					"Pyralis" = "Glitterfly-Security",
+					"Decapod" = "decapod-Security"
 					)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
@@ -584,7 +541,8 @@ var/global/list/robot_modules = list(
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor",
 					"Usagi-II" = "tall2janitor",
-					"Pyralis" = "Glitterfly-Janitor"
+					"Pyralis" = "Glitterfly-Janitor",
+					"Decapod" = "decapod-Janitor"
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
@@ -646,7 +604,8 @@ var/global/list/robot_modules = list(
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
 					"Usagi-II" = "tall2service",
-					"Pyralis" = "Glitterfly-Service"
+					"Pyralis" = "Glitterfly-Service",
+					"Decapod" = "decapod-Service"
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
@@ -700,7 +659,8 @@ var/global/list/robot_modules = list(
 					"Default" = "Service2",
 					"Drone" = "drone-blu",
 					"Usagi-II" = "tall2service",
-					"Pyralis" = "Glitterfly-Clerical"
+					"Pyralis" = "Glitterfly-Clerical",
+					"Decapod" = "decapod-Clerical"
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
@@ -738,7 +698,8 @@ var/global/list/robot_modules = list(
 					"Treadhead" = "Miner",
 					"Drone" = "drone-miner",
 					"Usagi-II" = "tall2miner",
-					"Pyralis" = "Glitterfly-Miner"
+					"Pyralis" = "Glitterfly-Miner",
+					"Decapod" = "decapod-Miner"
 				)
 
 /obj/item/weapon/robot_module/robot/miner/New()
@@ -768,7 +729,8 @@ var/global/list/robot_modules = list(
 					"Handy" = "handy-science",
 					"Insekt" = "insekt-Sci",
 					"Usagi-II" = "tall2peace",
-					"Pyralis" = "Glitterfly-Research"
+					"Pyralis" = "Glitterfly-Research",
+					"Decapod" = "decapod-Research"
 					)
 
 /obj/item/weapon/robot_module/robot/research/New()
@@ -794,6 +756,10 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/shockpaddles/robot/jumper(src)
 	src.modules += new /obj/item/weapon/melee/baton/slime/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/taser/xeno/robot(src)
+	src.modules += new /obj/item/device/xenoarch_multi_tool(src)
+	src.modules += new /obj/item/weapon/pickaxe/excavationdrill(src)
+	//src.modules += new /obj/item/device/cataloguer(src) //VOREStation Removal
+
 	src.emag = new /obj/item/weapon/hand_tele(src)
 
 	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
@@ -829,7 +795,8 @@ var/global/list/robot_modules = list(
 	sprites = list(
 					"Haruka" = "marinaCB",
 					"Combat Android" = "droid-combat",
-					"Insekt" = "insekt-Combat"
+					"Insekt" = "insekt-Combat",
+					"Decapod" = "decapod-Combat"
 					)
 
 /obj/item/weapon/robot_module/robot/security/combat/New()
@@ -859,6 +826,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/tool/wrench/cyborg(src)
 	src.modules += new /obj/item/weapon/tool/crowbar/cyborg(src)
 	src.modules += new /obj/item/weapon/tool/wirecutters/cyborg(src)
+	src.modules += new /obj/item/device/t_scanner(src)
 	src.modules += new /obj/item/device/multitool(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)

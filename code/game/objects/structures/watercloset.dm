@@ -46,7 +46,7 @@
 /obj/structure/toilet/attackby(obj/item/I as obj, mob/living/user as mob)
 	if(I.is_crowbar())
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
-		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
+		playsound(src, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 		if(do_after(user, 30))
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
 			cistern = !cistern
@@ -172,7 +172,7 @@
 	if(I.is_wrench())
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		to_chat(user, "<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>")
-		playsound(src.loc, I.usesound, 50, 1)
+		playsound(src, I.usesound, 50, 1)
 		if(do_after(user, 50 * I.toolspeed))
 			watertemp = newtemp
 			user.visible_message("<span class='notice'>[user] adjusts the shower with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I].</span>")
@@ -215,82 +215,14 @@
 		L.fire_stacks = -20 //Douse ourselves with water to avoid fire more easily
 
 	if(iscarbon(O))
-		var/mob/living/carbon/M = O
-		if(M.r_hand)
-			M.r_hand.clean_blood()
-		if(M.l_hand)
-			M.l_hand.clean_blood()
-		if(M.back)
-			if(M.back.clean_blood())
-				M.update_inv_back(0)
-
 		//flush away reagents on the skin
+		var/mob/living/carbon/M = O
 		if(M.touching)
 			var/remove_amount = M.touching.maximum_volume * M.reagent_permeability() //take off your suit first
 			M.touching.remove_any(remove_amount)
 
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			var/washgloves = 1
-			var/washshoes = 1
-			var/washmask = 1
-			var/washears = 1
-			var/washglasses = 1
-
-			if(H.wear_suit)
-				washgloves = !(H.wear_suit.flags_inv & HIDEGLOVES)
-				washshoes = !(H.wear_suit.flags_inv & HIDESHOES)
-
-			if(H.head)
-				washmask = !(H.head.flags_inv & HIDEMASK)
-				washglasses = !(H.head.flags_inv & HIDEEYES)
-				washears = !(H.head.flags_inv & HIDEEARS)
-
-			if(H.wear_mask)
-				if (washears)
-					washears = !(H.wear_mask.flags_inv & HIDEEARS)
-				if (washglasses)
-					washglasses = !(H.wear_mask.flags_inv & HIDEEYES)
-
-			if(H.head)
-				if(H.head.clean_blood())
-					H.update_inv_head(0)
-			if(H.wear_suit)
-				if(H.wear_suit.clean_blood())
-					H.update_inv_wear_suit(0)
-			else if(H.w_uniform)
-				if(H.w_uniform.clean_blood())
-					H.update_inv_w_uniform(0)
-			if(H.gloves && washgloves)
-				if(H.gloves.clean_blood())
-					H.update_inv_gloves(0)
-			if(H.shoes && washshoes)
-				if(H.shoes.clean_blood())
-					H.update_inv_shoes(0)
-			if(H.wear_mask && washmask)
-				if(H.wear_mask.clean_blood())
-					H.update_inv_wear_mask(0)
-			if(H.glasses && washglasses)
-				if(H.glasses.clean_blood())
-					H.update_inv_glasses(0)
-			if(H.l_ear && washears)
-				if(H.l_ear.clean_blood())
-					H.update_inv_ears(0)
-			if(H.r_ear && washears)
-				if(H.r_ear.clean_blood())
-					H.update_inv_ears(0)
-			if(H.belt)
-				if(H.belt.clean_blood())
-					H.update_inv_belt(0)
-			H.clean_blood(washshoes)
-		else
-			if(M.wear_mask)						//if the mob is not human, it cleans the mask without asking for bitflags
-				if(M.wear_mask.clean_blood())
-					M.update_inv_wear_mask(0)
-			M.clean_blood()
-	else
-		O.clean_blood()
-
+		M.clean_blood()
+	
 	if(isturf(loc))
 		var/turf/tile = loc
 		for(var/obj/effect/E in tile)
@@ -384,13 +316,14 @@
 		return
 
 	to_chat(usr, "<span class='notice'>You start washing your hands.</span>")
-	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
+	playsound(src, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	sleep(40)
+	if(!do_after(user, 40, src))
+		busy = 0
+		to_chat(usr, "<span class='notice'>You stop washing your hands.</span>")
+		return
 	busy = 0
-
-	if(!Adjacent(user)) return		//Person has moved away from the sink
 
 	user.clean_blood()
 	if(ishuman(user))
@@ -407,7 +340,7 @@
 	if (istype(RG) && RG.is_open_container())
 		RG.reagents.add_reagent("water", min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
-		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
+		playsound(src, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
 	else if (istype(O, /obj/item/weapon/melee/baton))
@@ -431,7 +364,7 @@
 	else if(istype(O, /obj/item/weapon/mop))
 		O.reagents.add_reagent("water", 5)
 		to_chat(user, "<span class='notice'>You wet \the [O] in \the [src].</span>")
-		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+		playsound(src, 'sound/effects/slosh.ogg', 25, 1)
 		return
 
 	var/turf/location = user.loc
@@ -443,14 +376,14 @@
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
 
 	busy = 1
-	sleep(40)
+	if(!do_after(user, 40, src))
+		busy = 0
+		to_chat(usr, "<span class='notice'>You stop washing \the [I].</span>")
+		return
 	busy = 0
 
-	if(user.loc != location) return				//User has moved
-	if(!I) return 								//Item's been destroyed while washing
-	if(user.get_active_hand() != I) return		//Person has switched hands or the item in their hands
-
 	O.clean_blood()
+	O.water_act(rand(1,10))
 	user.visible_message( \
 		"<span class='notice'>[user] washes \a [I] using \the [src].</span>", \
 		"<span class='notice'>You wash \a [I] using \the [src].</span>")

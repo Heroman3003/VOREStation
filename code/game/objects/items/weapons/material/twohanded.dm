@@ -26,6 +26,9 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
+	hitsound = "swing_hit"
+	drop_sound = 'sound/items/drop/sword.ogg'
+	pickup_sound = 'sound/items/pickup/sword.ogg'
 
 /obj/item/weapon/material/twohanded/update_held_icon()
 	var/mob/living/M = loc
@@ -61,7 +64,7 @@
 /obj/item/weapon/material/twohanded/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(wielded && default_parry_check(user, attacker, damage_source) && prob(15))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
-		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
+		playsound(src, 'sound/weapons/punchmiss.ogg', 50, 1)
 		return 1
 	return 0
 
@@ -96,6 +99,7 @@
 	applies_material_colour = 0
 	can_cleave = TRUE
 	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
 
 /obj/item/weapon/material/twohanded/fireaxe/update_held_icon()
 	var/mob/living/M = loc
@@ -152,6 +156,7 @@
 	edge = 0
 	sharp = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
+	mob_throw_hit_sound =  'sound/weapons/pierce.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = "glass"
 	applies_material_colour = 0
@@ -173,3 +178,14 @@
 	fragile = 0
 	sharp = 1
 	edge = 0
+
+/obj/item/weapon/material/twohanded/riding_crop
+	name = "riding crop"
+	desc = "A rod, a little over a foot long with a widened grip and a thick, leather patch at the end. Used since the dawn of the West to control animals."
+	force_divisor = 0.05 //Required in order for the X attacks Y message to pop up.
+	unwielded_force_divisor = 1 // One here, too.
+	applies_material_colour = 1
+	unbreakable = 1
+	base_icon = "riding_crop"
+	icon_state = "riding_crop0"
+	attack_verb = list("cropped","spanked","swatted","smacked","peppered")

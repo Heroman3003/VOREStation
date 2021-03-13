@@ -172,7 +172,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-		update_inv_handcuffed()
+		update_handcuffed()
 	else if (W == legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
@@ -272,11 +272,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_glasses)
 			src.glasses = W
 			W.equipped(src, slot)
+			worn_clothing += glasses
 			update_inv_glasses()
 		if(slot_gloves)
 			src.gloves = W
 			W.equipped(src, slot)
-			worn_clothing += glasses
 			update_inv_gloves()
 		if(slot_head)
 			src.head = W

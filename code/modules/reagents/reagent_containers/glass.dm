@@ -16,6 +16,8 @@
 	w_class = ITEMSIZE_SMALL
 	flags = OPENCONTAINER | NOCONDUCT
 	unacidable = 1 //glass doesn't dissolve in acid
+	drop_sound = 'sound/items/drop/bottle.ogg'
+	pickup_sound = 'sound/items/pickup/bottle.ogg'
 
 	var/label_text = ""
 
@@ -60,14 +62,14 @@
 	base_desc = desc
 
 /obj/item/weapon/reagent_containers/glass/examine(var/mob/user)
-	if(!..(user, 2))
-		return
-	if(reagents && reagents.reagent_list.len)
-		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
-	else
-		to_chat(user, "<span class='notice'>It is empty.</span>")
-	if(!is_open_container())
-		to_chat(user, "<span class='notice'>Airtight lid seals it completely.</span>")
+	. = ..()
+	if(get_dist(user, src) <= 2)
+		if(reagents && reagents.reagent_list.len)
+			. += "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>"
+		else
+			. += "<span class='notice'>It is empty.</span>"
+		if(!is_open_container())
+			. += "<span class='notice'>Airtight lid seals it completely.</span>"
 
 /obj/item/weapon/reagent_containers/glass/attack_self()
 	..()
@@ -133,7 +135,7 @@
 			update_name_label()
 	if(istype(W,/obj/item/weapon/storage/bag))
 		..()
-	if(W && W.w_class <= w_class && (flags & OPENCONTAINER))
+	if(W && W.w_class <= w_class && (flags & OPENCONTAINER) && user.a_intent != I_HELP)
 		to_chat(user, "<span class='notice'>You dip \the [W] into \the [src].</span>")
 		reagents.touch_obj(W, reagents.total_volume)
 
@@ -155,6 +157,8 @@
 	item_state = "beaker"
 	center_of_mass = list("x" = 15,"y" = 11)
 	matter = list("glass" = 500)
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/weapon/reagent_containers/glass/beaker/Initialize()
 	. = ..()
@@ -263,6 +267,8 @@
 	volume = 120
 	flags = OPENCONTAINER
 	unacidable = 0
+	drop_sound = 'sound/items/drop/helm.ogg'
+	pickup_sound = 'sound/items/pickup/helm.ogg'
 
 /obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/item/D, mob/user as mob)
 	if(isprox(D))
@@ -296,7 +302,7 @@
 		else
 			reagents.trans_to_obj(D, 5)
 			to_chat(user, "<span class='notice'>You wet \the [D] in \the [src].</span>")
-			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+			playsound(src, 'sound/effects/slosh.ogg', 25, 1)
 	else
 		return ..()
 
@@ -320,6 +326,8 @@ obj/item/weapon/reagent_containers/glass/bucket/wood
 	volume = 120
 	flags = OPENCONTAINER
 	unacidable = 0
+	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/weapon/reagent_containers/glass/bucket/wood/attackby(var/obj/D, mob/user as mob)
 	if(isprox(D))
@@ -337,7 +345,7 @@ obj/item/weapon/reagent_containers/glass/bucket/wood
 		else
 			reagents.trans_to_obj(D, 5)
 			to_chat(user, "<span class='notice'>You wet \the [D] in \the [src].</span>")
-			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+			playsound(src, 'sound/effects/slosh.ogg', 25, 1)
 		return
 	else
 		return ..()

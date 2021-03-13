@@ -31,7 +31,7 @@
 // find the attached trunk (if present) and init gas resvr.
 /obj/machinery/disposal/Initialize()
 	. = ..()
-	
+
 	trunk = locate() in loc
 	if(!trunk)
 		mode = 0
@@ -212,7 +212,6 @@
 
 // leave the disposal
 /obj/machinery/disposal/proc/go_out(mob/user)
-
 	if (user.client)
 		user.client.eye = user.client.mob
 		user.client.perspective = MOB_PERSPECTIVE
@@ -222,11 +221,11 @@
 
 // ai as human but can't flush
 /obj/machinery/disposal/attack_ai(mob/user as mob)
-	interact(user, 1)
+	add_hiddenprint(user)
+	tgui_interact(user)
 
 // human interact with machine
 /obj/machinery/disposal/attack_hand(mob/user as mob)
-
 	if(stat & BROKEN)
 		return
 
@@ -236,91 +235,146 @@
 
 	// Clumsy folks can only flush it.
 	if(user.IsAdvancedToolUser(1))
-		interact(user, 0)
+		tgui_interact(user)
 	else
 		flush = !flush
 		update()
 	return
 
 // user interaction
-/obj/machinery/disposal/interact(mob/user, var/ai=0)
+/obj/machinery/disposal/tgui_interact(mob/user, datum/tgui/ui = null)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "DisposalBin")
+		ui.open()
 
-	src.add_fingerprint(user)
-	if(stat & BROKEN)
-		user.unset_machine()
-		return
+/obj/machinery/disposal/tgui_data(mob/user)
+	var/list/data = list()
 
-	var/dat = "<head><title>Waste Disposal Unit</title></head><body><TT><B>Waste Disposal Unit</B><HR>"
+	data["isAI"] = isAI(user)
+	data["flushing"] = flush
+	data["mode"] = mode
+	data["pressure"] = round(clamp(100* air_contents.return_pressure() / (SEND_PRESSURE), 0, 100),1)
 
-	if(!ai)  // AI can't pull flush handle
-		if(flush)
-			dat += "Disposal handle: <A href='?src=\ref[src];handle=0'>Disengage</A> <B>Engaged</B>"
-		else
-			dat += "Disposal handle: <B>Disengaged</B> <A href='?src=\ref[src];handle=1'>Engage</A>"
+	return data
 
-		dat += "<BR><HR><A href='?src=\ref[src];eject=1'>Eject contents</A><HR>"
-
-	if(mode <= 0)
-		dat += "Pump: <B>Off</B> <A href='?src=\ref[src];pump=1'>On</A><BR>"
-	else if(mode == 1)
-		dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (pressurizing)<BR>"
-	else
-		dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (idle)<BR>"
-
-	var/per = 100* air_contents.return_pressure() / (SEND_PRESSURE)
-
-	dat += "Pressure: [round(per, 1)]%<BR></body>"
-
-
-	user.set_machine(src)
-	user << browse(dat, "window=disposal;size=360x170")
-	onclose(user, "disposal")
-
-// handle machine interaction
-
-/obj/machinery/disposal/Topic(href, href_list)
-	if(usr.loc == src)
-		to_chat(usr, "<font color='red'>You cannot reach the controls from inside.</font>")
-		return
-
-	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
-		to_chat(usr, "<font color='red'>The disposal units power is disabled.</font>")
-		return
+/obj/machinery/disposal/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return
 
+	if(usr.loc == src)
+		to_chat(usr, "<span class='warning'>You cannot reach the controls from inside.</span>")
+		return TRUE
+
+	if(mode==-1 && action != "eject") // If the mode is -1, only allow ejection
+		to_chat(usr, "<span class='warning'>The disposal units power is disabled.</span>")
+		return
+
 	if(stat & BROKEN)
 		return
-	if(usr.stat || usr.restrained() || src.flushing)
+
+	add_fingerprint(usr)
+
+	if(flushing)
 		return
 
-	if(istype(src.loc, /turf))
-		usr.set_machine(src)
-
-		if(href_list["close"])
-			usr.unset_machine()
-			usr << browse(null, "window=disposal")
-			return
-
-		if(href_list["pump"])
-			if(text2num(href_list["pump"]))
-				mode = 1
-			else
-				mode = 0
+	if(isturf(loc))
+		if(action == "pumpOn")
+			mode = 1
+			update()
+		if(action == "pumpOff")
+			mode = 0
 			update()
 
-		if(!isAI(usr))
-			if(href_list["handle"])
-				flush = text2num(href_list["handle"])
-				update()
+		if(action == "engageHandle")
+			flush = 1
+			update()
+		if(action == "disengageHandle")
+			flush = 0
+			update()
 
-			if(href_list["eject"])
-				eject()
-	else
-		usr << browse(null, "window=disposal")
-		usr.unset_machine()
-		return
-	return
+		if(action == "eject")
+			eject()
+
+	return TRUE
+
+
+	// src.add_fingerprint(user)
+	// if(stat & BROKEN)
+	// 	user.unset_machine()
+	// 	return
+
+	// var/dat = "<head><title>Waste Disposal Unit</title></head><body><TT><B>Waste Disposal Unit</B><HR>"
+
+	// if(!ai)  // AI can't pull flush handle
+	// 	if(flush)
+	// 		dat += "Disposal handle: <A href='?src=\ref[src];handle=0'>Disengage</A> <B>Engaged</B>"
+	// 	else
+	// 		dat += "Disposal handle: <B>Disengaged</B> <A href='?src=\ref[src];handle=1'>Engage</A>"
+
+	// 	dat += "<BR><HR><A href='?src=\ref[src];eject=1'>Eject contents</A><HR>"
+
+	// if(mode <= 0)
+	// 	dat += "Pump: <B>Off</B> <A href='?src=\ref[src];pump=1'>On</A><BR>"
+	// else if(mode == 1)
+	// 	dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (pressurizing)<BR>"
+	// else
+	// 	dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (idle)<BR>"
+
+	// var/per = 100* air_contents.return_pressure() / (SEND_PRESSURE)
+
+	// dat += "Pressure: [round(per, 1)]%<BR></body>"
+
+
+	// user.set_machine(src)
+	// user << browse(dat, "window=disposal;size=360x170")
+	// onclose(user, "disposal")
+
+// handle machine interaction
+
+// /obj/machinery/disposal/Topic(href, href_list)
+// 	if(usr.loc == src)
+// 		to_chat(usr, "<font color='red'>You cannot reach the controls from inside.</font>")
+// 		return
+
+// 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
+// 		to_chat(usr, "<font color='red'>The disposal units power is disabled.</font>")
+// 		return
+// 	if(..())
+// 		return
+
+// 	if(stat & BROKEN)
+// 		return
+// 	if(usr.stat || usr.restrained() || src.flushing)
+// 		return
+
+// 	if(istype(src.loc, /turf))
+// 		usr.set_machine(src)
+
+// 		if(href_list["close"])
+// 			usr.unset_machine()
+// 			usr << browse(null, "window=disposal")
+// 			return
+
+// 		if(href_list["pump"])
+// 			if(text2num(href_list["pump"]))
+// 				mode = 1
+// 			else
+// 				mode = 0
+// 			update()
+
+// 		if(!isAI(usr))
+// 			if(href_list["handle"])
+// 				flush = text2num(href_list["handle"])
+// 				update()
+
+// 			if(href_list["eject"])
+// 				eject()
+// 	else
+// 		usr << browse(null, "window=disposal")
+// 		usr.unset_machine()
+// 		return
+// 	return
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
@@ -340,7 +394,7 @@
 
 	// flush handle
 	if(flush)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
+		overlays += image(src.icon, "[initial(icon_state)]-handle")
 
 	// only handle is shown if no power
 	if(stat & NOPOWER || mode == -1)
@@ -348,13 +402,13 @@
 
 	// 	check for items in disposal - occupied light
 	if(contents.len > 0)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
+		overlays += image(src.icon, "[initial(icon_state)]-full")
 
 	// charging and ready light
 	if(mode == 1)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-charge")
+		overlays += image(src.icon, "[initial(icon_state)]-charge")
 	else if(mode == 2)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-ready")
+		overlays += image(src.icon, "[initial(icon_state)]-ready")
 
 // timed process
 // charge the gas reservoir and perform flush if ready
@@ -426,6 +480,7 @@
 		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
 		last_sound = world.time
 	sleep(5) // wait for animation to finish
+	GLOB.disposals_flush_shift_roundstat++
 
 
 	H.init(src, air_contents)	// copy the contents of disposer to holder
@@ -485,6 +540,35 @@
 		return 0
 	else
 		return ..(mover, target)
+
+/obj/machinery/disposal/wall
+	name = "inset disposal unit"
+	icon_state = "wall"
+
+	density = FALSE
+
+/obj/machinery/disposal/wall/Initialize()
+	. = ..()
+
+	spawn(1 SECOND)	// Fixfix for weird interaction with buildmode or other late-spawning.
+		update()
+
+/obj/machinery/disposal/wall/update()
+	..()
+
+	switch(dir)
+		if(1)
+			pixel_x = 0
+			pixel_y = -32
+		if(2)
+			pixel_x = 0
+			pixel_y = 32
+		if(4)
+			pixel_x = -32
+			pixel_y = 0
+		if(8)
+			pixel_x = 32
+			pixel_y = 0
 
 // virtual disposal object
 // travels through pipes in lieu of actual items
@@ -639,7 +723,7 @@
 			for (var/mob/M in hearers(src.loc.loc))
 				to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
 
-		playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
+		playsound(src, 'sound/effects/clang.ogg', 50, 0, 0)
 
 	// called to vent all gas in holder to a location
 	proc/vent_gas(var/atom/location)
@@ -1155,7 +1239,7 @@
 	New()
 		. = ..()
 		dpdir = dir | turn(dir, 180)
-		if(sort_tag) tagger_locations |= sort_tag
+		if(sort_tag) GLOB.tagger_locations |= sort_tag
 		updatename()
 		updatedesc()
 		update()
@@ -1169,7 +1253,7 @@
 
 			if(O.currTag)// Tag set
 				sort_tag = O.currTag
-				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+				playsound(src, 'sound/machines/twobeep.ogg', 100, 1)
 				to_chat(user, "<font color='blue'>Changed tag to '[sort_tag]'.</font>")
 				updatename()
 				updatedesc()
@@ -1221,7 +1305,7 @@
 
 	New()
 		. = ..()
-		if(sortType) tagger_locations |= sortType
+		if(sortType) GLOB.tagger_locations |= sortType
 
 		updatedir()
 		updatename()
@@ -1237,7 +1321,7 @@
 
 			if(O.currTag)// Tag set
 				sortType = O.currTag
-				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+				playsound(src, 'sound/machines/twobeep.ogg', 100, 1)
 				to_chat(user, "<font color='blue'>Changed filter to '[sortType]'.</font>")
 				updatename()
 				updatedesc()
@@ -1310,7 +1394,7 @@
 	var/obj/linked 	// the linked obj/machinery/disposal or obj/disposaloutlet
 
 /obj/structure/disposalpipe/trunk/Initialize()
-	..() //Lateload below
+	..()
 	dpdir = dir
 	return INITIALIZE_HINT_LATELOAD
 

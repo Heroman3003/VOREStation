@@ -19,7 +19,7 @@
 
 	var/target_temp = T20C
 
-	var/max_temp = T20C + 300
+	var/max_temp = T0C + 300
 	var/min_temp = T0C - 10
 
 	var/current_temp = T20C
@@ -74,7 +74,7 @@
 	..()
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/Initialize()
-	..()
+	. = ..()
 
 	Reservoir = new (src)
 	Reservoir.Master = src
@@ -85,6 +85,16 @@
 	setup_overlay_vars()
 
 	update_icon()
+
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/RefreshParts()
+	var/total_laser_rating = 0
+	for(var/obj/item/weapon/stock_parts/micro_laser/ML in component_parts)
+		total_laser_rating += ML.rating
+
+	max_temp = initial(max_temp) + (50 * (total_laser_rating - 1))
+	min_temp = max(1, initial(min_temp) - (30 * (total_laser_rating - 1)))
+
+	return
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/proc/setup_overlay_vars()
 	overlay_output_beaker = image(icon = src.icon, icon_state = "[base_state]-output")
@@ -109,31 +119,31 @@
 	..()
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/examine(mob/user)
-	..()
-	if(get_dist(user, src) < 3)
-		to_chat(user, "<span class='notice'>\The [src] is powered [on ? "on" : "off"].</span>")
+	. = ..()
+	if(get_dist(user, src) <= 2)
+		. += "<span class='notice'>\The [src] is powered [on ? "on" : "off"].</span>"
 
-		to_chat(user, "<span class='notice'>\The [src]'s gauges read:</span>")
+		. += "<span class='notice'>\The [src]'s gauges read:</span>"
 		if(!use_atmos)
-			to_chat(user, "<span class='notice'>- Target Temperature:</span> <span class='warning'>[target_temp]</span>")
-		to_chat(user, "<span class='notice'>- Temperature:</span> <span class='warning'>[current_temp]</span>")
+			. += "<span class='notice'>- Target Temperature:</span> <span class='warning'>[target_temp]</span>"
+		. += "<span class='notice'>- Temperature:</span> <span class='warning'>[current_temp]</span>"
 
 		if(InputBeaker)
 			if(InputBeaker.reagents.reagent_list.len)
-				to_chat(user, "<span class='notice'>\The [src]'s input beaker holds [InputBeaker.reagents.total_volume] units of liquid.</span>")
+				. += "<span class='notice'>\The [src]'s input beaker holds [InputBeaker.reagents.total_volume] units of liquid.</span>"
 			else
-				to_chat(user, "<span class='notice'>\The [src]'s input beaker is empty!</span>")
+				. += "<span class='notice'>\The [src]'s input beaker is empty!</span>"
 
 		if(Reservoir.reagents.reagent_list.len)
-			to_chat(user, "<span class='notice'>\The [src]'s internal buffer holds [Reservoir.reagents.total_volume] units of liquid.</span>")
+			. += "<span class='notice'>\The [src]'s internal buffer holds [Reservoir.reagents.total_volume] units of liquid.</span>"
 		else
-			to_chat(user, "<span class='notice'>\The [src]'s internal buffer is empty!</span>")
+			. += "<span class='notice'>\The [src]'s internal buffer is empty!</span>"
 
 		if(OutputBeaker)
 			if(OutputBeaker.reagents.reagent_list.len)
-				to_chat(user, "<span class='notice'>\The [src]'s output beaker holds [OutputBeaker.reagents.total_volume] units of liquid.</span>")
+				. += "<span class='notice'>\The [src]'s output beaker holds [OutputBeaker.reagents.total_volume] units of liquid.</span>"
 			else
-				to_chat(user, "<span class='notice'>\The [src]'s output beaker is empty!</span>")
+				. += "<span class='notice'>\The [src]'s output beaker is empty!</span>"
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/verb/toggle_power(mob/user = usr)
 	set name = "Toggle Distillery Heating"
@@ -186,7 +196,7 @@
 
 	switch(choice)
 		if("examine")
-			examine(user)
+			user.examinate(src)
 
 		if("use")
 			toggle_power(user)
@@ -267,7 +277,7 @@
 		return
 	if(chan == -1)
 		chan = power_channel
-	A.use_power(amount, chan)
+	A.use_power_oneoff(amount, chan)
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/process()
 	..()

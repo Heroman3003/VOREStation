@@ -46,8 +46,8 @@
 	catalogue_data = list(/datum/category_item/catalogue/fauna/sif_crab)
 
 /mob/living/simple_mob/animal/passive/crab/sif/Initialize()
-	..()
-	adjust_scale(rand(5,15) / 10)
+	. = ..()
+	adjust_scale(rand(5,12) / 10)
 
 // Meat!
 

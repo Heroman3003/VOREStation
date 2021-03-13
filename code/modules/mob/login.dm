@@ -15,7 +15,7 @@
 					if(matches)	matches += " and "
 					matches += "ID ([client.computer_id])"
 					if(!config.disable_cid_warn_popup)
-						spawn() alert("You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
+						spawn() alert("You appear to have logged in with another key this round, which is not permitted. Please contact an administrator if you believe this message to be in error.")
 				if(matches)
 					if(M.client)
 						message_admins("<font color='red'><B>Notice: </B></font><font color='blue'>[key_name_admin(src)] has the same [matches] as [key_name_admin(M)].</font>", 1)
@@ -51,7 +51,6 @@
 	else
 		client.eye = src
 		client.perspective = MOB_PERSPECTIVE
-	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_client_color()
 
@@ -66,6 +65,10 @@
 	var/ao_enabled = client.is_preference_enabled(/datum/client_preference/ambient_occlusion)
 	plane_holder.set_ao(VIS_OBJS, ao_enabled)
 	plane_holder.set_ao(VIS_MOBS, ao_enabled)
+
+	// Status indicators
+	var/status_enabled = client.is_preference_enabled(/datum/client_preference/status_indicators)
+	plane_holder.set_vis(VIS_STATUS, status_enabled)
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	client.set_hotkeys_macro("macro", "hotkeymode")

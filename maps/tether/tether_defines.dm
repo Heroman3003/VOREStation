@@ -22,8 +22,9 @@
 #define Z_LEVEL_AEROSTAT					21
 #define Z_LEVEL_AEROSTAT_SURFACE			22
 #define Z_LEVEL_DEBRISFIELD					23
-#define Z_LEVEL_FUELDEPOT					24
-#define Z_LEVEL_GATEWAY						25
+#define Z_LEVEL_GUTTERSITE					24
+#define Z_LEVEL_FUELDEPOT					25
+#define Z_LEVEL_GATEWAY						26
 
 //Camera networks
 #define NETWORK_TETHER "Tether"
@@ -31,6 +32,19 @@
 #define NETWORK_OUTSIDE "Outside"
 #define NETWORK_EXPLORATION "Exploration"
 #define NETWORK_XENOBIO "Xenobiology"
+
+/datum/map/tether/New()
+	..()
+	var/choice = pickweight(list(
+		"title" = 10,
+		"tether" = 50,
+		"tether_night" = 50,
+		"tether2_night" = 50,
+		"tether2_dog" = 1,
+		"tether2_love" = 1
+	))
+	if(choice)
+		lobby_screens = list(choice)
 
 /datum/map/tether
 	name = "Virgo"
@@ -60,6 +74,7 @@
 	station_name  = "NSB Adephagia"
 	station_short = "Tether"
 	dock_name     = "Virgo-3B Colony"
+	dock_type     = "surface"
 	boss_name     = "Central Command"
 	boss_short    = "CentCom"
 	company_name  = "NanoTrasen"
@@ -70,8 +85,9 @@
 	shuttle_leaving_dock = "The Orange Line tram has left the station. Estimate %ETA% until the tram arrives at %dock_name%."
 	shuttle_called_message = "A scheduled crew transfer to the %dock_name% is occuring. The tram will be arriving shortly. Those departing should proceed to the Orange Line tram station within %ETA%."
 	shuttle_recall_message = "The scheduled crew transfer has been cancelled."
+	shuttle_name = "Automated Tram"
 	emergency_shuttle_docked_message = "The evacuation tram has arrived at the tram station. You have approximately %ETD% to board the tram."
-	emergency_shuttle_leaving_dock = "The emergency tram has left the station. Estimate %ETA% until the shuttle arrives at %dock_name%."
+	emergency_shuttle_leaving_dock = "The emergency tram has left the station. Estimate %ETA% until the tram arrives at %dock_name%."
 	emergency_shuttle_called_message = "An emergency evacuation has begun, and an off-schedule tram has been called. It will arrive at the tram station in approximately %ETA%."
 	emergency_shuttle_recall_message = "The evacuation tram has been recalled."
 
@@ -130,13 +146,16 @@
 		/area/rnd/miscellaneous_lab
 		)
 
+//TFF 5/4/20 - Mining Ops move, airlock path change
 	unit_test_exempt_from_atmos = list(
 		/area/engineering/atmos_intake, // Outside,
 		/area/rnd/external, //  Outside,
-		/area/tether/surfacebase/mining_main/external, // Outside,
-		/area/tether/surfacebase/mining_main/airlock, //  Its an airlock,
 		/area/tether/surfacebase/emergency_storage/rnd,
-		/area/tether/surfacebase/emergency_storage/atrium)
+		/area/tether/surfacebase/emergency_storage/atrium,
+		/area/tether/surfacebase/lowernortheva, // it airlock
+		/area/tether/surfacebase/lowernortheva/external, //it outside
+		/area/tether/surfacebase/security/gasstorage) //it maint
+
 
 	lateload_z_levels = list(
 		list("Tether - Misc","Tether - Underdark","Tether - Plains"), //Stock Tether lateload maps
@@ -145,6 +164,7 @@
 		list("Desert Planet - Z1 Beach","Desert Planet - Z2 Cave"),
 		list("Remmi Aerostat - Z1 Aerostat","Remmi Aerostat - Z2 Surface"),
 		list("Debris Field - Z1 Space"),
+		list("Gutter Site - Z1 Space"),
 		list("Fuel Depot - Z1 Space")
 		)
 
@@ -177,9 +197,14 @@
 						 	 	 Z_LEVEL_ROGUEMINE_3,
 								 Z_LEVEL_ROGUEMINE_4)
 
+//TFF 16/4/20 - mining outpost shuttle defines
+	mining_station_z =		list(Z_LEVEL_SPACE_HIGH)
+	mining_outpost_z =		list(Z_LEVEL_SURFACE_MINE)
+
 	lateload_single_pick = null //Nothing right now.
 
-	planet_datums_to_make = list(/datum/planet/virgo3b)
+	planet_datums_to_make = list(/datum/planet/virgo3b,
+								/datum/planet/virgo4)
 
 /datum/map/tether/perform_map_generation()
 
@@ -203,12 +228,20 @@
 		Z_LEVEL_SURFACE_MINE,
 		Z_LEVEL_SOLARS,
 		Z_LEVEL_PLAINS
+		)
+/datum/planet/virgo4
+	expected_z_levels = list(
+		Z_LEVEL_BEACH
 	)
 
 // Overmap represetation of tether
 /obj/effect/overmap/visitable/sector/virgo3b
 	name = "Virgo 3B"
 	desc = "Full of phoron, and home to the NSB Adephagia, where you can dock and refuel your craft."
+	scanner_desc = @{"[i]Registration[/i]: NSB Adephagia
+[i]Class[/i]: Installation
+[i]Transponder[/i]: Transmitting (CIV), NanoTrasen IFF
+[b]Notice[/b]: NanoTrasen Base, authorized personnel only"}
 	base = 1
 	icon_state = "globe"
 	color = "#d35b5b"
@@ -262,8 +295,8 @@
 // For making the 6-in-1 holomap, we calculate some offsets
 #define TETHER_MAP_SIZE 140 // Width and height of compiled in tether z levels.
 #define TETHER_HOLOMAP_CENTER_GUTTER 40 // 40px central gutter between columns
-#define TETHER_HOLOMAP_MARGIN_X ((HOLOMAP_ICON_SIZE - (2*TETHER_MAP_SIZE) - TETHER_HOLOMAP_CENTER_GUTTER) / 2) // 100
-#define TETHER_HOLOMAP_MARGIN_Y ((HOLOMAP_ICON_SIZE - (3*TETHER_MAP_SIZE)) / 2) // 60
+#define TETHER_HOLOMAP_MARGIN_X ((HOLOMAP_ICON_SIZE - (2*TETHER_MAP_SIZE) - TETHER_HOLOMAP_CENTER_GUTTER) / 2) // 80
+#define TETHER_HOLOMAP_MARGIN_Y ((HOLOMAP_ICON_SIZE - (3*TETHER_MAP_SIZE)) / 2) // 30
 
 // We have a bunch of stuff common to the station z levels
 /datum/map_z_level/tether/station
@@ -298,7 +331,7 @@
 /datum/map_z_level/tether/transit
 	z = Z_LEVEL_TRANSIT
 	name = "Transit"
-	flags = MAP_LEVEL_SEALED|MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT
+	flags = MAP_LEVEL_STATION|MAP_LEVEL_SEALED|MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT
 
 /datum/map_z_level/tether/station/space_low
 	z = Z_LEVEL_SPACE_LOW
@@ -327,11 +360,11 @@
 /datum/map_z_level/tether/mine
 	z = Z_LEVEL_SURFACE_MINE
 	name = "Mining Outpost"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED
+	flags = MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED
 	base_turf = /turf/simulated/floor/outdoors/rocks/virgo3b
 
 /datum/map_z_level/tether/solars
 	z = Z_LEVEL_SOLARS
 	name = "Solar Field"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED
+	flags = MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED
 	base_turf = /turf/simulated/floor/outdoors/rocks/virgo3b

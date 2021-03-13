@@ -27,7 +27,11 @@
 		"osmium" = /obj/item/weapon/ore/osmium,
 		"hydrogen" = /obj/item/weapon/ore/hydrogen,
 		"silicates" = /obj/item/weapon/ore/glass,
-		"carbon" = /obj/item/weapon/ore/coal
+		"carbon" = /obj/item/weapon/ore/coal,
+		"copper" = /obj/item/weapon/ore/copper,
+		"tin" = /obj/item/weapon/ore/tin,
+		"bauxite" = /obj/item/weapon/ore/bauxite,
+		"rutile" = /obj/item/weapon/ore/rutile
 		)
 
 	//Upgrades
@@ -40,11 +44,14 @@
 	// Found with an advanced laser. exotic_drilling >= 1
 	var/list/ore_types_uncommon = list(
 		MAT_MARBLE = /obj/item/weapon/ore/marble,
+		"painite" = /obj/item/weapon/ore/painite,
+		"quartz" = /obj/item/weapon/ore/quartz,
 		MAT_LEAD = /obj/item/weapon/ore/lead
 		)
 
 	// Found with an ultra laser. exotic_drilling >= 2
 	var/list/ore_types_rare = list(
+		"void opal" = /obj/item/weapon/ore/void_opal,
 		MAT_VERDANTIUM = /obj/item/weapon/ore/verdantium
 		)
 
@@ -52,16 +59,18 @@
 	var/need_update_field = 0
 	var/need_player_check = 0
 
-/obj/machinery/mining/drill/New()
+/obj/machinery/mining/drill/Initialize()
+	. = ..()
+	if(ispath(cell))
+		cell = new cell(src)
+	default_apply_parts()
+	cell = default_use_hicell()
 
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/cell/high(src)
+/obj/machinery/mining/drill/get_cell()
+	return cell
 
-	RefreshParts()
+/obj/machinery/mining/drill/loaded
+	cell = /obj/item/weapon/cell/high
 
 /obj/machinery/mining/drill/process()
 
@@ -173,7 +182,7 @@
 			to_chat(user, "The drill already has a cell installed.")
 		else
 			user.drop_item()
-			O.loc = src
+			O.forceMove(src)
 			cell = O
 			component_parts += O
 			to_chat(user, "You install \the [O].")
@@ -185,7 +194,7 @@
 
 	if (panel_open && cell && user.Adjacent(src))
 		to_chat(user, "You take out \the [cell].")
-		cell.loc = get_turf(user)
+		user.put_in_hands(cell)
 		component_parts -= cell
 		cell = null
 		return
@@ -243,7 +252,7 @@
 			capacity = 200 * P.rating
 		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
 			charge_use -= 10 * P.rating
-	cell = locate(/obj/item/weapon/cell) in component_parts
+	cell = locate(/obj/item/weapon/cell) in src
 
 /obj/machinery/mining/drill/proc/check_supports()
 

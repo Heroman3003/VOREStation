@@ -21,3 +21,12 @@
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
+
+/datum/gear/mask/veil
+	display_name = "black veil"
+	path = /obj/item/clothing/mask/veil
+
+/datum/gear/mask/plaguedoctor2
+	display_name = "golden plague doctor's mask"
+	path = /obj/item/clothing/mask/gas/plaguedoctor/gold
+	cost = 3 ///Because it functions as a gas mask, and therefore has a mechanical advantage.

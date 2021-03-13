@@ -8,7 +8,7 @@
 	assignable = FALSE
 	visible = FALSE
 
-/datum/job/talon/captain
+/datum/job/talon_captain
 	title = "Talon Captain"
 	flag = TALCAP
 	department_flag = TALON
@@ -28,8 +28,12 @@
 	pto_type = null
 	access = list(access_talon)
 	minimal_access = list(access_talon)
+	alt_titles = list("Talon Commander" = /datum/alt_title/talon_commander)
 
-/datum/job/talon/doctor
+/datum/alt_title/talon_commander
+	title = "Talon Commander"
+
+/datum/job/talon_doctor
 	title = "Talon Doctor"
 	flag = TALDOC
 	department_flag = TALON
@@ -48,8 +52,13 @@
 	pto_type = null
 	access = list(access_talon)
 	minimal_access = list(access_talon)
+	alt_titles = list("Talon Medic" = /datum/alt_title/talon_medic)
 
-/datum/job/talon/engineer
+/datum/alt_title/talon_medic
+	title = "Talon Medic"
+
+
+/datum/job/talon_engineer
 	title = "Talon Engineer"
 	flag = TALENG
 	department_flag = TALON
@@ -68,8 +77,13 @@
 	pto_type = null
 	access = list(access_talon)
 	minimal_access = list(access_talon)
+	alt_titles = list("Talon Technician" = /datum/alt_title/talon_tech)
 
-/datum/job/talon/pilot
+/datum/alt_title/talon_tech
+	title = "Talon Technician"
+
+
+/datum/job/talon_pilot
 	title = "Talon Pilot"
 	flag = TALPIL
 	department_flag = TALON
@@ -88,8 +102,13 @@
 	pto_type = null
 	access = list(access_talon)
 	minimal_access = list(access_talon)
+	alt_titles = list("Talon Helmsman" = /datum/alt_title/talon_helmsman)
 
-/datum/job/talon/guard
+/datum/alt_title/talon_helmsman
+	title = "Talon Helmsman"
+
+
+/datum/job/talon_guard
 	title = "Talon Guard"
 	flag = TALSEC
 	department_flag = TALON
@@ -108,6 +127,11 @@
 	pto_type = null
 	access = list(access_talon)
 	minimal_access = list(access_talon)
+	alt_titles = list("Talon Security" = /datum/alt_title/talon_security)
+
+/datum/alt_title/talon_security
+	title = "Talon Security"
+
 
 /decl/hierarchy/outfit/job/talon_captain
 	name = OUTFIT_JOB_NAME("Talon Captain")

@@ -55,6 +55,34 @@
 
 	..()
 
+/obj/item/clothing/shoes/container_resist(mob/living/micro)
+	var/mob/living/carbon/human/macro = loc
+	if(!istype(macro))
+		to_chat(micro, "<span class='notice'>You start to climb out of [src]!</span>")
+		if(do_after(micro, 50, src))
+			to_chat(micro, "<span class='notice'>You climb out of [src]!</span>")
+			micro.forceMove(loc)
+		return
+
+	var/escape_message_micro = "You start to climb out of [src]!"
+	var/escape_message_macro = "Something is trying to climb out of your [src]!"
+	var/escape_time = 60
+
+	if(macro.shoes == src)
+		escape_message_micro = "You start to climb around the larger creature's feet and ankles!"
+		escape_time = 100
+
+	to_chat(micro, "<span class='notice'>[escape_message_micro]</span>")
+	to_chat(macro, "<span class='danger'>[escape_message_macro]</span>")
+	if(!do_after(micro, escape_time, macro))
+		to_chat(micro, "<span class='danger'>You're pinned underfoot!</span>")
+		to_chat(macro, "<span class='danger'>You pin the escapee underfoot!</span>")
+		return
+
+	to_chat(micro, "<span class='notice'>You manage to escape [src]!</span>")
+	to_chat(macro, "<span class='danger'>Someone has climbed out of your [src]!</span>")
+	micro.forceMove(macro.loc)
+
 /obj/item/clothing/gloves
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/seromi/gloves.dmi',
@@ -120,38 +148,10 @@
 
 //Switch to taur sprites if a taur equips
 /obj/item/clothing/suit
-	var/taurized = FALSE //Easier than trying to 'compare icons' to see if it's a taur suit
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/seromi/suit.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
 		SPECIES_WEREBEAST = 'icons/mob/species/werebeast/suit.dmi')
-
-/obj/item/clothing/suit/equipped(var/mob/user, var/slot)
-	var/normalize = TRUE
-
-	//Pyramid of doom-y. Improve somehow?
-	if(!taurized && slot == slot_wear_suit && ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(isTaurTail(H.tail_style))
-			var/datum/sprite_accessory/tail/taur/taurtail = H.tail_style
-			if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in icon_states(taurtail.suit_sprites)))
-				icon_override = taurtail.suit_sprites
-				normalize = FALSE
-				taurized = TRUE
-
-	if(normalize && taurized)
-		icon_override = initial(icon_override)
-		taurized = FALSE
-
-	return ..()
-
-// Taur suits need to be shifted so its centered on their taur half.
-/obj/item/clothing/suit/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask)
-	var/image/standing = ..()
-	if(taurized) //Special snowflake var on suits
-		standing.pixel_x = -16
-		standing.layer = BODY_LAYER + 15 // 15 is above tail layer, so will not be covered by taurbody.
-	return standing
 
 //TFF 5/8/19 - sets Vorestation /obj/item/clothing/under sensor setting default?
 /obj/item/clothing/under

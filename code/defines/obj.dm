@@ -29,7 +29,6 @@
 	density = 0
 	unacidable = 1//Just to be sure.
 	var/def_zone
-	flags = PROXMOVE
 	pass_flags = PASSTABLE
 
 
@@ -59,21 +58,10 @@
 	var/damage = 0.0
 	var/range = 10.0
 
-
-/obj/effect/list_container
-	name = "list container"
-
-/obj/effect/list_container/mobl
-	name = "mobl"
-	var/master = null
-
-	var/list/container = list(  )
-
 /obj/effect/projection
 	name = "Projection"
 	desc = "This looks like a projection of something."
 	anchored = 1.0
-
 
 /obj/effect/shut_controller
 	name = "shut controller"
@@ -109,17 +97,11 @@
 	throw_speed = 1
 	throw_range = 20
 	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 		user.drop_item()
 		src.throw_at(target, throw_range, throw_speed, user)
-
-/obj/effect/stop
-	var/victim = null
-	icon_state = "empty"
-	name = "Geas"
-	desc = "You can't resist."
-	// name = ""
 
 /obj/effect/spawner
 	name = "object spawner"

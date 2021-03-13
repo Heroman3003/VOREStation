@@ -5,7 +5,7 @@ CIRCUITS BELOW
 /datum/design/circuit
 	build_type = IMPRINTER
 	req_tech = list(TECH_DATA = 2)
-	materials = list("glass" = 2000)
+	materials = list("glass" = 1850, MAT_COPPER = 150)
 	chemicals = list("sacid" = 20)
 	time = 5
 
@@ -493,6 +493,8 @@ CIRCUITS BELOW
 	name = "'Durand' central control"
 	id = "durand_main"
 	req_tech = list(TECH_DATA = 4)
+	materials = list("glass" = 2000, MAT_GRAPHITE = 1250, MAT_COPPER = 100)
+	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/main
 	sort_string = "NAADA"
 
@@ -500,6 +502,8 @@ CIRCUITS BELOW
 	name = "'Durand' peripherals control"
 	id = "durand_peri"
 	req_tech = list(TECH_DATA = 4)
+	materials = list("glass" = 2000, MAT_GRAPHITE = 1250, MAT_COPPER = 100)
+	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/peripherals
 	sort_string = "NAADB"
 
@@ -507,6 +511,8 @@ CIRCUITS BELOW
 	name = "'Durand' weapon control and targeting"
 	id = "durand_targ"
 	req_tech = list(TECH_DATA = 4, TECH_COMBAT = 2)
+	materials = list("glass" = 2000, MAT_GRAPHITE = 1250, MAT_COPPER = 100)
+	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/targeting
 	sort_string = "NAADC"
 
@@ -570,6 +576,36 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/telecomms/exonet_node
 	sort_string = "PAAAH"
 
+/datum/design/circuit/shield
+	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
+	materials = list("glass" = 2000, MAT_COPPER = 100, "gold" = 1000)
+
+/datum/design/circuit/shield/AssembleDesignName()
+	name = "Shield generator circuit design ([name])"
+/datum/design/circuit/shield/AssembleDesignDesc()
+	if(!desc)
+		desc = "Allows for the construction of \a [name] shield generator."
+
+/datum/design/circuit/shield/bubble
+	name = "bubble (OBSOLETE)" //VOREStation Edit
+	id = "shield_gen"
+	build_path = /obj/item/weapon/circuitboard/shield_gen
+	sort_string = "VAAAZ"	// Duplicate string, really need to redo this whole thing
+
+/datum/design/circuit/shield/hull
+	name = "hull (OBSOLETE)" //VOREStation Edit
+	id = "shield_gen_ex"
+	build_path = /obj/item/weapon/circuitboard/shield_gen_ex
+	sort_string = "VAAAB"
+
+/datum/design/circuit/shield/capacitor
+	name = "capacitor (OBSOLETE)" //VOREStation Edit"
+	desc = "Allows for the construction of a shield capacitor circuit board."
+	id = "shield_cap"
+	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
+	build_path = /obj/item/weapon/circuitboard/shield_cap
+	sort_string = "VAAAC"
+
 /datum/design/circuit/ntnet_relay
 	name = "NTNet Quantum Relay"
 	id = "ntnet_relay"
@@ -583,13 +619,49 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 4, TECH_BIO = 3)
 	build_path = /obj/item/weapon/circuitboard/aicore
 	sort_string = "XAAAA"
+// Cooking Appliances
+/datum/design/circuit/microwave
+	name = "microwave board"
+	id = "microwave_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/microwave
+	sort_string = "HACAM"
+
+/datum/design/circuit/oven
+	name = "oven board"
+	id = "oven_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/oven
+	sort_string = "HACAN"
+
+/datum/design/circuit/fryer
+	name = "deep fryer board"
+	id = "fryer_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/fryer
+	sort_string = "HACAO"
+
+/datum/design/circuit/cerealmaker
+	name = "cereal maker board"
+	id = "cerealmaker_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/cerealmaker
+	sort_string = "HACAP"
+
+/datum/design/circuit/candymaker
+	name = "candy machine board"
+	id = "candymachine_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/candymachine
+	sort_string = "HACAQ"
 
 /datum/design/circuit/microwave/advanced
 	name = "deluxe microwave"
 	id = "deluxe microwave"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5, TECH_BLUESPACE = 4)
 	build_path = /obj/item/weapon/circuitboard/microwave/advanced
-	sort_string = "MAAAC"
+	sort_string = "HACAA"
+
 
 /datum/design/circuit/shield_generator
 	name = "shield generator"
@@ -613,7 +685,7 @@ CIRCUITS BELOW
 	sort_string = "OAABA"
 
 /datum/design/circuit/pointdefense_control
-	name = "deluxe microwave"
+	name = "point defense control"
 	id = "pointdefense_control"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_COMBAT = 2)
 	build_path = /obj/item/weapon/circuitboard/pointdefense_control

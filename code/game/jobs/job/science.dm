@@ -11,7 +11,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Colony Director"
+	supervisors = "the Site Manager"
 	selection_color = "#AD6BAD"
 	req_admin_notify = 1
 	economic_modifier = 15
@@ -23,7 +23,6 @@
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
-	alt_titles = list("Research Supervisor")
 
 	minimum_character_age = 25
 	minimal_player_age = 14
@@ -39,7 +38,7 @@
 // Research Director Alt Titles
 /datum/alt_title/research_supervisor
 	title = "Research Supervisor"
-	
+
 //////////////////////////////////
 //			Scientist
 //////////////////////////////////
@@ -105,13 +104,15 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
 	job_description = "A Xenobiologist studies esoteric lifeforms, usually in the relative safety of their lab. They attempt to find ways to benefit \
 						from the byproducts of these lifeforms, and their main subject at present is the Giant Slime."
+/*VR edit start
 	alt_titles = list("Xenobotanist" = /datum/alt_title/xenobot)
 
-// Xenibiologist Alt Titles
+ Xenibiologist Alt Titles
 /datum/alt_title/xenobot
 	title = "Xenobotanist"
 	title_blurb = "A Xenobotanist grows and cares for a variety of abnormal, custom made, and frequently dangerous plant life. When the products of these plants \
 					is both safe and beneficial to the station, they may choose to introduce it to the rest of the crew."
+VR edit end*/
 
 //////////////////////////////////
 //			Roboticist

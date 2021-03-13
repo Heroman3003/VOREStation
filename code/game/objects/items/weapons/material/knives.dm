@@ -10,6 +10,7 @@
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	drop_sound = 'sound/items/drop/knife.ogg'
+	pickup_sound = 'sound/items/pickup/knife.ogg'
 
 /obj/item/weapon/material/butterfly/update_force()
 	if(active)
@@ -44,13 +45,15 @@
 
 /obj/item/weapon/material/butterfly/attack_self(mob/user)
 	active = !active
-	if(active)
-		to_chat(user, "<span class='notice'>You flip out \the [src].</span>")
-		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
-	else
-		to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
 	update_force()
-	add_fingerprint(user)
+
+	if(user)
+		if(active)
+			to_chat(user, "<span class='notice'>You flip out \the [src].</span>")
+			playsound(src, 'sound/weapons/flipblade.ogg', 15, 1)
+		else
+			to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
+		add_fingerprint(user)
 
 /*
  * Kitchen knives

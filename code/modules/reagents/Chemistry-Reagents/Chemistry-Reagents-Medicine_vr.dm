@@ -13,9 +13,9 @@
 	if(M.confused)
 		M.Confuse(-8*removed)
 	if(M.eye_blurry)
-		M.eye_blurry = max(M.eye_blurry - 8*removed, 0)
+		M.eye_blurry = max(M.eye_blurry - 25*removed, 0)
 	if(M.jitteriness)
-		M.make_jittery(max(M.jitteriness - 8*removed,0))
+		M.make_jittery(max(M.jitteriness - 25*removed,0))
 
 /datum/reagent/numbing_enzyme
 	name = "Numbing Enzyme"
@@ -67,7 +67,7 @@
 	taste_description = "sparkles"
 	taste_mult = 3
 	reagent_state = LIQUID
-	color = "#964e06"
+	color = "#750404"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 

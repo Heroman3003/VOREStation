@@ -292,7 +292,6 @@ var/global/list/additional_antag_types = list()
 			antag.check_victory()
 			antag.print_player_summary()
 		sleep(10)
-		print_ownerless_uplinks()
 
 	var/clients = 0
 	var/surviving_humans = 0
@@ -306,7 +305,7 @@ var/global/list/additional_antag_types = list()
 	var/escaped_on_pod_5 = 0
 	var/escaped_on_shuttle = 0
 
-	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
+	var/list/area/escape_locations = list(/area/shuttle/escape, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom) //VOREStation Edit
 
 	for(var/mob/M in player_list)
 		if(M.client)
