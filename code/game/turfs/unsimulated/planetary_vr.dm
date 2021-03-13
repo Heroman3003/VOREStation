@@ -38,7 +38,7 @@
 #define VIRGO5_AVG_TEMP	223 //kelvin
 
 #define VIRGO5_PER_N2		0.57 //percent
-#define VIRGO5_PER_O2		0.24
+#define VIRGO5_PER_O2		0.14
 #define VIRGO5_PER_N2O		0.00 //Currently no capacity to 'start' a turf with this. See turf.dm
 #define VIRGO5_PER_CO2		0.29
 #define VIRGO5_PER_PHORON	0.00

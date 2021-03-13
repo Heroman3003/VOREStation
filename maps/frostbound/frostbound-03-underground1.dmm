@@ -17,122 +17,128 @@
 "aq" = (/turf/simulated/floor/reinforced,/area/space)
 "ar" = (/turf/simulated/floor/lava,/area/space)
 "as" = (/turf/simulated/floor/tiled/techfloor,/area/space)
-"at" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#ffcc00"},/turf/simulated/floor,/area/space)
-"au" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#444444"},/turf/simulated/floor,/area/space)
-"av" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#5c1ec0"},/turf/simulated/floor,/area/space)
-"aw" = (/obj/machinery/atmospherics/binary/pump{dir = 2},/turf/simulated/floor/tiled,/area/space)
-"ax" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#00ffff"},/turf/simulated/floor,/area/space)
-"ay" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#ff0000"},/turf/simulated/floor,/area/space)
-"az" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"aA" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan,/turf/simulated/floor/tiled,/area/space)
-"aB" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"aC" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 6},/turf/simulated/floor/tiled,/area/space)
-"aD" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"aE" = (/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"aF" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,/turf/simulated/floor/tiled,/area/space)
-"aG" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 6},/turf/simulated/floor/tiled,/area/space)
-"aH" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"aI" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"aJ" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 9},/turf/simulated/floor/tiled,/area/space)
-"aK" = (/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/tiled,/area/space)
-"aL" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 5},/turf/simulated/floor/tiled,/area/space)
-"aM" = (/obj/machinery/atmospherics/pipe/manifold/visible/supply,/turf/simulated/floor/tiled,/area/space)
-"bL" = (/turf/simulated/floor/plating,/area/space)
-"bT" = (/obj/machinery/atmospherics/binary/pump,/turf/simulated/floor/tiled,/area/space)
-"ca" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 6},/turf/simulated/floor/tiled,/area/space)
-"cb" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"cc" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/tiled,/area/space)
-"ce" = (/obj/machinery/atmospherics/pipe/manifold/visible/red,/turf/simulated/floor/tiled,/area/space)
-"ch" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"cj" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 10},/turf/simulated/floor/tiled,/area/space)
-"co" = (/obj/machinery/atmospherics/pipe/simple/visible/red,/turf/simulated/floor/tiled,/area/space)
-"ct" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"cv" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"cz" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/simulated/floor/tiled,/area/space)
-"cX" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 9; icon_state = "intact"},/turf/simulated/floor/tiled,/area/space)
-"di" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/floor/tiled,/area/space)
-"dj" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 6},/turf/simulated/floor/tiled,/area/space)
-"dt" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 6},/turf/simulated/floor/tiled,/area/space)
-"dv" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{icon_state = "map"; dir = 4},/turf/simulated/floor/tiled,/area/space)
-"dB" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/black,/turf/simulated/floor/tiled,/area/space)
-"dR" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"dZ" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 6},/turf/simulated/floor/tiled,/area/space)
-"ec" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"eg" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"ei" = (/obj/machinery/atmospherics/valve/digital{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"ej" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{icon_state = "map"; dir = 1},/turf/simulated/floor/tiled,/area/space)
-"ek" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"fv" = (/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{dir = 2; start_pressure = 3039.75},/turf/simulated/floor/tiled,/area/space)
-"fw" = (/obj/machinery/atmospherics/pipe/manifold/visible/black{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"fx" = (/obj/machinery/atmospherics/pipe/simple/visible/black{icon_state = "intact"; dir = 9},/turf/simulated/floor/tiled,/area/space)
-"fB" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/yellow,/turf/simulated/floor/tiled,/area/space)
-"fC" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 10},/turf/simulated/floor/tiled,/area/space)
-"fD" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"fE" = (/obj/machinery/atmospherics/pipe/simple/visible/purple,/turf/simulated/floor/tiled,/area/space)
-"fF" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 5},/turf/simulated/floor/tiled,/area/space)
-"fG" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"fH" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"fI" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/turf/simulated/floor/tiled,/area/space)
-"fJ" = (/obj/machinery/atmospherics/binary/passive_gate{dir = 1; name = "Waste Purge Valve"; target_pressure = 4500},/turf/simulated/floor/tiled,/area/space)
-"fK" = (/obj/machinery/atmospherics/valve/digital,/turf/simulated/floor/tiled,/area/space)
-"fL" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"fM" = (/obj/machinery/atmospherics/pipe/simple/visible/red{icon_state = "intact"; dir = 6},/turf/simulated/floor/tiled,/area/space)
-"fO" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/machinery/atmospherics/binary/pump,/turf/simulated/floor/tiled,/area/space)
-"fP" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "CO2 Filter"; tag_east = 0; tag_north = 5; tag_south = 2; tag_west = 1},/turf/simulated/floor/tiled,/area/space)
-"fQ" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/tiled,/area/space)
-"fR" = (/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"fS" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{dir = 8},/turf/simulated/floor/tiled,/area/space)
-"fT" = (/obj/machinery/atmospherics/pipe/simple/visible/red,/obj/machinery/atmospherics/binary/pump{dir = 8; target_pressure = 300},/turf/simulated/floor/tiled,/area/space)
-"fU" = (/obj/machinery/atmospherics/pipe/tank/phoron{dir = 8; start_pressure = 1215.9},/turf/simulated/floor/tiled,/area/space)
-"fV" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"fW" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "N2O Filter"; tag_east = 7; tag_north = 1; tag_south = 2; tag_west = 0},/turf/simulated/floor/tiled,/area/space)
-"fX" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"fY" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{dir = 6; icon_state = "intact"},/turf/simulated/floor/tiled,/area/space)
-"fZ" = (/obj/machinery/atmospherics/pipe/tank/nitrous_oxide{dir = 8; start_pressure = 1519.88},/turf/simulated/floor/tiled,/area/space)
-"ga" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"gb" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/tiled,/area/space)
-"gc" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 4},/turf/simulated/floor/tiled,/area/space)
-"gd" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/floor/tiled,/area/space)
-"ge" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/tiled,/area/space)
-"gf" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"gg" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 5; icon_state = "intact"},/turf/simulated/floor/tiled,/area/space)
-"gh" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{icon_state = "intact"; dir = 10},/turf/simulated/floor/tiled,/area/space)
-"gi" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{dir = 5; icon_state = "intact"},/turf/simulated/floor/tiled,/area/space)
-"gj" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 5},/turf/simulated/floor/tiled,/area/space)
-"gk" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"gl" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8},/turf/simulated/floor/tiled,/area/space)
-"gm" = (/obj/machinery/atmospherics/omni/mixer{name = "Air Mixer"; tag_north = 1; tag_north_con = 0.79; tag_south = 1; tag_south_con = 0.21; tag_west = 2; tag_west_con = null},/turf/simulated/floor/tiled,/area/space)
-"gn" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 5},/turf/simulated/floor/tiled,/area/space)
-"go" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "O2 Filter"; tag_east = 1; tag_north = 0; tag_south = 3; tag_west = 2},/turf/simulated/floor/tiled,/area/space)
-"gp" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "N2 Filter"; tag_east = 1; tag_north = 0; tag_south = 4; tag_west = 2},/turf/simulated/floor/tiled,/area/space)
-"gq" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"gr" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "Phoron Filter"; tag_east = 6; tag_north = 1; tag_south = 0; tag_west = 2},/turf/simulated/floor/tiled,/area/space)
-"gs" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/purple,/turf/simulated/floor/tiled,/area/space)
-"gt" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 6; icon_state = "intact"},/turf/simulated/floor/tiled,/area/space)
-"gu" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/simulated/floor/tiled,/area/space)
-"gv" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"gw" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"gx" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/tiled,/area/space)
-"gy" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 8},/turf/simulated/floor/tiled,/area/space)
-"gz" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 9},/turf/simulated/floor/tiled,/area/space)
-"gA" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10; icon_state = "intact"},/turf/simulated/floor/tiled,/area/space)
-"gB" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/tiled,/area/space)
-"gC" = (/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/tiled,/area/space)
-"gD" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/cyan,/turf/simulated/floor/tiled,/area/space)
-"gE" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 9},/turf/simulated/floor/tiled,/area/space)
-"gF" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/tiled,/area/space)
-"gG" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/turf/simulated/floor/tiled,/area/space)
-"gH" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/turf/simulated/floor/tiled,/area/space)
-"gI" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 1},/turf/simulated/floor/tiled,/area/space)
-"gJ" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 1; icon_state = "o2_map"},/turf/simulated/floor/tiled,/area/space)
-"gK" = (/obj/machinery/atmospherics/pipe/tank/nitrogen{dir = 1; icon_state = "n2_map"},/turf/simulated/floor/tiled,/area/space)
-"gO" = (/obj/machinery/atmospherics/unary/heater{dir = 2},/turf/simulated/floor/tiled,/area/space)
-"gP" = (/obj/machinery/atmospherics/unary/freezer{dir = 2},/turf/simulated/floor/tiled,/area/space)
-"gQ" = (/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/tiled,/area/space)
-"gR" = (/obj/machinery/atmospherics/pipe/manifold/visible/green,/turf/simulated/floor/tiled,/area/space)
-"gS" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 10},/turf/simulated/floor/tiled,/area/space)
-"gT" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/tiled,/area/space)
-"gU" = (/obj/machinery/atmospherics/binary/pump{dir = 1},/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/turf/simulated/floor/tiled,/area/space)
+"at" = (/turf/simulated/wall,/area/engineering/atmos/storage)
+"au" = (/turf/simulated/wall,/area/engineering/atmos)
+"av" = (/turf/simulated/floor,/area/engineering/atmos/storage)
+"aw" = (/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ax" = (/turf/simulated/floor/bluegrid,/area/engineering/atmos)
+"ay" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#00ffff"},/turf/simulated/floor,/area/engineering/atmos)
+"az" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#ff0000"},/turf/simulated/floor,/area/engineering/atmos)
+"aA" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aB" = (/obj/machinery/atmospherics/pipe/simple/visible/red,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aC" = (/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{dir = 2; start_pressure = 3039.75},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aD" = (/turf/simulated/floor,/area/engineering/atmos)
+"aE" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#ffcc00"},/turf/simulated/floor,/area/engineering/atmos)
+"aF" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#444444"},/turf/simulated/floor,/area/engineering/atmos)
+"aG" = (/obj/machinery/atmospherics/pipe/zpipe/up{color = "#5c1ec0"},/turf/simulated/floor,/area/engineering/atmos)
+"aH" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 5},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aI" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/black,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aJ" = (/obj/machinery/atmospherics/pipe/simple/visible/black{icon_state = "intact"; dir = 9},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aK" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aL" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/yellow,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aM" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 10},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aN" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aO" = (/obj/machinery/atmospherics/pipe/simple/visible/purple,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aP" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aQ" = (/obj/machinery/atmospherics/pipe/manifold/visible/black{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aR" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aS" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aT" = (/obj/machinery/atmospherics/binary/passive_gate{dir = 1; name = "Waste Purge Valve"; target_pressure = 4500},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aU" = (/obj/machinery/atmospherics/valve/digital,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aV" = (/obj/machinery/atmospherics/binary/pump{dir = 2},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aW" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aX" = (/obj/machinery/atmospherics/pipe/simple/visible/red{icon_state = "intact"; dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aY" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"aZ" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{icon_state = "map"; dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ba" = (/obj/machinery/atmospherics/pipe/manifold/visible/red,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bb" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bc" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/machinery/atmospherics/binary/pump,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bd" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "CO2 Filter"; tag_east = 0; tag_north = 5; tag_south = 2; tag_west = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"be" = (/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bf" = (/obj/machinery/atmospherics/binary/pump,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bg" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bh" = (/turf/simulated/floor/plating,/area/engineering/atmos)
+"bi" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bj" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bk" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bl" = (/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bm" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bn" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{icon_state = "map"; dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bo" = (/obj/machinery/atmospherics/unary/heater{dir = 2},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bp" = (/obj/machinery/atmospherics/unary/freezer{dir = 2},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bq" = (/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"br" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bs" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bt" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bu" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 5; icon_state = "intact"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bv" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bw" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bx" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"by" = (/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bz" = (/obj/machinery/atmospherics/pipe/manifold/visible/green,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bA" = (/obj/machinery/atmospherics/valve/digital{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bB" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 10},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bC" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bD" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 9},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bE" = (/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bF" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bG" = (/obj/machinery/atmospherics/binary/pump{dir = 1},/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bH" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bI" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bJ" = (/obj/machinery/atmospherics/pipe/simple/visible/red,/obj/machinery/atmospherics/binary/pump{dir = 8; target_pressure = 300},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bK" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bL" = (/obj/machinery/atmospherics/pipe/tank/phoron{dir = 8; start_pressure = 1215.9},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bM" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bN" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 9; icon_state = "intact"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bO" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "N2O Filter"; tag_east = 7; tag_north = 1; tag_south = 2; tag_west = 0},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bP" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bQ" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 5},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bR" = (/obj/machinery/atmospherics/pipe/manifold/visible/supply,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bS" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bT" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bU" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bV" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bW" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 5},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bX" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bY" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"bZ" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ca" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cb" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cc" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 10},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cd" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ce" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{icon_state = "intact"; dir = 10},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cf" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{dir = 6; icon_state = "intact"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cg" = (/obj/machinery/atmospherics/pipe/tank/nitrous_oxide{dir = 8; start_pressure = 1519.88},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ch" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 5},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ci" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cj" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ck" = (/obj/machinery/atmospherics/omni/mixer{name = "Air Mixer"; tag_north = 1; tag_north_con = 0.79; tag_south = 1; tag_south_con = 0.21; tag_west = 2; tag_west_con = null},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cl" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "O2 Filter"; tag_east = 1; tag_north = 0; tag_south = 3; tag_west = 2},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cm" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cn" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "N2 Filter"; tag_east = 1; tag_north = 0; tag_south = 4; tag_west = 2},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"co" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cp" = (/obj/machinery/atmospherics/omni/atmos_filter{name = "Phoron Filter"; tag_east = 6; tag_north = 1; tag_south = 0; tag_west = 2},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cq" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/purple,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cr" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cs" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ct" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cu" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cv" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cw" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 9},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cx" = (/obj/machinery/atmospherics/pipe/simple/visible/purple{dir = 5; icon_state = "intact"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cy" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cz" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/cyan,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cA" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 9},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cB" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cC" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cD" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cE" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 6; icon_state = "intact"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cF" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10; icon_state = "intact"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cG" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 6},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cH" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cI" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 1},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cJ" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 1; icon_state = "o2_map"},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"cK" = (/obj/machinery/atmospherics/pipe/tank/nitrogen{dir = 1; icon_state = "n2_map"},/turf/simulated/floor/tiled,/area/engineering/atmos)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -248,37 +254,37 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacaaacacacacacacacadadadahapapapapapacadadadadadadadadadahadadadadadadadadadadadacaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadafafacaaaaaaaaaaaaaaacadadadacapapapapapacadadadadadacadadadadadadadadadadadadadadadacahaiahacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadafafacaaaaaaaaaaaaaaacadadadacahahacaqahacadadadadadadadadadahadadadadadadadadadadadahakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadafafacacacacacacacacacadadadacadadahaqaqacadadadadadadadadadacadadadadadadadadadadadadakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacababaeaeababacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadadadadadadadadadadadadahaqaqacadadadadadadadadadacacacacacacacacacacacacacakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahahahahacadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadadadadadadadadadacadadacahahacadadadadadacadadadababababacadadadadadadadacakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahahahahacadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadagagacacacacacadacacacadadadacadadadadadacacacacacacacadadadaeaeaeabacadadadadadadadacakakakacadadadadadacadacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahahahahacadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadagagacadadadadadadadacacadacacadadadadadadadadadacaaacadadadaeaeaeabacadadadadadadadacahahahacacacacadacacadadafafacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahahahahacadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadagagacadadadadadadadacadadadacadadadadadadadadadacaaacadadadababababacadadadadadadadacadadadadadadadadadacadadafafacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahahahahahadadadadadadadadacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacadadadadadadadacadadadacadadadadadadadadadacaaacadadadacacacacacadadadadadadadacadadadadadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacadadadadadadadadafafacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadacadadadacadadadadadadadadadacaaacadadadadadadadacadadadadadadadacadadadadadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadafafacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacadacacacacacacacacacacacacacacadadadadadadadacacacacadacacacacadadadadadadadadadacadadagagacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacadadagagacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadaxayadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadczcoadadadadadadacaaaaaaaaaaaaacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacafafczcoadadadadadadacacacacacacacacadadadadfvfvfvadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiaiacacacacacacacacacacacacacacacadacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacafafczcoadadadadadadadahatahauahavauadadadadfFdBfxadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababababaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiacaiaiaiaiaiacaaaaacadadadadadadadadadadabababababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacczcoadadadadadadaddtfBfCfDadfEfFfGfGfGfGfwdBfHfIadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabaeaeaeaeaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiacaaaaacadadadadadadadadadadaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacczcoadadadadadadadfJfJfJfKadawadadadadadfDfLadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacaaaaacabaeaeaeaeaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaacadadadadadadadadadadaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacczcofMcbcbcbcbejcbceaBcececbcecbcbcbcbcbfOfPadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacaaaaacabaeaeaeaeaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiacaiaiaiaiaiacaaaaacadadadadadadadadadadaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadfRbTcoadadadadfKadadfQbLbLbLbLbLbLbLbLbLdicoadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiacaaaaacabababababaiaiaiaiaiaiaiaiaiacalamalamalamalacaiaiaiaiaiacaaaaacadadadadadadadadadadabababababacaaaaaaaaaaaaaaaaaaaaaaaaaaacadaCaDaDaDaEcbfHazcedvadadadaddiadadfQadadgOgPgQgQadadbLdicoadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacacacacacacacacacaiaiaiaiaiaiaiaiaiacaiaianaiaoaiaoacaiaiaiaiaiacaaaaacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaacadaFadaGaHaEcbfHazcbdvadadadadggcvctecgCctgRgRgRgReigSbLdicoadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacacacacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaIaJadaKadadadadczadfRadadadadadadgggTcvgUcvcvcvcvcvgcbLfSfTdRfCdtfUacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiacaoaiaoaoaoaiaoacaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadaKadaKadadadadczadczadadadaddZcvcvecfHgRctctctcteicXbLdifWfXfBfBfUacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiacacaiacacacaiacacacaiaracacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadaLaHaMaHaEchgCaAchfVadadadaddiadadfQadadgagagagaadadbLdicoadbTgnfUacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadadadczadadadaddiadadfQbLbLbLbLbLbLbLbLbLdicoadgaadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacacacacaiacacacacacacacacacacaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacadadczadadadadfScvcvgbcvctcvcvcvcvctcvcvgccoadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiaiaiaiaiacaiaiaiacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadczadadaddjgdchchgechgfchchchchgfcjadggfTegghfYfZacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadgjchgkglgmfRadadgngoekcbcbcbgpekgqcbcbgrfXgsgsfZacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiaiaiaiaiacaiaiaiacaiaiaiaiaiaiaiaiaiaiaiaiaiacaiaiaiagagaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadczadgjguchchglgvgwadadadgxgygzadadadadbTgifZacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadgBgCgDchchgEadgBgCgFgGadgBgCccgzadadadadadgaadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadaddjgDcjadadadadgtgFgAadadcaccgHadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadgIgIgIadadadadgJgJgJadadgKgKgKadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadafafacacacacacacacacacadadadacadadahaqaqacadadadadadadadadadacadadadadadadadadadadadadakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatatatatatatatatatababaeaeababauauauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadadadadadadadadadadadadahaqaqacadadadadadadadadadacacacacacacacacacacacacacakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatavavavavavavavatawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadadadadadadadadadadacadadacahahacadadadadadacadadadababababacadadadadadadadacakakakacadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatavavavavavavavatawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadagagacacacacacadacacacadadadacadadadadadacacacacacacacadadadaeaeaeabacadadadadadadadacakakakacadadadadadacadacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatavavavavavavavatawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadagagacadadadadadadadacacadacacadadadadadadadadadacaaacadadadaeaeaeabacadadadadadadadacahahahacacacacadacacadadafafacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatavavavavavavavatawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadagagacadadadadadadadacadadadacadadadadadadadadadacaaacadadadababababacadadadadadadadacadadadadadadadadadacadadafafacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatavavavavavavavavawawawawawawawawauauauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacadadadadadadadacadadadacadadadadadadadadadacaaacadadadacacacacacadadadadadadadacadadadadadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatatatatatatatatatawawawawawawawawaxaxauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacadadadadadadadacadadadacadadadadadadadadadacaaacadadadadadadadacadadadadadadadacadadadadadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawawawawawawaxaxauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacadacacacacacacacacacacacacacacadadadadadadadacacacacadacacacacadadadadadadadadadacadadagagacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacadadagagacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawayazawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahahadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawaAaBawawawawawawauaaaaaaaaaaaaauauauauauauauauauauauauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacahahahacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaxaxaAaBawawawawawawauauauauauauauauawawawawaCaCaCawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiaiacacacacacacacacacacacacacacacadacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaxaxaAaBawawawawawawawaDaEaDaFaDaGaFawawawawaHaIaJawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababababaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiacaiaiaiaiaiacaaaaacadadadadadadadadadadabababababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauauauaAaBawawawawawawawaKaLaMaNawaOaHaPaPaPaPaQaIaRaSawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabaeaeaeaeaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiacaaaaacadadadadadadadadadadaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaAaBawawawawawawawaTaTaTaUawaVawawawawawaNaWawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacaaaaacabaeaeaeaeaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaacadadadadadadadadadadaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaauauauauauauauauauaAaBaXaYaYaYaYaZaYbabbbabaaYbaaYaYaYaYaYbcbdawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacaaaaacabaeaeaeaeaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiacaiaiaiaiaiacaaaaacadadadadadadadadadadaeaeaeaeabacaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawawawawawawbebfaBawawawawaUawawbgbhbhbhbhbhbhbhbhbhbiaBawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiacaaaaacabababababaiaiaiaiaiaiaiaiaiacalamalamalamalacaiaiaiaiaiacaaaaacadadadadadadadadadadabababababacaaaaaaaaaaaaaaaaaaaaaaaaaaauawbjbkbkbkblaYaRbmbabnawawawawbiawawbgawawbobpbqbqawawbhbiaBawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacacacacacacacacacaiaiaiaiaiaiaiaiaiacaiaianaiaoaiaoacaiaiaiaiaiacaaaaacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaauawbrawbsbtblaYaRbmaYbnawawawawbubvbwbxbybwbzbzbzbzbAbBbhbiaBawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacacacacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaubCbDawbEawawawawaAawbeawawawawawawbubFbvbGbvbvbvbvbvbHbhbIbJbKaMaKbLauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiacaoaiaoaoaoaiaoacaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawbEawbEawawawawaAawaAawawawawbMbvbvbxaRbzbwbwbwbwbAbNbhbibObPaLaLbLauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiacacaiacacacaiacacacaiaracacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawbQbtbRbtblbSbybTbSbUawawawawbiawawbgawawbVbVbVbVawawbhbiaBawbfbWbLauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiacaiaiaiaiaiaiaiacagagacaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawawawawawawawawaAawawawawbiawawbgbhbhbhbhbhbhbhbhbhbiaBawbVawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacacacacaiacacacacacacacacacacaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauauauauauauauauauawawaAawawawawbIbvbvbXbvbwbvbvbvbvbwbvbvbHaBawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiaiaiaiaiacaiaiaiacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawaAawawawbYbZbSbScabScbbSbSbSbScbccawbubJcdcecfcgauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawchbScicjckbeawawbWclcmaYaYaYcncmcoaYaYcpbPcqcqcgauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiacaiaiaiaiaiaiacaiaiaiacaiaiaiaiaiaiaiaiaiaiaiaiaiacaiaiaiagagaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawawaAawchcrbSbScjcsctawawawcucvcwawawawawbfcxcgauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawcybyczbSbScAawcybycBcCawcybycDcwawawawawawbVawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawbYczccawawawawcEcBcFawawcGcDcHawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauawawawcIcIcIawawawawcJcJcJawawcKcKcKawawawawawawawawauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauauauauauauauauauauauauauauauauauauauauauauauauauauauauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacaiaiaiaiaiaiaiaiaiacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaiaiaiaiaiaiaiaiaiacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
