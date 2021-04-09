@@ -1,0 +1,75 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/obj/item/weapon/extinguisher,/turf/space,/area/space)
+"ac" = (/obj/structure/lattice,/turf/space,/area/space)
+"ad" = (/obj/machinery/power/grounding_rod,/turf/simulated/floor/airless,/area/space)
+"ae" = (/turf/simulated/floor/airless,/area/space)
+"af" = (/obj/machinery/power/tesla_coil,/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/airless,/area/space)
+"ag" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/airless,/area/space)
+"ah" = (/obj/machinery/power/tesla_coil,/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/structure/cable/yellow{d1 = 0; d2 = 8; icon_state = "0-8"},/turf/simulated/floor/airless,/area/space)
+"ai" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/item/clothing/head/hardhat,/turf/simulated/floor/airless,/area/space)
+"aj" = (/turf/simulated/floor/tiled,/area/space)
+"ak" = (/obj/machinery/field_generator{anchored = 1; state = 1},/turf/simulated/floor/airless,/area/space)
+"al" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/space)
+"am" = (/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/machinery/power/tesla_coil,/obj/structure/cable/yellow,/turf/simulated/floor/airless,/area/space)
+"an" = (/obj/item/weapon/weldingtool,/turf/simulated/floor/airless,/area/space)
+"ao" = (/obj/machinery/the_singularitygen/tesla{anchored = 1},/turf/simulated/floor/airless,/area/space)
+"ap" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/airless,/area/space)
+"aq" = (/obj/structure/cable/yellow,/obj/machinery/power/tesla_coil,/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/airless,/area/space)
+"ar" = (/obj/structure/cable/yellow{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/airless,/area/space)
+"as" = (/obj/effect/floor_decal/techfloor/orange{dir = 1},/obj/structure/particle_accelerator/particle_emitter/right{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/space)
+"at" = (/obj/structure/particle_accelerator/particle_emitter/center{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/space)
+"au" = (/obj/effect/floor_decal/techfloor/orange,/obj/structure/particle_accelerator/particle_emitter/left{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/space)
+"av" = (/obj/structure/particle_accelerator/particle_emitter/left{dir = 1},/turf/simulated/floor/tiled,/area/space)
+"aw" = (/obj/structure/particle_accelerator/particle_emitter/center{dir = 1},/turf/simulated/floor/tiled,/area/space)
+"ax" = (/obj/structure/particle_accelerator/particle_emitter/right{dir = 1},/turf/simulated/floor/tiled,/area/space)
+"ay" = (/obj/structure/particle_accelerator/power_box{dir = 1},/turf/simulated/floor/tiled,/area/space)
+"az" = (/obj/structure/particle_accelerator/fuel_chamber{dir = 1},/turf/simulated/floor/tiled,/area/space)
+"aA" = (/obj/machinery/particle_accelerator/control_box,/turf/simulated/floor/tiled,/area/space)
+"aB" = (/obj/structure/particle_accelerator/end_cap{dir = 1},/turf/simulated/floor/tiled,/area/space)
+"aV" = (/obj/structure/flora/pottedplant/dead,/turf/simulated/floor/tiled,/area/space)
+"aW" = (/obj/machinery/computer/rcon,/turf/simulated/floor/tiled,/area/space)
+"aX" = (/obj/machinery/computer/security/engineering,/turf/simulated/floor/tiled,/area/space)
+"aY" = (/obj/structure/flora/pottedplant/smallcactus,/turf/simulated/floor/tiled,/area/space)
+"aZ" = (/obj/machinery/computer/station_alert{dir = 4},/turf/simulated/floor/tiled,/area/space)
+"ba" = (/obj/machinery/computer/power_monitor{dir = 8},/turf/simulated/floor/tiled,/area/space)
+"bb" = (/obj/machinery/computer/power_monitor{dir = 4},/turf/simulated/floor/tiled,/area/space)
+"bc" = (/obj/machinery/computer/station_alert{dir = 8},/turf/simulated/floor/tiled,/area/space)
+"bd" = (/obj/structure/table/reinforced,/turf/simulated/floor/tiled,/area/space)
+
+(1,1,1) = {"
+aaaaaaabaaacaaaaacaaaaacacadaaaaaaaaaa
+aaaaaaaaadaeafagagagahagaiacaaaaaaaaaa
+aaaaaaacaeakaaacaaacaaakalacaaaaaaaaaa
+aaaaaaaaaeaaaaacaaacaaaaamacaaaaaaaaaa
+aaaaaaaaaeacacanaeaeacacalacaaaaaaaaaa
+aaaaaaaaaeaaaaaeaoaeaaaaapagaaaaaaaaaa
+aaaaaaaaaeacacaeaeaeacacalacaaaaaaaaaa
+aaaaaaaaaeaaaaacaaacaaaaaqacasaaaaaaaa
+aaaaaaacaeakaaacaaacaaakalacataaaaaaaa
+aaaaaaaaadaeafagagagahagaracauaaaaaaaa
+aaaaaaaaaaacaaaaacaaaaacacadaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ajajajajajajaaajajajajajaaajajajajajaj
+ajajajajajajaaajavawaxajaaajajajajajaj
+ajajajajajajaaajajayajajaaajajajajajaj
+ajajajajajajaaajajazaAajaaajajajajajaj
+ajajajajajajajajajaBajajajajajajajajaj
+ajajajajajajaaajajajajajaaajajajajajaj
+ajajajajajajaaaaaaaaaaaaaaajajajajajaj
+ajajajajajajajajajajajajajajajajajajaj
+ajajajajajajajajajajajajajajajajajajaj
+ajajajajajajajajajajajajajajajajajajaj
+ajajajajajajajajajajajajajajajajajajaj
+aaaaaaaaaaaaaaaaaaajajajajajajajajajaj
+aVaWaXaYaVaXaWaVaaajajajajajajajajajaj
+aZajajbabbajajbcaaajajajajajajajajajaj
+ajajajajajajajajaaajajajajajajajajajaj
+ajajajajajajajajajajajajajajajajajajaj
+bdajajajajajajajaaajajajajajajajajajaj
+bdbdajajajajajajaaajajajajajajajajajaj
+"}
