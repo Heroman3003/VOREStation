@@ -310,8 +310,8 @@ var/global/list/disallowed_protean_accessories = list(
 	if(client?.statpanel == "Protean")
 		panel_was_up = TRUE
 
-	if(istype(loc, /obj/machinery/recharge_station))
-		to_chat(src, "You cannot unform while connected to recharger!")
+	if(!isturf(loc))		//TODO: make it possible to use blobform to escape specific confines (lockers, cages, etc.)
+		to_chat(src, "You cannot unform yourself in your current situation!")
 		return
 
 	handle_grasp() //It's possible to blob out before some key parts of the life loop. This results in things getting dropped at null. TODO: Fix the code so this can be done better.
@@ -326,7 +326,7 @@ var/global/list/disallowed_protean_accessories = list(
 	stop_pulling()
 
 	//Record where they should go
-	var/atom/creation_spot = drop_location()
+	var/turf/creation_spot = loc
 
 	//Create our new blob
 	var/mob/living/simple_mob/protean_blob/blob = new(creation_spot,src)
@@ -406,8 +406,8 @@ var/global/list/disallowed_protean_accessories = list(
 	if(!istype(blob))
 		return
 
-	if(istype(blob.loc, /obj/machinery/atmospherics) || istype(blob.loc, /obj/machinery/recharge_station))
-		to_chat(src, "You cannot reform in these confines!")
+	if(!isturf(loc))
+		to_chat(src, "You cannot reform without enough free space!")
 		return
 
 	var/panel_was_up = FALSE
@@ -437,7 +437,7 @@ var/global/list/disallowed_protean_accessories = list(
 	sleep(8)
 
 	//Record where they should go
-	var/atom/reform_spot = blob.drop_location()
+	var/turf/reform_spot = blob.loc
 
 	//Size update
 	resize(blob.size_multiplier, FALSE, ignore_prefs = TRUE)
