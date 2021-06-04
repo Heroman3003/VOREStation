@@ -25,7 +25,6 @@
 	var/ears_color_secondary = "#222222"
 	var/ears_color_tertiary = "#222222"
 
-
 	var/tail_style
 	var/tail_color_primary = "#222222"
 	var/tail_color_secondary = "#222222"
@@ -149,3 +148,43 @@
 	wing_color_primary = "#FFFF99"
 
 	scale = 1.5
+
+/datum/transformation_datum/proc/import_pref_settings(var/datum/preferences/prefs)
+	if(!prefs)
+		return
+
+	species = prefs.species
+	custom_species_name = prefs.custom_species
+
+	gender_physical = prefs.biological_gender
+	gender_identity = prefs.identifying_gender
+
+	markings = Copy(prefs.body_markings)
+
+	body_color = "#[num2hex(prefs.r_skin)][num2hex(prefs.g_skin)][num2hex(prefs.b_skin)]"
+	skin_tone = prefs.s_tone
+	eye_color = "#[num2hex(prefs.r_eyes)][num2hex(prefs.g_eyes)][num2hex(prefs.b_eyes)]"
+
+	hair_style = prefs.h_style
+	hair_color = "#[num2hex(prefs.r_hair)][num2hex(prefs.g_hair)][num2hex(prefs.b_hair)]"
+
+	var/gradient_style = "None"
+	var/gradient_color = "#222222"
+
+	var/facial_hair_style = "Shaved"
+	var/facial_hair_color = "#222222"
+
+	var/ears_style
+	var/ears_color_primary = "#222222"
+	var/ears_color_secondary = "#222222"
+	var/ears_color_tertiary = "#222222"
+
+	var/tail_style
+	var/tail_color_primary = "#222222"
+	var/tail_color_secondary = "#222222"
+	var/tail_color_tertiary = "#222222"
+
+	var/wing_style
+	var/wing_color_primary = "#222222"
+	var/wing_color_secondary = "#222222"
+	var/wing_color_tertiary = "#222222"
