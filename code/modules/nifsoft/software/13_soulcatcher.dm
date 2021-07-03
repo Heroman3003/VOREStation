@@ -206,7 +206,7 @@
 	return TRUE
 
 //Complex version for catching in-round characters
-/datum/nifsoft/soulcatcher/proc/catch_mob(var/mob/M)
+/datum/nifsoft/soulcatcher/proc/catch_mob(var/mob/M, var/self_catch = FALSE)
 	if(!M.mind)	return
 
 	//Create a new brain mob
@@ -226,7 +226,7 @@
 	brainmob.real_name = brainmob.mind.name
 
 	//If we caught our owner, special settings.
-	if(M == nif.human)
+	if(self_catch)
 		brainmob.ext_deaf = FALSE
 		brainmob.ext_blind = FALSE
 		brainmob.parent_mob = TRUE
@@ -259,6 +259,15 @@
 	//Announce to host and other minds
 	notify_into("New mind loaded: [brainmob.name]")
 	return TRUE
+
+/datum/nifsoft/soulcatcher/proc/control_takeover(var/mob/living/carbon/brain/caught_soul/M)
+	//if(!M.mind || !nif.human.mind) return
+
+	//Put owner into soulcatcher...
+	catch_mob(nif.human)
+
+	//And make ourselves the new owner.
+	M.mind.transfer_to(nif.human)
 
 ////////////////
 //The caught mob
@@ -511,7 +520,7 @@
 	set name = "NMe"
 	set desc = "Emote into your NIF's Soulcatcher."
 	set category = "IC"
-	
+
 	src.nme_act(message)
 
 /mob/proc/nme_act(message as text|null)
@@ -603,3 +612,10 @@
 	if(message)
 		var/sane_message = sanitize(message)
 		soulcatcher.emote_into(sane_message,src,null)
+
+/mob/living/carbon/brain/caught_soul/verb/takeover()
+	set name = "Takeover"
+	set desc = "Emote into the NIF's Soulcatcher (circumventing AR speaking)."
+	set category = "Soulcatcher"
+
+	soulcatcher.control_takeover(src)
