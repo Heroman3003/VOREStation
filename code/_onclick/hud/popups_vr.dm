@@ -22,7 +22,6 @@
 		popup_action()
 
 /obj/screen/popup/proc/popup_action()
-	to_world("CLICK")
 	return
 
 /obj/screen/popup/proc/close_popup()
@@ -30,7 +29,6 @@
 	qdel(src)
 
 /obj/screen/popup/proc/check_click_spot(click_x, click_y)
-	to_world("[click_x], [click_y]")
 	if((click_x <= close_button_x_end) && (click_x >= close_button_x_start))
 		if((click_y <= close_button_y_end) && (click_y >= close_button_y_start))
 			return TRUE
