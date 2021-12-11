@@ -1,12 +1,12 @@
 /mob/living/simple_mob/glitch_boss
-	name = "MOB/LIVING/SIMPLE_MOB/%MISSINGDATA%"
-	desc = "Absolutely gigantic, this %$^& faith in humanity @%*( capable of inflicting very deadly @!!!$ doom pounce!"
-	tt_desc = "%MISSINGDATA%"
-	icon = 'icons/mob/64x64.dmi'
+	name = "CLICK ME!!!"
+	desc = "WELCOME TO %location_data% THIS IS YOUR HOME NOW PLEASE INPUT CREDIT CARD CREDENTIALS BELOW"
+	tt_desc = "BEST TOOLBAR PROVIDER SINCE 2098"
+	icon = 'icons/mob/vore32x64.dmi'
 	vis_height = 64
-	icon_state = "spider_queen"
-	icon_living = "spider_queen"
-	icon_dead = "spider_queen_dead"
+	icon_state = "placeholder"
+	icon_living = "placeholder"
+	icon_dead = "placeholder_dead"
 
 	maxHealth = 800
 	health = 800
@@ -15,13 +15,7 @@
 	melee_damage_upper = 40
 	attack_armor_pen = 15
 
-	pixel_x = -16
-	pixel_y = 0
-	default_pixel_x = -16
-	old_x = -16
-	old_y = 0
-
-	projectiletype = /obj/item/projectile/energy/spidertoxin
+	projectiletype = /obj/item/projectile/energy/slow_orb
 	projectilesound = 'sound/weapons/pierce.ogg'
 
 	special_attack_min_range = 0
@@ -31,17 +25,18 @@
 
 	loot_list = list(/obj/item/royal_spider_egg = 100)
 
-/obj/item/projectile/energy/spidertoxin
-	name = "concentrated spidertoxin"
+/obj/item/projectile/energy/slow_orb
+	name = "TROJAN"
 	icon_state = "neurotoxin"
-	damage = 35
-	damage_type = BIOACID
+	damage = 50
+	speed = 3
+	damage_type = ELECTROCUTE
 	agony = 15
-	check_armour = "bio"
+	check_armour = "energy"
 	armor_penetration = 40
 
-	combustion = FALSE
-
+	combustion = TRUE
+/*
 /mob/living/simple_mob/animal/giant_spider/broodmother/death(gibbed, deathmessage="falls over and makes its last twitches as its birthing sack bursts!")
 	var/count = 0
 	while(count < death_brood)
@@ -130,3 +125,4 @@
 
 	else
 		holder.a_intent = I_DISARM
+*/
