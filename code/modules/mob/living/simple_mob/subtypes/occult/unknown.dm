@@ -21,7 +21,7 @@
 	special_attack_min_range = 0
 	special_attack_max_range = 10
 	special_attack_cooldown = 6 SECONDS
-	ai_holder_type = /datum/ai_holder/simple_mob/intentional/giant_spider_broodmother
+	ai_holder_type = /datum/ai_holder/simple_mob/ranged
 
 	loot_list = list(/obj/item/royal_spider_egg = 100)
 
