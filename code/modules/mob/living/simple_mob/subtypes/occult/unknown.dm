@@ -15,6 +15,8 @@
 	melee_damage_upper = 40
 	attack_armor_pen = 15
 
+	base_attack_cooldown = 1.5 SECONDS
+
 	projectiletype = /obj/item/projectile/energy/slow_orb
 	projectilesound = 'sound/weapons/pierce.ogg'
 
@@ -29,7 +31,7 @@
 	name = "TROJAN"
 	icon_state = "neurotoxin"
 	damage = 50
-	speed = 3
+	speed = 6
 	damage_type = ELECTROCUTE
 	agony = 15
 	check_armour = "energy"
