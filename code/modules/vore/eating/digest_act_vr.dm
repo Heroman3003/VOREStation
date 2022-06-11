@@ -19,6 +19,7 @@
 					qdel(O)
 			else if(item_storage)
 				O.forceMove(item_storage)
+		GLOB.items_digested_roundstat++
 		qdel(src)
 		return w_class
 
@@ -57,6 +58,7 @@
 				S.use(1)
 				digest_stage = w_class
 		else
+			GLOB.items_digested_roundstat++
 			qdel(src)
 	if(g_damage > w_class)
 		return w_class
@@ -137,6 +139,10 @@
 /////////////
 /obj/item/device/mmi/digital/posibrain/digest_act(atom/movable/item_storage = null)
 	//Replace this with a VORE setting so all types of posibrains can/can't be digested on a whim
+	return FALSE
+
+/obj/item/organ/internal/nano/digest_act(atom/movable/item_storage = null)
+	//Make proteans recoverable too
 	return FALSE
 
 // Gradual damage measurement

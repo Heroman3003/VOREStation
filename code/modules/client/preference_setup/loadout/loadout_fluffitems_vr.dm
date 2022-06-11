@@ -78,6 +78,24 @@
 	ckeywhitelist = list("alfalah")
 	character_name = list("Charlotte Graves")
 
+/datum/gear/fluff/fifi_hat
+	path = /obj/item/clothing/head/fluff/fifi_hat
+	display_name = "Fifi's hat"
+	ckeywhitelist = list("allweek")
+	character_name = list("Fifi The Magnificent")
+
+/datum/gear/fluff/fifi_jumpsuit
+	path = /obj/item/clothing/under/fluff/fifi_jumpsuit
+	display_name = "Fifi's jumpsuit"
+	ckeywhitelist = list("allweek")
+	character_name = list("Fifi The Magnificent")
+
+/datum/gear/fluff/fifi_socks
+	path = /obj/item/clothing/shoes/fluff/fifi_socks
+	display_name = "Fifi's socks"
+	ckeywhitelist = list("allweek")
+	character_name = list("Fifi The Magnificent")
+
 /datum/gear/fluff/lynn_penlight
 	path = /obj/item/device/flashlight/pen/fluff/lynn
 	display_name = "Lynn's Penlight"
@@ -198,6 +216,12 @@
 	ckeywhitelist = list("bobofboblandia")
 	character_name = list("Charles Gettler")
 
+/datum/gear/fluff/nettie_tablet
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/nettie
+	display_name = "Remodeled Tablet"
+	ckeywhitelist = list("bricker98")
+	character_name = list("Nettie Stough")
+
 /datum/gear/fluff/xin_sovietuniform
 	path = /obj/item/clothing/under/soviet
 	display_name = "Xin's Soviet Uniform"
@@ -296,6 +320,12 @@
 	ckeywhitelist = list("chaleur")
 	character_name = list("Hisako Arato")
 
+/datum/gear/fluff/jade_stamp
+	path = /obj/item/weapon/stamp/fluff/jade_horror
+	display_name = "Official Council of Mid Horror rubber stamp"
+	ckeywhitelist = list("coolcrow420")
+	character_name = list("Jade Davis")
+
 //  D CKEYS
 /datum/gear/fluff/dhaeleena_medal
 	path = /obj/item/clothing/accessory/medal/silver/security/fluff/dhael
@@ -373,6 +403,12 @@
 	display_name = "Erik's Unity Medal"
 	ckeywhitelist = list("erikthedog")
 	character_name = list("Erik Ramadwood")
+
+/datum/gear/fluff/salvage_id
+	path = /obj/item/weapon/card/id/event/polymorphic/itg
+	display_name = "Salvage's ITG-ID card"
+	ckeywhitelist = list("essbie")
+	character_name = list("Savage")
 
 //  F CKEYS
 /datum/gear/fluff/yikatihaki_armor
@@ -658,12 +694,6 @@
 	ckeywhitelist = list("luminescentring")
 	character_name = list("Briana Moore")
 
-/datum/gear/fluff/entchtut_medal
-	path = /obj/item/clothing/accessory/medal/conduct
-	display_name = "Entchtut's Conduct Medal"
-	ckeywhitelist = list("littlebigkid2000")
-	character_name = list("Entchtut Cenein")
-
 //  M CKEYS
 /datum/gear/fluff/phi_box
 	path = /obj/item/weapon/storage/box/fluff/phi
@@ -833,6 +863,12 @@
 	ckeywhitelist = list("pastelprincedan")
 	character_name = list("Kiyoshi Maki", "Masumi Maki")
 
+/datum/gear/fluff/entchtut_medal
+	path = /obj/item/clothing/accessory/medal/conduct
+	display_name = "Entchtut's Conduct Medal"
+	ckeywhitelist = list("positronicjune")
+	character_name = list("Entchtut Cenein")
+
 /datum/gear/fluff/mechanic_overalls
 	path = /obj/item/clothing/under/fluff/mechanic_overalls
 	display_name = "mechanic overalls"
@@ -844,6 +880,12 @@
 	display_name = "mechanic winter coat"
 	ckeywhitelist = list("pastelprincedan", "hatterhat")
 	character_name = list("Masumi Maki", "Harold Robinson")
+
+/datum/gear/fluff/slimecat_rd_plush
+	path = /obj/item/toy/plushie/fluff/slimeowshi
+	display_name = "slimecat RD plushie"
+	ckeywhitelist = list("pastelprincedan")
+	character_name = list("Kiyoshi Maki", "Masumi Maki")
 
 //  Q CKEYS
 
@@ -879,6 +921,12 @@
 	display_name = "Pathfinder's ITG ID"
 	ckeywhitelist = list("residentcody")
 	character_name = list("Pathfinder")
+
+/datum/gear/fluff/revolver_claymore
+	path = /obj/item/weapon/sword/fluff/revolver
+	display_name = "Catnip"
+	ckeywhitelist = list("revolvereloise")
+	character_name = list("Revolver Eloise")
 
 /datum/gear/fluff/nikki_dorky_outfit
 	path = /obj/item/weapon/storage/box/fluff
@@ -952,6 +1000,20 @@
 	ckeywhitelist = list("scree")
 	character_name = list("Scree")
 
+/datum/gear/fluff/avida_dress
+	path = /obj/item/clothing/under/skirt/outfit/fluff/avida
+	display_name = "Avida's Dress"
+	slot = slot_w_uniform
+	ckeywhitelist = list("scree")
+	character_name = list("Avida")
+
+/datum/gear/fluff/avida_hat
+	path = /obj/item/clothing/head/fluff/avida
+	display_name = "Avida's Hat"
+	slot = slot_head
+	ckeywhitelist = list("scree")
+	character_name = list("Avida")
+
 /datum/gear/fluff/alfonso_sunglasses
 	path = /obj/item/clothing/glasses/sunglasses/fluff/alfonso
 	display_name = "Alfonso's Sunglasses"
@@ -1000,11 +1062,11 @@
 	ckeywhitelist = list("swat43")
 	character_name = list("Fortune Bloise")
 
-/datum/gear/fluff/alexis_cane
-	path = /obj/item/weapon/cane/wand
-	display_name = "Alexis' Cane"
+/datum/gear/fluff/kyutar
+	path = /obj/item/instrument/piano_synth/fluff/kyutar
+	display_name = "Kyu's Holotar"
 	ckeywhitelist = list("stobarico")
-	character_name = list("Alexis Bloise")
+	character_name = list("Kyu Comet")
 
 /datum/gear/fluff/roiz_coat
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/roiz
@@ -1103,6 +1165,11 @@
 	character_name = list("Konor Foxe")
 
 //  U CKEYS
+/datum/gear/fluff/brad_jordans
+	path = /obj/item/clothing/shoes/fluff/airjordans
+	display_name = "Bradley's Air Jordans"
+	ckeywhitelist = list("unclefruitvevo")
+	character_name = list("Bradley Khatibi")
 
 //  V CKEYS
 /datum/gear/fluff/verie_suit
@@ -1307,6 +1374,12 @@
 
 //  Y CKEYS
 
+/datum/gear/fluff/lemon_plush
+	path = /obj/item/toy/plushie/fluff/lemonplush
+	display_name = "yellow slime plushie"
+	ckeywhitelist = list("yecrowbarman")
+	character_name = list("Lemon Yellow", "Lemon Gettler Yellow", "Lemon Lee Yellow", "Lemon Jade Yellow") //different sleeves, same char
+
 //  Z CKEYS
 /datum/gear/fluff/tachika_medal
 	path = /obj/item/clothing/accessory/medal/conduct
@@ -1326,3 +1399,10 @@
 	display_name = "Nehi's Radio"
 	ckeywhitelist = list("zodiacshadow")
 	character_name = list("Nehi Maximus")
+
+/datum/gear/fluff/lucky_amour
+	path = /obj/item/clothing/suit/armor/combat/crusader_costume/lucky
+	display_name = "Lucky's amour"
+	ckeywhitelist = list ("thedavestdave")
+	character_name = list("Lucky")
+	allowed_roles = "Chaplain"

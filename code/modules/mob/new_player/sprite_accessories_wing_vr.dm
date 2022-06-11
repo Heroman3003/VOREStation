@@ -133,6 +133,7 @@
 	icon_state = "neckfur"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "neckfur_markings"
 
 /datum/sprite_accessory/wing/feathered
 	name = "feathered wings, colorable"
@@ -225,3 +226,12 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "drago_wing_2"
+
+/datum/sprite_accessory/wing/aeromorph_flat
+	name = "aeromorph wings, flat"
+	desc = ""
+	icon_state = "aeromorph_flat"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "aeromorph_flat_1"
+	extra_overlay2 = "aeromorph_flat_2"

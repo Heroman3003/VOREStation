@@ -4,12 +4,22 @@
 /mob/verb/whisper(message as text)
 	set name = "Whisper"
 	set category = "IC"
+	//VOREStation Addition Start
+	if(forced_psay)
+		psay(message)
+		return
+	//VOREStation Addition End
 
 	usr.say(message,whispering=1)
 
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
+	//VOREStation Addition Start
+	if(forced_psay)
+		psay(message)
+		return
+	//VOREStation Addition End
 
 	set_typing_indicator(FALSE)
 	usr.say(message)
@@ -21,6 +31,11 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<font color='red'>Speech is currently admin-disabled.</font>")
 		return
+	//VOREStation Addition Start
+	if(forced_psay)
+		pme(message)
+		return
+	//VOREStation Addition End
 
 	//VOREStation Edit Start
 	if(muffled)
@@ -62,6 +77,15 @@
 	//Universal speak makes everything understandable, for obvious reasons.
 	else if(universal_speak || universal_understand)
 		return TRUE
+
+	//VOREStation Addition Start
+	if(isliving(src))
+		var/mob/living/L = src
+		if(isbelly(L.loc) && L.absorbed)
+			var/mob/living/P = L.loc.loc
+			if(P.say_understands(other, speaking))
+				return TRUE
+	//VOREStation Addition End
 
 	//Languages are handled after.
 	if(!speaking)
@@ -225,7 +249,7 @@
 
 		// There are a few things that will make us want to ignore all other languages in - namely, HIVEMIND languages.
 		var/datum/language/L = current[1]
-		if(L && (L.flags & HIVEMIND || L.flags & SIGNLANG))
+		if(L && (L.flags & HIVEMIND || L.flags & SIGNLANG || L.flags & INAUDIBLE))
 			return new /datum/multilingual_say_piece(L, trim(sanitize(strip_prefixes(message))))
 
 		if(i + 1 > length(prefix_locations)) // We are out of lookaheads, that means the rest of the message is in cur lang

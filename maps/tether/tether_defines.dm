@@ -21,6 +21,7 @@
 #define Z_LEVEL_DEBRISFIELD					19
 #define Z_LEVEL_FUELDEPOT					20
 #define Z_LEVEL_GATEWAY						21
+#define Z_LEVEL_OM_ADVENTURE				22
 
 //Camera networks
 #define NETWORK_TETHER "Tether"
@@ -173,6 +174,10 @@
 		list("Wild West")
 		)
 
+	lateload_overmap = list(
+		list("Grass Cave")
+		)
+
 	ai_shell_restricted = TRUE
 	ai_shell_allowed_levels = list(
 		Z_LEVEL_SURFACE_LOW,
@@ -193,8 +198,6 @@
 
 	mining_station_z =		list(Z_LEVEL_SPACE_LOW)
 	mining_outpost_z =		list(Z_LEVEL_SURFACE_MINE)
-
-	lateload_gateway = null //Nothing right now.
 
 	planet_datums_to_make = list(/datum/planet/virgo3b,
 								/datum/planet/virgo4)
@@ -360,6 +363,7 @@
 	name = "Asteroid 1"
 	base_turf = /turf/space
 	transit_chance = 33
+	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_PERSIST|MAP_LEVEL_BELOW_BLOCKED
 	holomap_offset_x = TETHER_HOLOMAP_MARGIN_X + TETHER_HOLOMAP_CENTER_GUTTER + TETHER_MAP_SIZE
 	holomap_offset_y = TETHER_HOLOMAP_MARGIN_Y + TETHER_MAP_SIZE
 

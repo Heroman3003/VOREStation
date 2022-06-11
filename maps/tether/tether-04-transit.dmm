@@ -26,6 +26,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/tether_midpoint)
+"cC" = (
+/obj/effect/landmark/vermin,
+/turf/simulated/floor/wood,
+/area/tether/midpoint)
 "cH" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
@@ -372,6 +376,10 @@
 	},
 /turf/simulated/floor/wood,
 /area/tether/midpoint)
+"zr" = (
+/obj/effect/landmark/vines,
+/turf/simulated/floor/wood,
+/area/tether/midpoint)
 "zG" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -675,7 +683,7 @@
 /area/tether/midpoint)
 "Ud" = (
 /obj/structure/table/woodentable,
-/obj/item/device/paicard,
+/obj/random/paicard,
 /turf/simulated/floor/midpoint_glass/reinf,
 /area/tether/midpoint)
 "Ui" = (
@@ -8916,7 +8924,7 @@ kz
 Et
 zi
 pK
-pK
+zr
 pK
 pK
 pK
@@ -10762,7 +10770,7 @@ kz
 Et
 Pz
 Or
-pK
+cC
 pK
 pK
 Tz

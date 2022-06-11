@@ -5,12 +5,16 @@
 	name = "guest pass"
 	desc = "Allows temporary access to station areas."
 	icon_state = "guest"
+	initial_sprite_stack = list()
 	light_color = "#0099ff"
 
 	var/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0
 	var/expired = 0
 	var/reason = "NOT SPECIFIED"
+
+/obj/item/weapon/card/id/guest/update_icon()
+	return
 
 /obj/item/weapon/card/id/guest/GetAccess()
 	if(world.time > expiration_time)
@@ -103,6 +107,9 @@
 
 
 /obj/machinery/computer/guestpass/attackby(obj/I, mob/user)
+	if(istype(I, /obj/item/weapon/card/id/guest))
+		to_chat(user, "<span class='warning'>The guest pass terminal denies to accept the guest pass.</span>")
+		return
 	if(istype(I, /obj/item/weapon/card/id))
 		if(!giver && user.unEquip(I))
 			I.forceMove(src)

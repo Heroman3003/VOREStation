@@ -106,24 +106,38 @@
 
 	if(emote_active)
 		var/list/EL = emote_lists[digest_mode]
-		if(LAZYLEN(EL) && next_emote <= world.time)
+		if((LAZYLEN(EL) || LAZYLEN(emote_lists[DM_HOLD_ABSORBED]) || (digest_mode == DM_DIGEST && LAZYLEN(emote_lists[DM_HOLD]))) && next_emote <= world.time)
 			var/living_count = 0
+			var/absorbed_count = 0
 			for(var/mob/living/L in contents)
 				living_count++
+				if(L.absorbed)
+					absorbed_count++
 			next_emote = world.time + (emote_time SECONDS)
 			for(var/mob/living/M in contents)
-				if(digest_mode == DM_DIGEST && !M.digestable)
-					continue // don't give digesty messages to indigestible people
+				if(M.absorbed)
+					EL = emote_lists[DM_HOLD_ABSORBED]
 
-				var/raw_message = pick(EL)
-				var/formatted_message
-				formatted_message = replacetext(raw_message, "%belly", lowertext(name))
-				formatted_message = replacetext(formatted_message, "%pred", owner)
-				formatted_message = replacetext(formatted_message, "%prey", english_list(contents))
-				formatted_message = replacetext(formatted_message, "%countprey", living_count)
-				formatted_message = replacetext(formatted_message, "%count", contents.len)
-				to_chat(M, "<span class='notice'>[formatted_message]</span>")
-	
+					var/raw_message = pick(EL)
+					var/formatted_message
+					formatted_message = replacetext(raw_message, "%belly", lowertext(name))
+					formatted_message = replacetext(formatted_message, "%pred", owner)
+					formatted_message = replacetext(formatted_message, "%prey", M)
+					formatted_message = replacetext(formatted_message, "%countprey", absorbed_count)
+					to_chat(M, "<span class='notice'>[formatted_message]</span>")
+				else
+					if(digest_mode == DM_DIGEST && !M.digestable)
+						EL = emote_lists[DM_HOLD]					// Use Hold's emote list if we're indigestible
+
+					var/raw_message = pick(EL)
+					var/formatted_message
+					formatted_message = replacetext(raw_message, "%belly", lowertext(name))
+					formatted_message = replacetext(formatted_message, "%pred", owner)
+					formatted_message = replacetext(formatted_message, "%prey", M)
+					formatted_message = replacetext(formatted_message, "%countprey", living_count)
+					formatted_message = replacetext(formatted_message, "%count", contents.len)
+					to_chat(M, "<span class='notice'>[formatted_message]</span>")
+
 	if(to_update)
 		updateVRPanels()
 
@@ -153,7 +167,7 @@
 			var/mob/living/L = A
 			touchable_mobs += L
 
-			if(L.absorbed)
+			if(L.absorbed && !issilicon(L))
 				L.Weaken(5)
 
 			// Fullscreen overlays
@@ -171,6 +185,10 @@
 				//Thickbelly flag
 				if((mode_flags & DM_FLAG_THICKBELLY) && !H.muffled)
 					H.muffled = TRUE
+
+				//Force psay
+				if((mode_flags & DM_FLAG_FORCEPSAY) && !H.forced_psay && H.absorbed)
+					H.forced_psay = TRUE
 
 				//Worn items flag
 				if(mode_flags & DM_FLAG_AFFECTWORN)
@@ -259,6 +277,9 @@
 	//Send messages
 	to_chat(owner, "<span class='notice'>[digest_alert_owner]</span>")
 	to_chat(M, "<span class='notice'>[digest_alert_prey]</span>")
+
+	if(M.ckey)
+		GLOB.prey_digested_roundstat++
 
 	if((mode_flags & DM_FLAG_LEAVEREMAINS) && M.digest_leave_remains)
 		handle_remains_leaving(M)

@@ -112,7 +112,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/change_human_appearance_self,	// Allows the human-based mob itself change its basic appearance ,
 	/client/proc/change_security_level,
 	/client/proc/view_chemical_reaction_logs,
-	/client/proc/makePAI,
+	/client/proc/makepAI,
 	/client/proc/toggle_debug_logs,
 	/client/proc/toggle_attack_logs,
 	/datum/admins/proc/paralyze_mob,
@@ -132,7 +132,8 @@ var/list/admin_verbs_ban = list(
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
-	/client/proc/play_server_sound
+	/client/proc/play_server_sound,
+	/client/proc/play_z_sound
 	)
 
 var/list/admin_verbs_fun = list(
@@ -156,7 +157,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/smite_vr, //VOREStation Add,
 	/client/proc/admin_lightning_strike,
 	/client/proc/resize, //VOREStation Add,
-	/client/proc/cmd_admin_droppod_deploy
+	/client/proc/cmd_admin_droppod_deploy,
+	/client/proc/adminorbit //VOREStation Add,
 	)
 
 var/list/admin_verbs_spawn = list(
@@ -517,7 +519,7 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/change_human_appearance_admin,     // Allows an admin to change the basic appearance of human-based mobs ,
 	/client/proc/change_human_appearance_self,      // Allows the human-based mob itself change its basic appearance ,
 	/client/proc/change_security_level,
-	/client/proc/makePAI,
+	/client/proc/makepAI,
 	/client/proc/toggle_debug_logs,
 	/client/proc/toggle_attack_logs,
 	/datum/admins/proc/paralyze_mob,
