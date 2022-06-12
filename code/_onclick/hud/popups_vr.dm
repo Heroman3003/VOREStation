@@ -3,7 +3,7 @@
 	desc = "NOTICE ME!"
 
 	icon = 'icons/mob/screen1_popups.dmi'
-	layer = HUD_LAYER+1
+	layer = INFINITY
 
 	var/close_button_x_start
 	var/close_button_x_end
@@ -49,9 +49,11 @@
 	src.screen |= ad
 	ad.holder = src
 
-
-
-
+/client/proc/create_fake_ad_popup_multiple(popup_type, popup_amount)
+	if(!src)
+		return
+	for(var/i = 0, i < popup_amount, i++)
+		create_fake_ad_popup(popup_type)
 
 /obj/screen/popup/test
 	name = "CLICK ME"
