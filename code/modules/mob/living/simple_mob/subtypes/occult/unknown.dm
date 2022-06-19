@@ -3,6 +3,7 @@
 #define GA_MATH 2
 #define GA_ILLUSION 3
 #define GA_BULLETHELL 4
+#define GA_LINES 5
 
 /mob/living/simple_mob/glitch_boss
 	name = "CLICK ME!!!"
@@ -35,13 +36,13 @@
 
 	var/next_special_attack = GA_ADS
 	var/recently_used_attack = GA_MATH
-	var/all_special_attacks = list(GA_ADS, GA_CALLDOWN)
+	var/all_special_attacks = list(GA_ADS, /*GA_CALLDOWN, GA_LINES,*/ GA_BULLETHELL)
 
 	//loot_list = list(/obj/item/royal_spider_egg = 100)
 
 /obj/item/projectile/energy/slow_orb
 	name = "TROJAN"
-	icon_state = "neurotoxin"
+	icon_state = "meme"
 	damage = 50
 	speed = 6
 	damage_type = ELECTROCUTE
@@ -65,7 +66,6 @@
 			potential_targets -= target
 			if(target.client)
 				target.client.create_fake_ad_popup_multiple(/obj/screen/popup/test, 3)
-	return TRUE
 
 /mob/living/simple_mob/glitch_boss/proc/bombardment(atom/A)
 	var/list/potential_targets = ai_holder.list_targets()
@@ -77,7 +77,6 @@
 			var/mob/target = pick(potential_targets)
 			potential_targets -= target
 			spawn_bombardments(target)
-	return TRUE
 
 /mob/living/simple_mob/glitch_boss/proc/spawn_bombardments(atom/target)
 	var/list/bomb_range = block(locate(target.x-1, target.y-1, target.z), locate(target.x+1, target.y+1, target.z))
@@ -87,6 +86,53 @@
 		var/turf/T = pick(bomb_range)
 		new /obj/effect/calldown_attack(T)
 		bomb_range -= T
+
+/mob/living/simple_mob/glitch_boss/proc/bomb_lines(atom/A)
+	var/list/potential_targets = ai_holder.list_targets()
+	if(potential_targets.len)
+		var/iteration = clamp(potential_targets.len, 1, 3)
+		for(var/i = 0, i < iteration, i++)
+			if(!(potential_targets.len))
+				break
+			var/mob/target = pick(potential_targets)
+			potential_targets -= target
+			spawn_lines(target)
+
+/mob/living/simple_mob/glitch_boss/proc/spawn_lines(atom/target)
+	var/alignment = rand(1,2)	// 1 for vertical, 2 for horizontal
+	var/list/line_range = list()
+	var/turf/T = get_turf(target)
+	line_range += T
+	for(var/i = 1, i <= 7, i++)
+		switch(alignment)
+			if(1)
+				if(T.x-i > 0)
+					line_range += locate(T.x-i, T.y, T.z)
+				if(T.x+i <= world.maxx)
+					line_range += locate(T.x+i, T.y, T.z)
+			if(2)
+				if(T.y-i > 0)
+					line_range += locate(T.x, T.y-i, T.z)
+				if(T.y+i <= world.maxy)
+					line_range += locate(T.x, T.y+i, T.z)
+	for(var/turf/dropspot in line_range)
+		new /obj/effect/calldown_attack(dropspot)
+
+/mob/living/simple_mob/glitch_boss/proc/bullethell(atom/A)
+	set waitfor = FALSE
+
+	var/sd = dir2angle(dir)
+	var/list/offsets = list(45, 45, 20, 10)
+
+	for(var/i = 0, i<4, i++)
+		for(var/j = 0, j <4, j++)
+			var/obj/item/projectile/energy/slow_orb/shot = new(get_turf(src))
+			shot.firer = src
+			shot.fire(sd)
+			sd += 90
+		sd += pick(offsets)
+		sleep(20)
+
 
 /*
 /mob/living/simple_mob/glitch_boss/proc/spawn_brood(atom/A)
@@ -138,6 +184,10 @@
 			make_ads(A)
 		if(GA_CALLDOWN)
 			bombardment(A)
+		if(GA_LINES)
+			bomb_lines(A)
+		if(GA_BULLETHELL)
+			bullethell(A)
 
 /datum/ai_holder/simple_mob/ranged/bossmob_special
 	wander = FALSE
