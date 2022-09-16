@@ -12,24 +12,13 @@ type TextInputData = {
   placeholder: string;
   timeout: number;
   title: string;
+  prevent_enter: boolean;
 };
 
-export const TextInputModal = (_, context) => {
+export const TextInputModal = (props, context) => {
   const { act, data } = useBackend<TextInputData>(context);
-  const {
-    large_buttons,
-    max_length,
-    message = "",
-    multiline,
-    placeholder,
-    timeout,
-    title,
-  } = data;
-  const [input, setInput] = useLocalState<string>(
-    context,
-    'input',
-    placeholder || ''
-  );
+  const { large_buttons, max_length, message = '', multiline, placeholder, timeout, title, prevent_enter } = data;
+  const [input, setInput] = useLocalState<string>(context, 'input', placeholder || '');
   const onType = (value: string) => {
     if (value === input) {
       return;
@@ -37,11 +26,11 @@ export const TextInputModal = (_, context) => {
     setInput(value);
   };
   // Dynamically changes the window height based on the message.
-  const windowHeight
-    = 135
-    + (message.length > 30 ? Math.ceil(message.length / 4) : 0)
-    + (multiline || input.length >= 30 ? 75 : 0)
-    + (message.length && large_buttons ? 5 : 0);
+  const windowHeight =
+    135 +
+    (message.length > 30 ? Math.ceil(message.length / 4) : 0) +
+    (multiline || input.length >= 30 ? 75 : 0) +
+    (message.length && large_buttons ? 5 : 0);
 
   return (
     <Window title={title} width={325} height={windowHeight}>
@@ -49,8 +38,10 @@ export const TextInputModal = (_, context) => {
       <Window.Content
         onEscape={() => act('cancel')}
         onEnter={(event) => {
-          act('submit', { entry: input });
-          event.preventDefault();
+          if (!prevent_enter) {
+            act('submit', { entry: input });
+            event.preventDefault();
+          }
         }}>
         <Section fill>
           <Stack fill vertical>
@@ -61,10 +52,7 @@ export const TextInputModal = (_, context) => {
               <InputArea input={input} onType={onType} />
             </Stack.Item>
             <Stack.Item>
-              <InputButtons
-                input={input}
-                message={`${input.length}/${max_length}`}
-              />
+              <InputButtons input={input} message={`${input.length}/${max_length}`} />
             </Stack.Item>
           </Stack>
         </Section>
@@ -76,7 +64,7 @@ export const TextInputModal = (_, context) => {
 /** Gets the user input and invalidates if there's a constraint. */
 const InputArea = (props, context) => {
   const { act, data } = useBackend<TextInputData>(context);
-  const { max_length, multiline } = data;
+  const { max_length, multiline, prevent_enter } = data;
   const { input, onType } = props;
 
   return (
@@ -87,8 +75,10 @@ const InputArea = (props, context) => {
       maxLength={max_length}
       onEscape={() => act('cancel')}
       onEnter={(event) => {
-        act('submit', { entry: input });
-        event.preventDefault();
+        if (!prevent_enter) {
+          act('submit', { entry: input });
+          event.preventDefault();
+        }
       }}
       onInput={(_, value) => onType(value)}
       placeholder="Type something..."

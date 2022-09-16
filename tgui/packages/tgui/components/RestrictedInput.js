@@ -18,7 +18,8 @@ const getClampedNumber = (value, minValue, maxValue) => {
   if (!value || !value.length) {
     return String(minimum);
   }
-  let parsedValue = parseInt(value.replace(/\D/g, ''), 10);
+  // let parsedValue = parseInt(value.replace(/\D/g, ''), 10);
+  let parsedValue = parseFloat(value);
   if (isNaN(parsedValue)) {
     return String(minimum);
   } else {
@@ -130,12 +131,7 @@ export class RestrictedInput extends Component {
     const { className, fluid, monospace, ...rest } = boxProps;
     return (
       <Box
-        className={classes([
-          'Input',
-          fluid && 'Input--fluid',
-          monospace && 'Input--monospace',
-          className,
-        ])}
+        className={classes(['Input', fluid && 'Input--fluid', monospace && 'Input--monospace', className])}
         {...rest}>
         <div className="Input__baseline">.</div>
         <input

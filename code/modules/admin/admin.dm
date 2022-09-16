@@ -1,5 +1,3 @@
-
-var/global/BSACooldown = 0
 var/global/floorIsLava = 0
 
 
@@ -617,7 +615,7 @@ var/global/floorIsLava = 0
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
 
-	var/message = tgui_input_text(usr, "Global message to send:", "Admin Announce", multiline = TRUE)
+	var/message = tgui_input_text(usr, "Global message to send:", "Admin Announce", multiline = TRUE, prevent_enter = TRUE)
 	if(message)
 		if(!check_rights(R_SERVER,0))
 			message = sanitize(message, 500, extra = 0)
@@ -642,7 +640,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 
 		if(sender) //They put a sender
 			sender = sanitize(sender, 75, extra = 0)
-			var/message = tgui_input_text(usr, "Message content (max 500):", "Contents", "This is a test of the announcement system.", multiline = TRUE)
+			var/message = tgui_input_text(usr, "Message content (max 500):", "Contents", "This is a test of the announcement system.", multiline = TRUE, prevent_enter = TRUE)
 			var/msgverb = tgui_input_text(usr, "Name of verb (Such as 'states', 'says', 'asks', etc):", "Verb", "says")
 			if(message) //They put a message
 				message = sanitize(message, 500, extra = 0)
@@ -681,7 +679,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 		The above will result in those messages playing, with a 5 second gap between each. Maximum of 20 messages allowed.</span>")
 
 	var/list/decomposed
-	var/message = tgui_input_text(usr,"See your chat box for instructions. Keep a copy elsewhere in case it is rejected when you click OK.", "Input Conversation", "", multiline = TRUE)
+	var/message = tgui_input_text(usr,"See your chat box for instructions. Keep a copy elsewhere in case it is rejected when you click OK.", "Input Conversation", "", multiline = TRUE, prevent_enter = TRUE)
 
 	if(!message)
 		return
@@ -1565,8 +1563,8 @@ var/datum/announcement/minor/admin_min_announcer = new
 			for(var/client/C in GLOB.admins)
 				if((R_ADMIN | R_MOD | R_EVENT) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
-		
-		var/plaintext_title = P.sender ? "replied to [key_name(P.sender)]'s fax" : "sent a fax message to [destination.department]" 
+
+		var/plaintext_title = P.sender ? "replied to [key_name(P.sender)]'s fax" : "sent a fax message to [destination.department]"
 		var/fax_text = paper_html_to_plaintext(P.info)
 		log_game(plaintext_title)
 		log_game(fax_text)

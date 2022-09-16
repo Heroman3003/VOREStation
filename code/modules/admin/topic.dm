@@ -24,6 +24,8 @@
 	else if(href_list["ahelp_tickets"])
 		GLOB.ahelp_tickets.BrowseTickets(text2num(href_list["ahelp_tickets"]))
 
+	mentor_commands(href, href_list, src)
+
 	if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
 
 		var/adminckey = href_list["dbsearchadmin"]
@@ -102,6 +104,8 @@
 		notes_add(banckey,banreason,usr)
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
+		if((bantype == BANTYPE_PERMA || bantype == BANTYPE_TEMP) && playermob.client)
+			qdel(playermob.client)
 
 	else if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
@@ -846,7 +850,7 @@
 		if (ismob(M))
 			if(!check_if_greater_rights_than(M.client))
 				return
-			var/reason = sanitize(tgui_input_text(usr, "Please enter reason.", multiline = TRUE))
+			var/reason = sanitize(tgui_input_text(usr, "Please enter reason.", multiline = TRUE, prevent_enter = TRUE))
 			if(!reason)
 				return
 
@@ -1821,7 +1825,7 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_new_message"])
-		src.admincaster_feed_message.body = sanitize(tgui_input_text(usr, "Write your Feed story", "Network Channel Handler", "", multiline = TRUE))
+		src.admincaster_feed_message.body = sanitize(tgui_input_text(usr, "Write your Feed story", "Network Channel Handler", "", multiline = TRUE, prevent_enter = TRUE))
 		src.access_news_network()
 
 	else if(href_list["ac_submit_new_message"])
