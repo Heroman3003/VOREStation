@@ -55,12 +55,16 @@
 	for(var/i = 0, i < popup_amount, i++)
 		create_fake_ad_popup(popup_type)
 
-/obj/screen/popup/test
+/obj/screen/popup/default
 	name = "CLICK ME"
 
-	icon_state = "default"
+	icon_state = "popup1"
 
 	close_button_x_start = 118
 	close_button_x_end = 126
 	close_button_y_start = 86
 	close_button_y_end = 94
+
+/obj/screen/popup/default/New()
+	..()
+	icon_state = "popup[rand(1,4)]"

@@ -4,7 +4,7 @@
 	unacidable = TRUE
 	mouse_opacity = 0
 	icon = 'icons/effects/effects.dmi'
-	icon_state = "gravisphere"
+	icon_state = "drop_marker"
 
 /obj/effect/calldown_attack/Initialize(mapload)
 	..()
@@ -40,6 +40,6 @@
 		var/soaked = L.get_armor_soak(target_zone, "melee")
 
 		if(!L.apply_damage(35, BRUTE, target_zone, blocked, soaked))
-			return 0
+			break
 	playsound(src, 'sound/effects/clang2.ogg', 50, 1)
 	qdel(src)
