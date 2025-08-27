@@ -43,3 +43,6 @@
 			icon_state = "[modifystate]"
 		else
 			icon_state = "[initial(icon_state)]"
+
+/obj/item/gun/energy/netgun/shrink
+	projectile_type = /obj/item/projectile/beam/energy_net/shrink

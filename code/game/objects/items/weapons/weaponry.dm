@@ -135,3 +135,58 @@
 	else //Just unbuckled someone
 		M.can_pull_size = initial(M.can_pull_size)
 		qdel(src)
+
+/obj/item/energy_net/shrink
+	name = "energy compactor net"
+	desc = "It's a net made of cyan energy."
+	icon_state = "shrinkenergynet"
+	net_type = /obj/effect/energy_net/shrink
+
+/obj/effect/energy_net/shrink
+	name = "energy compactor net"
+	desc = "It's a net made of cyan energy."
+	icon_state = "shrinkenergynet"
+
+	escape_time = 10 SECONDS
+
+	var/size_increment = 0.01
+/*
+/obj/effect/energy_net/shrink/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/effect/energy_net/shrink/Destroy()
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			to_chat(A, span_notice("You are free of the net!"))
+			unbuckle_mob(A)
+
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+*/
+
+/obj/effect/energy_net/shrink/process()
+	..()
+	for(var/A in buckled_mobs)
+		if(istype(A, /mob/living))
+			var/mob/living/L = A
+			L.resize((L.size_multiplier - size_increment), uncapped = L.has_large_resize_bounds(), aura_animation = FALSE)
+/*
+/obj/effect/energy_net/shrink/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+	user.setClickCooldown(user.get_attack_speed())
+	visible_message(span_danger("[user] begins to tear at \the [src]!"))
+	if(do_after(user, escape_time, src, timed_action_flags = IGNORE_INCAPACITATED))
+		if(!has_buckled_mobs())
+			return
+		visible_message(span_danger("[user] manages to tear \the [src] apart!"))
+		unbuckle_mob(buckled_mob)
+
+/obj/effect/energy_net/shrink/post_buckle_mob(mob/living/M)
+	if(M.buckled == src) //Just buckled someone
+		..()
+		layer = M.layer+1
+		M.can_pull_size = 0
+	else //Just unbuckled someone
+		M.can_pull_size = initial(M.can_pull_size)
+		qdel(src)
+*/
